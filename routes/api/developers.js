@@ -28,7 +28,7 @@ router.post('/upsert', (req, res) => {
    developer
       .findOneAndUpdate(
          {
-            email: req.body.email,
+            email: req.body.email, // if the email matches. TODO: check by _id
          },
          select_properties(new_developer), // UGLY: There's got to be a better way to upsert everything but the _id
          { upsert: true, new: true, setDefaultsOnInsert: true },
