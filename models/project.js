@@ -2,12 +2,8 @@ const mongoose = require('mongoose')
 const schema = mongoose.Schema
 
 const project_schema = new schema({
-   id: {
-      type: Number,
-      required: true,
-   },
-   developer: {
-      type: Number,
+   member: {
+      type: ObjectId, // this may not be correct
       required: true,
    },
    title: {

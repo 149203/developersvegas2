@@ -1,11 +1,7 @@
 const mongoose = require('mongoose')
 const schema = mongoose.Schema
 
-const developer_schema = new schema({
-   id: {
-      type: Number,
-      required: true,
-   },
+const member_schema = new schema({
    first_name: {
       type: String,
       required: true,
@@ -32,4 +28,4 @@ const developer_schema = new schema({
    },
 })
 
-module.exports = developer = mongoose.model('developers', developer_schema)
+module.exports = member = mongoose.model('member', member_schema)
