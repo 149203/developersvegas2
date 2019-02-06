@@ -22,17 +22,7 @@ router.get('/', (req, res) => {
       .find()
       .then(members => {
          const formatted_members = _map(members, member => {
-            // Mask email
-            let email = member.email
-            let email_masked = ''
-            if (email) {
-               const local_part = email.slice(0, email.lastIndexOf('@') + 1)
-               const domain = email.slice(email.lastIndexOf('@'))
-               email_masked =
-                  local_part.slice(0, -_random(3, 6)) + '*****' + domain
-            }
-            member.email = email_masked
-
+            member.email = mask_email(member.email)
             return member
          })
          res.json(formatted_members)
@@ -79,6 +69,16 @@ function select_properties(member) {
       'photo_url_md',
       'photo_url_orig',
    ])
+}
+
+function mask_email(email) {
+   let email_masked = null
+   if (email) {
+      const local_part = email.slice(0, email.lastIndexOf('@') + 1)
+      const domain = email.slice(email.lastIndexOf('@'))
+      email_masked = local_part.slice(0, -_random(3, 6)) + '*****' + domain
+   }
+   return email_masked
 }
 
 module.exports = router
