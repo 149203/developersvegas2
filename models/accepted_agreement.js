@@ -20,7 +20,7 @@ const accepted_agreement_schema = new schema({
    },
    accepted_on: {
       type: Date,
-      default: Date.now,
+      default: Date.now(),
    },
 })
 

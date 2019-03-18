@@ -22,7 +22,7 @@ const agreement_schema = new schema({
    },
    created_on: {
       type: Date,
-      default: Date.now,
+      default: Date.now(),
    },
    is_active: {
       type: Boolean,

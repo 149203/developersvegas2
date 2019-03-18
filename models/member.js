@@ -31,7 +31,7 @@ const member_schema = new schema({
    },
    joined_on: {
       type: Date,
-      default: Date.now,
+      default: Date.now(),
    },
    bio: {
       type: String,
