@@ -2,10 +2,10 @@ const mongoose = require('mongoose')
 const schema = mongoose.Schema
 
 const technology_schema = new schema({
-   // row_id is for migration to SQL
    row_id: {
       type: Number, // auto-incremented ID
       required: true,
+      unique: true,
    },
    name: {
       type: String,
@@ -14,6 +14,15 @@ const technology_schema = new schema({
    popularity: {
       type: Number,
       default: 10,
+   },
+   slug: {
+      type: String,
+      required: true,
+      unique: true,
+   },
+   is_active: {
+      type: Boolean,
+      default: true,
    },
 })
 

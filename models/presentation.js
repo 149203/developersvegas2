@@ -6,6 +6,7 @@ const presentation_schema = new schema({
    row_id: {
       type: Number, // auto-incremented ID
       required: true,
+      unique: true,
    },
    member_id: {
       type: mongoose.Schema.Types.ObjectId,
@@ -15,6 +16,7 @@ const presentation_schema = new schema({
    title: {
       type: String,
       default: 'Untitled project',
+      max: 80,
    },
    signed_in_on: {
       type: Date,
@@ -22,6 +24,7 @@ const presentation_schema = new schema({
    },
    order: {
       type: Number,
+      required: true,
    },
    screenshot_sm_url: {
       type: String,
@@ -33,11 +36,13 @@ const presentation_schema = new schema({
       type: String,
    },
    slug: {
-      type: String, // 'untitled-project-2' if this is the second 'untitled-project' by this member
+      type: String, // 'untitled-project-2019-03-09'
+      required: true,
+      unique: true,
    },
    is_active: {
       type: Boolean,
-      required: true,
+      default: true,
    },
 })
 

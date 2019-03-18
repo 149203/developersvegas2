@@ -6,6 +6,7 @@ const agreement_schema = new schema({
    row_id: {
       type: Number, // auto-incremented ID
       required: true,
+      unique: true,
    },
    title: {
       type: String,
@@ -22,6 +23,10 @@ const agreement_schema = new schema({
    created_on: {
       type: Date,
       default: Date.now,
+   },
+   is_active: {
+      type: Boolean,
+      default: true,
    },
 })
 

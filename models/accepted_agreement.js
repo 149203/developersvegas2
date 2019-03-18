@@ -6,6 +6,7 @@ const accepted_agreement_schema = new schema({
    row_id: {
       type: Number, // auto-incremented ID
       required: true,
+      unique: true,
    },
    agreement_id: {
       type: mongoose.Schema.Types.ObjectId,
@@ -19,7 +20,7 @@ const accepted_agreement_schema = new schema({
    },
    accepted_on: {
       type: Date,
-      required: true,
+      default: Date.now,
    },
 })
 
