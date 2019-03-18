@@ -4,6 +4,44 @@
 
 `npm start`
 
+# Conventions
+
+lower_snake_case for everything except urls and filenames of web assets (like images).
+
+Dates look like this:
+
+`created_on`
+
+`signed_in_on`
+
+Booleans look like this:
+
+`is_active`
+
+`has_signature`
+
+URLs look like this:
+
+`profile_photo_orig_url`
+
+`portfolio_url`
+
+ObjectIDs look like this:
+
+`member_id`
+
+`technology_id`
+
+Soft deletes are indicated with the `is_active` field.
+
+Map tables follow the convention:
+
+`presentation_technologies`
+
+`member_badges`
+
+Map tables do not have a row_id / primary key.
+
 # Commits
 
 ## VS Code

@@ -1,20 +1,24 @@
 const mongoose = require('mongoose')
 const schema = mongoose.Schema
 
-const technology_schema = new schema({
+const badge_schema = new schema({
    // row_id is for migration to SQL
    row_id: {
       type: Number, // auto-incremented ID
       required: true,
    },
-   name: {
+   title: {
       type: String,
       required: true,
    },
-   popularity: {
-      type: Number,
-      default: 10,
+   description: {
+      type: String,
+      required: true,
+   },
+   is_active: {
+      type: Boolean,
+      required: true,
    },
 })
 
-module.exports = technology = mongoose.model('technologies', technology_schema)
+module.exports = badge = mongoose.model('badges', badge_schema)

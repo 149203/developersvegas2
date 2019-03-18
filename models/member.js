@@ -2,6 +2,11 @@ const mongoose = require('mongoose')
 const schema = mongoose.Schema
 
 const member_schema = new schema({
+   // row_id is for migration to SQL
+   row_id: {
+      type: Number, // auto-incremented ID
+      required: true,
+   },
    first_name: {
       type: String,
       required: true,
@@ -17,15 +22,26 @@ const member_schema = new schema({
    portfolio_url: {
       type: String,
    },
-   photo_url_sm: {
+   profile_photo_orig_url: {
       type: String,
    },
-   photo_url_md: {
+   profile_photo_sm_url: {
       type: String,
    },
-   photo_url_orig: {
+   joined_on: {
+      type: Date,
+      required: true,
+   },
+   bio: {
       type: String,
+   },
+   slug: {
+      type: String, // 'mike-zetlow-2' if this is the second 'mike-zetlow'
+   },
+   is_active: {
+      type: Boolean,
+      required: true,
    },
 })
 
-module.exports = member = mongoose.model('member', member_schema)
+module.exports = member = mongoose.model('members', member_schema)
