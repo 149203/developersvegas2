@@ -8,11 +8,6 @@ const presentation_schema = new schema({
       required: true,
       unique: true,
    },
-   member_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: 'member',
-   },
    title: {
       type: String,
       default: 'Untitled project',

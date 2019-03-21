@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const schema = mongoose.Schema
 
-const member_badge_schema = new schema({
+const xref_badge_member_schema = new schema({
    member_id: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
@@ -14,7 +14,7 @@ const member_badge_schema = new schema({
    },
 })
 
-module.exports = member_badge = mongoose.model(
-   'member_badges',
-   member_badge_schema
+module.exports = xref_badge_member = mongoose.model(
+   'xref_badge_member',
+   xref_badge_member_schema
 )

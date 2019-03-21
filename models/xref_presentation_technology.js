@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const schema = mongoose.Schema
 
-const presentation_technology_schema = new schema({
+const xref_presentation_technology_schema = new schema({
    presentation_id: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
@@ -14,7 +14,7 @@ const presentation_technology_schema = new schema({
    },
 })
 
-module.exports = presentation_technology = mongoose.model(
-   'presentation_technologies',
-   presentation_technology_schema
+module.exports = xref_presentation_technology = mongoose.model(
+   'xref_presentation_technology',
+   xref_presentation_technology_schema
 )
