@@ -17,6 +17,10 @@ const presentation_schema = new schema({
       type: Date,
       default: Date.now(),
    },
+   has_accepted_agreement: {
+      type: Boolean,
+      required: true,
+   },
    order: {
       type: Number,
       required: true,
