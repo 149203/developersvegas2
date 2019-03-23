@@ -6,7 +6,6 @@ const badge_schema = new schema({
    row_id: {
       type: Number, // auto-incremented ID
       required: true,
-      unique: true,
    },
    title: {
       type: String,

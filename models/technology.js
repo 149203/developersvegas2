@@ -5,7 +5,6 @@ const technology_schema = new schema({
    row_id: {
       type: Number, // auto-incremented ID
       required: true,
-      unique: true,
    },
    name: {
       type: String,
@@ -18,7 +17,6 @@ const technology_schema = new schema({
    slug: {
       type: String,
       required: true,
-      unique: true,
    },
    is_active: {
       type: Boolean,

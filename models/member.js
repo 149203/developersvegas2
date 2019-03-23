@@ -6,7 +6,6 @@ const member_schema = new schema({
    row_id: {
       type: Number, // auto-incremented ID
       required: true,
-      unique: true,
    },
    first_name: {
       type: String,
@@ -39,7 +38,6 @@ const member_schema = new schema({
    slug: {
       type: String, // 'mike-zetlow-2' if this is the second 'mike-zetlow'
       required: true,
-      unique: true,
    },
    is_active: {
       type: Boolean,

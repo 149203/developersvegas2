@@ -6,7 +6,6 @@ const presentation_schema = new schema({
    row_id: {
       type: Number, // auto-incremented ID
       required: true,
-      unique: true,
    },
    title: {
       type: String,
@@ -37,7 +36,6 @@ const presentation_schema = new schema({
    slug: {
       type: String, // 'untitled-project-2019-03-09'
       required: true,
-      unique: true,
    },
    is_active: {
       type: Boolean,
