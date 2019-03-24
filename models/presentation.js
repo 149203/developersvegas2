@@ -12,7 +12,7 @@ const presentation_schema = new schema({
       default: 'Untitled project',
       max: 80,
    },
-   signed_in_on: {
+   signed_up_on: {
       type: Date,
       default: Date.now(),
    },

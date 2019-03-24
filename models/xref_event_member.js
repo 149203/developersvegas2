@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 const schema = mongoose.Schema
 
-const xref_badge_member_schema = new schema({
-   badge_id: {
+const xref_event_member_schema = new schema({
+   event_id: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'badge',
+      ref: 'event',
    },
    member_id: {
       type: mongoose.Schema.Types.ObjectId,
@@ -14,7 +14,7 @@ const xref_badge_member_schema = new schema({
    },
 })
 
-module.exports = xref_badge_member = mongoose.model(
-   'xref_badge_member',
-   xref_badge_member_schema
+module.exports = xref_event_member = mongoose.model(
+   'xref_event_member',
+   xref_event_member_schema
 )
