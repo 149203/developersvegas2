@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const developer = require('../../models/member')
+const developer = require('../../../models/member')
 
 // @route      GET api/demo-days/test
 // @desc       Tests the demo-days route

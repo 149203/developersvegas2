@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const member = require('../../models/member')
+const member = require('../../../models/member')
 const _pick = require('lodash/pick')
 const _map = require('lodash/map')
 const _random = require('lodash/random')
