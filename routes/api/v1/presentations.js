@@ -15,7 +15,7 @@ const example_api_parameters = {
          _id: mongoose.Schema.Types.ObjectId, // optional
       },
    ],
-   title: String,
+   title: String, // optional
    has_accepted_agreement: Boolean,
    order: Number,
 }
@@ -26,6 +26,12 @@ const example_api_return = {
    xref_event_presentation_id: mongoose.Schema.Types.ObjectId,
    xref_member_presentation_id: mongoose.Schema.Types.ObjectId,
    xref_presentation_technology_id: mongoose.Schema.Types.ObjectId,
+   title: String,
+   signed_up_on: Date,
+   has_accepted_agreement: Boolean,
+   order: Number,
+   slug: String,
+   is_active: Boolean,
 }
 
 router.post('/', (req, res) => {

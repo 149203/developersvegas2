@@ -8,7 +8,7 @@ const mongoose = require('mongoose')
 
 const example_api_parameters = {
    name: String,
-   popularity: Number,
+   popularity: Number, // optional
 }
 
 const example_api_return = {
