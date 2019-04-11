@@ -24,14 +24,13 @@ const presentation_schema = new schema({
       type: Number,
       required: true,
    },
-   screenshot_sm_url: {
-      type: String,
-   },
-   screenshot_md_url: {
-      type: String,
-   },
    screenshot_orig_url: {
       type: String,
+      required: true,
+   },
+   video_url: {
+      type: String,
+      required: true,
    },
    slug: {
       type: String, // 'untitled-project-2019-03-09'
