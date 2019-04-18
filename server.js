@@ -3,10 +3,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const body_parser = require('body-parser')
 
-const members = require('./routes/api/members')
-const projects = require('./routes/api/projects')
-const technologies = require('./routes/api/technologies')
-const demo_days = require('./routes/api/demo-days')
+const members = require('./routes/api/v1/members')
 
 const app = express()
 
@@ -22,10 +19,7 @@ mongoose
    .catch(err => console.log(err))
 
 // Routes
-app.use('/api/members', members)
-app.use('/api/projects', projects)
-app.use('/api/technologies', technologies)
-app.use('/api/demo-days', demo_days)
+app.use('/api/v1/members', members)
 
 app.get('/', (req, res) => res.send('Hello world.'))
 

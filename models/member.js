@@ -22,10 +22,7 @@ const member_schema = new schema({
    portfolio_url: {
       type: String,
    },
-   profile_photo_orig_url: {
-      type: String,
-   },
-   profile_photo_sm_url: {
+   profile_photo_url: {
       type: String,
    },
    joined_on: {
