@@ -2,22 +2,13 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 const member_model = require('../../../models/member')
-const _pick = require('lodash/pick')
 const _map = require('lodash/map')
 const _random = require('lodash/random')
 const _is_finite = require('lodash/isFinite')
 const _to_number = require('lodash/toNumber')
 const _to_lower = require('lodash/toLower')
 const _has = require('lodash/has')
-
-// @route      GET api/v1/members/test
-// @desc       Tests the developers route
-// @access     Public
-router.get('/test', (req, res) =>
-   res.json({
-      msg: 'The members route works.',
-   })
-)
+const validate_input_for_member = require('../../../validation/member')
 
 // @route      GET api/v1/members
 // @desc       Gets all members
@@ -41,11 +32,10 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
    // Validate user input
-   // const { errors, is_valid } = validate_profile_input(req.body)
-   // if (!is_valid) {
-   //    console.log(errors, is_valid)
-   //    return res.status(400).json(errors)
-   // }
+   const { errors, is_valid } = validate_input_for_member(req.body)
+   if (!is_valid) {
+      return res.status(400).json(errors)
+   }
 
    const member_obj = {}
    const body = req.body
@@ -110,7 +100,7 @@ function create_row_id() {
       .then(member => {
          if (member) {
             return member.row_id + 1
-         } else return 1
+         } else return 1 // this is the first document in this collection, row_id: 1
       })
       .catch(err => console.log(err))
 }
@@ -137,7 +127,7 @@ function append_slug_suffix(slug) {
 }
 
 function mask_email(email) {
-   let email_masked = null
+   let email_masked = ''
    if (email) {
       const local_part = email.slice(0, email.lastIndexOf('@') + 1)
       const domain = email.slice(email.lastIndexOf('@'))
