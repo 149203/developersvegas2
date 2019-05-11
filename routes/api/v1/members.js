@@ -3,12 +3,12 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const member_model = require('../../../models/member')
 const _map = require('lodash/map')
-const _random = require('lodash/random')
-const _is_finite = require('lodash/isFinite')
-const _to_number = require('lodash/toNumber')
 const _to_lower = require('lodash/toLower')
 const _has = require('lodash/has')
 const validate_input_for_member = require('../../../validation/member')
+const append_slug_suffix = require('../../../utils/append_slug_suffix')
+const create_row_id = require('../../../utils/create_row_id')
+const mask_email = require('../../../utils/mask_email')
 
 // @route      GET api/v1/members
 // @desc       Gets all members
@@ -29,7 +29,6 @@ router.get('/', (req, res) => {
 // @route      POST api/v1/members
 // @desc       Create a new member in the members resource
 // @access     Public
-
 router.post('/', (req, res) => {
    // Validate user input
    const { errors, is_valid } = validate_input_for_member(req.body)
@@ -61,8 +60,8 @@ router.post('/', (req, res) => {
          } else {
             // Create member
             let slug = _to_lower(`${body.first_name}-${body.last_name}`) // john-smith
-            member_obj.slug = await append_slug_suffix(slug)
-            member_obj.row_id = await create_row_id()
+            member_obj.slug = await append_slug_suffix(member_model, slug)
+            member_obj.row_id = await create_row_id(member_model)
             if (!_has(member_obj, 'portfolio_url'))
                member_obj.portfolio_url = ''
             if (!_has(member_obj, 'profile_photo_url'))
@@ -91,49 +90,6 @@ const example_api_return = {
    bio: String,
    slug: String,
    is_active: Boolean,
-}
-
-function create_row_id() {
-   return member_model
-      .findOne({})
-      .sort({ row_id: -1 }) // find the row_id with the highest num
-      .then(member => {
-         if (member) {
-            return member.row_id + 1
-         } else return 1 // this is the first document in this collection, row_id: 1
-      })
-      .catch(err => console.log(err))
-}
-
-function append_slug_suffix(slug) {
-   return member_model
-      .findOne({ slug })
-      .then(member => {
-         if (!member) {
-            // slug wasn't found, it's unique
-            return slug
-         } else {
-            let slug_prefix = slug.slice(0, slug.lastIndexOf('-') + 1)
-            let slug_suffix = _to_number(slug.slice(slug.lastIndexOf('-') + 1))
-            if (_is_finite(slug_suffix)) {
-               slug_suffix += 1
-               return append_slug_suffix(slug_prefix + slug_suffix)
-            } else {
-               return append_slug_suffix(`${slug}-2`)
-            }
-         }
-      })
-      .catch(err => console.log(err))
-}
-
-function mask_email(email) {
-   let email_masked = ''
-   if (email) {
-      const local_part = email.slice(0, email.lastIndexOf('@') + 1)
-      const domain = email.slice(email.lastIndexOf('@'))
-      email_masked = local_part.slice(0, -_random(3, 6)) + '*****' + domain
-   }
-   return email_masked
 }
 
 module.exports = router

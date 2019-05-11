@@ -24,11 +24,11 @@ const presentation_schema = new schema({
       type: Number,
       required: true,
    },
-   screenshot_orig_url: {
+   video_url: {
       type: String,
       required: true,
    },
-   video_url: {
+   video_screenshot_url: {
       type: String,
       required: true,
    },
