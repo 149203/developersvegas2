@@ -54,7 +54,7 @@ router.post('/', (req, res) => {
          if (member) {
             // if we include an id in the request, update
             member_model
-               .findByIdAndUpdate(body._id, { $set: member_obj }, { new: true }) // TODO: Use findByIdAndUpdate with upsert: true
+               .findByIdAndUpdate(body._id, { $set: member_obj }, { new: true })
                .then(updated_member => res.json(updated_member))
                .catch(err => res.status(400).json(err))
          } else {
