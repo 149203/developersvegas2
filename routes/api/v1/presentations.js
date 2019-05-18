@@ -24,14 +24,14 @@ router.get('/', (req, res) => {
 // @desc       Create a new presentation in the presentations resource
 // @access     Public
 router.post('/', (req, res) => {
+   const body = req.body
    // Validate user input
-   const { errors, is_valid } = validate_input_for_presentation(req.body)
+   const { errors, is_valid } = validate_input_for_presentation(body)
    if (!is_valid) {
       return res.status(400).json(errors)
    }
 
    const presentation_obj = {}
-   const body = req.body
    // These are fields that can be updated via the API
    if (body.title) presentation_obj.title = body.title // String
    if (body.has_accepted_agreement)

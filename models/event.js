@@ -9,7 +9,7 @@ const event_schema = new schema({
    },
    title: {
       type: String, // Demo Day
-      default: 'Demo Day',
+      required: true,
    },
    date: {
       type: Date,

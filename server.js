@@ -19,6 +19,7 @@ mongoose
 // Routes
 app.use('/api/v1/members', require('./routes/api/v1/members'))
 app.use('/api/v1/presentations', require('./routes/api/v1/presentations'))
+app.use('/api/v1/events', require('./routes/api/v1/events'))
 app.get('/', (req, res) => res.send('Hello world.'))
 
 const port = process.env.port || 3333

@@ -30,14 +30,14 @@ router.get('/', (req, res) => {
 // @desc       Create a new member in the members resource
 // @access     Public
 router.post('/', (req, res) => {
+   const body = req.body
    // Validate user input
-   const { errors, is_valid } = validate_input_for_member(req.body)
+   const { errors, is_valid } = validate_input_for_member(body)
    if (!is_valid) {
       return res.status(400).json(errors)
    }
 
    const member_obj = {}
-   const body = req.body
    // These are fields that can be updated via the API
    if (body.first_name) member_obj.first_name = body.first_name // String, required
    if (body.last_name) member_obj.last_name = body.last_name // String, required
