@@ -7,7 +7,6 @@ const _kebab_case = require('lodash/kebabCase')
 const append_slug_suffix = require('../../../utils/append_slug_suffix')
 const create_row_id = require('../../../utils/create_row_id')
 const validate_input_for_event = require('../../../validation/event')
-const _has = require('lodash/has')
 
 // @route      GET api/v1/events
 // @desc       Gets all events
@@ -35,7 +34,7 @@ router.post('/', (req, res) => {
    const event_obj = {}
    // These are fields that can be updated via the API
    if (body.title) event_obj.title = body.title // String
-   if (body.date) event_obj.date = body.date // Date, default Date.now()
+   if (body.started_on) event_obj.started_on = body.started_on // Date, default Date.now()
    if (body.is_active) event_obj.is_active = body.is_active // Boolean, default true
 
    event_model
@@ -50,7 +49,10 @@ router.post('/', (req, res) => {
                .catch(err => res.status(400).json(err))
          } else {
             // Create event
-            let event_date = date_format(body.date || Date.now(), 'YYYY-MM-DD')
+            let event_date = date_format(
+               body.started_on || Date.now(),
+               'YYYY-MM-DD'
+            )
             let slug = _kebab_case(`${event_date}-${body.title}`)
             event_obj.slug = await append_slug_suffix(event_model, slug)
             event_obj.row_id = await create_row_id(event_model)
@@ -70,7 +72,7 @@ const example_api_return = {
    _id: mongoose.Schema.Types.ObjectId,
    row_id: Number,
    title: String,
-   date: Date,
+   started_on: Date,
    slug: String,
    is_active: Boolean,
 }

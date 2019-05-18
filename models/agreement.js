@@ -12,7 +12,7 @@ const agreement_schema = new schema({
       required: true,
    },
    version: {
-      type: String,
+      type: Number,
       required: true,
    },
    text: {

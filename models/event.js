@@ -11,7 +11,7 @@ const event_schema = new schema({
       type: String, // Demo Day
       required: true,
    },
-   date: {
+   started_on: {
       type: Date,
       default: Date.now(),
    },
