@@ -22,6 +22,10 @@ module.exports = function validate_input_for_member(input) {
    if (validator.isEmpty(input.first_name)) {
       errors.first_name = 'Your first name is required, friend.'
    }
+   if (validator.matches(input.last_name, /-\d+\s*$/)) {
+      errors.last_name =
+         'Hey, I know this is weird. But your last name cannot end with a dash followed by a number.'
+   }
    if (!validator.isLength(input.last_name, { max: 50 })) {
       errors.last_name =
          "Your last name can be no longer than 50 characters. I'm sorry yours is so long. You must be German."

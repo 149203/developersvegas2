@@ -34,6 +34,11 @@ module.exports = function validate_input_for_presentation(input) {
       errors.video_screenshot_url = 'video_screenshot_url is not a valid URL.'
    }
 
+   if (validator.matches(input.title, /-\d+\s*$/)) {
+      errors.title =
+         'Hey, I know this is weird. But your title cannot end with a dash followed by a number.'
+   }
+
    console.log({ errors, is_valid: is_empty(errors) })
 
    return {
