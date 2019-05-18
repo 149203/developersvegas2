@@ -5,6 +5,8 @@ const presentation_model = require('../../../models/presentation')
 const _kebab_case = require('lodash/kebabCase')
 const append_slug_suffix = require('../../../utils/append_slug_suffix')
 const create_row_id = require('../../../utils/create_row_id')
+const validate_input_for_presentation = require('../../../validation/presentation')
+const _has = require('lodash/has')
 
 // @route      GET api/v1/presentations
 // @desc       Gets all presentations
@@ -23,10 +25,10 @@ router.get('/', (req, res) => {
 // @access     Public
 router.post('/', (req, res) => {
    // Validate user input
-   // const { errors, is_valid } = validate_input_for_member(req.body)
-   // if (!is_valid) {
-   //    return res.status(400).json(errors)
-   // }
+   const { errors, is_valid } = validate_input_for_presentation(req.body)
+   if (!is_valid) {
+      return res.status(400).json(errors)
+   }
 
    const presentation_obj = {}
    const body = req.body
@@ -35,9 +37,9 @@ router.post('/', (req, res) => {
    if (body.has_accepted_agreement)
       presentation_obj.has_accepted_agreement = body.has_accepted_agreement // Boolean, required
    if (body.order) presentation_obj.order = body.order // Number, required
-   if (body.video_url) presentation_obj.video_url = body.video_url // String, required
+   if (body.video_url) presentation_obj.video_url = body.video_url // String
    if (body.video_screenshot_url)
-      presentation_obj.video_screenshot_url = body.video_screenshot_url // String, required
+      presentation_obj.video_screenshot_url = body.video_screenshot_url // String
    if (body.is_active) presentation_obj.is_active = body.is_active // Boolean, default true
 
    presentation_model
@@ -61,6 +63,11 @@ router.post('/', (req, res) => {
                slug
             )
             presentation_obj.row_id = await create_row_id(presentation_model)
+
+            if (!_has(presentation_obj, 'video_url'))
+               presentation_obj.video_url = ''
+            if (!_has(presentation_obj, 'video_screenshot_url'))
+               presentation_obj.video_screenshot_url = ''
 
             new presentation_model(presentation_obj)
                .save()

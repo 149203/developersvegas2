@@ -26,11 +26,9 @@ const presentation_schema = new schema({
    },
    video_url: {
       type: String,
-      required: true,
    },
    video_screenshot_url: {
       type: String,
-      required: true,
    },
    slug: {
       type: String, // 'untitled-project-2019-03-09'
