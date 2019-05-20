@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
 
    const agreement_obj = {}
    // These are fields that can be updated via the API
-   if (body.title) agreement_obj.title = body.title // String
+   if (body.title) agreement_obj.title = body.title // String, required
    if (body.version) agreement_obj.version = body.version // Number, required
    if (body.text) agreement_obj.text = body.text // String, required
    if (body.created_on) agreement_obj.created_on = body.created_on // Date, default Date.now()
@@ -67,13 +67,6 @@ router.post('/', (req, res) => {
       .catch(err => res.status(400).json(err))
 })
 
-const example_api_parameters = {
-   title: String,
-   version: String,
-   text: String,
-   created_on: Date, // optional
-}
-
 const example_api_return = {
    _id: mongoose.Schema.Types.ObjectId,
    row_id: Number,
@@ -83,9 +76,5 @@ const example_api_return = {
    created_on: Date,
    is_active: Boolean,
 }
-
-router.post('/', (req, res) => {
-   console.log('Reached this API endpoint.')
-})
 
 module.exports = router

@@ -7,7 +7,7 @@ module.exports = function validate_input_for_event(input) {
    // if the user input is empty, replace with an empty string
    // else use the user's input
    input.title = is_empty(input.title) ? '' : input.title
-   input.date = is_empty(input.date) ? '' : input.date
+   input.started_on = is_empty(input.started_on) ? '' : input.started_on
    input.is_active = is_empty(input.is_active) ? '' : input.is_active
 
    // These have an order! E.g. the isEmpty validation will overwrite the isEmail validation.
@@ -18,8 +18,11 @@ module.exports = function validate_input_for_event(input) {
    if (validator.isEmpty(input.title)) {
       errors.title = 'A title for the event is required.'
    }
-   if (input.date && !validator.isISO8601(input.date, { strict: true })) {
-      errors.date = 'date is not a valid Date.'
+   if (
+      input.started_on &&
+      !validator.isISO8601(input.started_on, { strict: true })
+   ) {
+      errors.started_on = 'started_on is not a valid date.'
    }
    if (validator.matches(input.title, /-\d+\s*$/)) {
       errors.title =
