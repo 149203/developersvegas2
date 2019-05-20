@@ -47,6 +47,12 @@ module.exports = function validate_input_for_member(input) {
       errors.bio =
          "Your bio should be less than 500 characters. We're not writing a novel here."
    }
+   if (
+      input.joined_on &&
+      !validator.isISO8601(input.joined_on, { strict: true })
+   ) {
+      errors.joined_on = 'joined_on is not a valid date.'
+   }
 
    console.log({ errors, is_valid: is_empty(errors) })
 

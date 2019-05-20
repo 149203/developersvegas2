@@ -38,6 +38,12 @@ module.exports = function validate_input_for_presentation(input) {
       errors.title =
          'Hey, I know this is weird. But your title cannot end with a dash followed by a number.'
    }
+   if (
+      input.signed_up_on &&
+      !validator.isISO8601(input.signed_up_on, { strict: true })
+   ) {
+      errors.signed_up_on = 'signed_up_on is not a valid date.'
+   }
 
    console.log({ errors, is_valid: is_empty(errors) })
 

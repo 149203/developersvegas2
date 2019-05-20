@@ -40,6 +40,7 @@ router.post('/', (req, res) => {
    if (body.video_url) presentation_obj.video_url = body.video_url // String
    if (body.video_screenshot_url)
       presentation_obj.video_screenshot_url = body.video_screenshot_url // String
+   if (body.signed_up_on) presentation_obj.signed_up_on = body.signed_up_on // Date, default now
    if (body.is_active) presentation_obj.is_active = body.is_active // Boolean, default true
 
    presentation_model
