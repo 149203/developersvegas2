@@ -8,6 +8,7 @@ module.exports = function validate_input_for_event(input) {
    // else use the user's input
    input.title = is_empty(input.title) ? '' : input.title
    input.started_on = is_empty(input.started_on) ? '' : input.started_on
+   input.is_active = is_empty(input.is_active) ? '' : input.is_active
 
    // These have an order! E.g. the isEmpty validation will overwrite the isEmail validation.
    if (!validator.isLength(input.title, { max: 80 })) {
@@ -27,6 +28,9 @@ module.exports = function validate_input_for_event(input) {
       !validator.isISO8601(input.started_on, { strict: true })
    ) {
       errors.started_on = 'started_on is not a valid date.'
+   }
+   if (!validator.isBoolean(input.is_active)) {
+      errors.is_active = 'is_active must be a Boolean.'
    }
 
    console.log({ errors, is_valid: is_empty(errors) })

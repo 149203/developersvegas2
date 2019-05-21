@@ -14,6 +14,7 @@ module.exports = function validate_input_for_member(input) {
       : input.portfolio_url
    input.bio = is_empty(input.bio) ? '' : input.bio
    input.joined_on = is_empty(input.joined_on) ? '' : input.joined_on
+   input.is_active = is_empty(input.is_active) ? '' : input.is_active
 
    // These have an order! E.g. the isEmpty validation will overwrite the isEmail validation.
    if (!validator.isLength(input.first_name, { max: 50 })) {
@@ -53,6 +54,9 @@ module.exports = function validate_input_for_member(input) {
       !validator.isISO8601(input.joined_on, { strict: true })
    ) {
       errors.joined_on = 'joined_on is not a valid date.'
+   }
+   if (!validator.isBoolean(input.is_active)) {
+      errors.is_active = 'is_active must be a Boolean.'
    }
 
    console.log({ errors, is_valid: is_empty(errors) })

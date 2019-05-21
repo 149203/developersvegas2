@@ -7,10 +7,18 @@ module.exports = function validate_input_for_technology(input) {
    // if the user input is empty, replace with an empty string
    // else use the user's input
    input.name = is_empty(input.name) ? '' : input.name
+   input.is_active = is_empty(input.is_active) ? '' : input.is_active
+   input.popularity = is_empty(input.popularity) ? '' : input.popularity
 
    // These have an order! E.g. the isEmpty validation will overwrite the isEmail validation.
    if (validator.isEmpty(input.name)) {
       errors.name = 'A name for the technology is required.'
+   }
+   if (!validator.isBoolean(input.is_active)) {
+      errors.is_active = 'is_active must be a Boolean.'
+   }
+   if (!validator.isNumeric(input.popularity)) {
+      errors.popularity = 'popularity must be a number.'
    }
 
    console.log({ errors, is_valid: is_empty(errors) })
