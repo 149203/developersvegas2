@@ -4,6 +4,8 @@ const mongoose = require('mongoose')
 const technology_model = require('../../../models/technology')
 const create_row_id = require('../../../utils/create_row_id')
 const validate_input_for_technology = require('../../../validation/technology')
+const _kebab_case = require('lodash/kebabCase')
+const append_slug_suffix = require('../../../utils/append_slug_suffix')
 
 // @route      GET api/v1/technologies
 // @desc       Gets all technologies
@@ -23,40 +25,43 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
    const body = req.body
    // Validate user input
-   const { errors, is_valid } = validate_input_for_agreement(body)
+   const { errors, is_valid } = validate_input_for_technology(body)
    if (!is_valid) {
       return res.status(400).json(errors)
    }
 
-   const agreement_obj = {}
+   const technology_obj = {}
    // These are fields that can be updated via the API
-   if (body.title) agreement_obj.title = body.title // String, required
-   if (body.version) agreement_obj.version = body.version // Number, required
-   if (body.text) agreement_obj.text = body.text // String, required
-   if (body.created_on) agreement_obj.created_on = body.created_on // Date, default Date.now()
-   if (body.is_active) agreement_obj.is_active = body.is_active // Boolean, default true
+   if (body.name) technology_obj.name = body.name // String, required
+   if (body.popularity) technology_obj.popularity = body.popularity // Number, default 10
+   if (body.is_active) technology_obj.is_active = body.is_active // Boolean, default true
 
-   agreement_model
+   technology_model
       .findById(body._id)
-      .then(async agreement => {
-         if (agreement) {
+      .then(async technology => {
+         if (technology) {
             // if we include an id in the request and it matches a document, update
-            agreement_model
+            technology_model
                .findByIdAndUpdate(
                   body._id,
-                  { $set: agreement_obj },
+                  { $set: technology_obj },
                   { new: true }
                )
-               .then(updated_agreement => res.json(updated_agreement))
+               .then(updated_technology => res.json(updated_technology))
                .catch(err => res.status(400).json(err))
          } else {
-            // Create agreement
-            agreement_obj.row_id = await create_row_id(agreement_model)
+            // Create technology
+            let slug = _kebab_case(body.name) // 'name-of-technology'
+            technology_obj.slug = await append_slug_suffix(
+               technology_model,
+               slug
+            )
+            technology_obj.row_id = await create_row_id(technology_model)
 
-            new agreement_model(agreement_obj)
+            new technology_model(technology_obj)
                .save()
-               .then(agreement => {
-                  res.json(agreement)
+               .then(technology => {
+                  res.json(technology)
                })
                .catch(err => res.status(400).json(err))
          }
