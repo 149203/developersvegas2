@@ -13,6 +13,7 @@ module.exports = function validate_input_for_member(input) {
       ? ''
       : input.portfolio_url
    input.bio = is_empty(input.bio) ? '' : input.bio
+   input.joined_on = is_empty(input.joined_on) ? '' : input.joined_on
 
    // These have an order! E.g. the isEmpty validation will overwrite the isEmail validation.
    if (!validator.isLength(input.first_name, { max: 50 })) {

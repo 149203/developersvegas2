@@ -2,11 +2,8 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 const agreement_model = require('../../../models/agreement')
-const _kebab_case = require('lodash/kebabCase')
-const append_slug_suffix = require('../../../utils/append_slug_suffix')
 const create_row_id = require('../../../utils/create_row_id')
 const validate_input_for_agreement = require('../../../validation/agreement')
-const _has = require('lodash/has')
 
 // @route      GET api/v1/agreements
 // @desc       Gets all agreements

@@ -10,7 +10,6 @@ module.exports = function validate_input_for_agreement(input) {
    input.text = is_empty(input.text) ? '' : input.text
    input.version = is_empty(input.version) ? '' : input.version
    input.created_on = is_empty(input.created_on) ? '' : input.created_on
-   input.is_active = is_empty(input.is_active) ? '' : input.is_active
 
    // These have an order! E.g. the isEmpty validation will overwrite the isEmail validation.
    if (validator.isEmpty(input.title)) {
