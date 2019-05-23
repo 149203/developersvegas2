@@ -15,13 +15,12 @@ module.exports = function validate_input_for_event(input) {
       errors.title =
          "I can't believe this event has a title that long. It should be no more than 80 characters."
    }
-   if (validator.isEmpty(input.title)) {
-      errors.title = 'A title for the event is required.'
-   }
-
    if (validator.matches(input.title, /-\d+\s*$/)) {
       errors.title =
          'Hey, I know this is weird. But your event title cannot end with a dash followed by a number.'
+   }
+   if (validator.isEmpty(input.title)) {
+      errors.title = 'A title for the event is required.'
    }
    if (
       input.started_on &&

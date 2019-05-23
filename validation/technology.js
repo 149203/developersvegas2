@@ -17,7 +17,7 @@ module.exports = function validate_input_for_technology(input) {
    if (input.is_active && !validator.isBoolean(input.is_active)) {
       errors.is_active = 'is_active must be a Boolean.'
    }
-   if (!validator.isNumeric(input.popularity)) {
+   if (input.popularity && !validator.isNumeric(input.popularity)) {
       errors.popularity = 'popularity must be a number.'
    }
 
