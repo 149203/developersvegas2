@@ -19,7 +19,7 @@ module.exports = function validate_input_for_agreement(input) {
    if (validator.isEmpty(input.text)) {
       errors.text = 'Text for the agreement is required.'
    }
-   if (!validator.isBoolean(input.is_active)) {
+   if (input.is_active && !validator.isBoolean(input.is_active)) {
       errors.is_active = 'is_active must be a Boolean.'
    }
    if (!validator.isNumeric(input.version)) {

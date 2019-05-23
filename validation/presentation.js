@@ -42,10 +42,13 @@ module.exports = function validate_input_for_presentation(input) {
    ) {
       errors.signed_up_on = 'signed_up_on is not a valid date.'
    }
-   if (!validator.isBoolean(input.is_active)) {
+   if (input.is_active && !validator.isBoolean(input.is_active)) {
       errors.is_active = 'is_active must be a Boolean.'
    }
-   if (!validator.isBoolean(input.has_accepted_agreement)) {
+   if (
+      input.has_accepted_agreement &&
+      !validator.isBoolean(input.has_accepted_agreement)
+   ) {
       errors.has_accepted_agreement =
          'has_accepted_agreement must be a Boolean.'
    }

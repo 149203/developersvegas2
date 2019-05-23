@@ -55,7 +55,7 @@ module.exports = function validate_input_for_member(input) {
    ) {
       errors.joined_on = 'joined_on is not a valid date.'
    }
-   if (!validator.isBoolean(input.is_active)) {
+   if (input.is_active && !validator.isBoolean(input.is_active)) {
       errors.is_active = 'is_active must be a Boolean.'
    }
 
