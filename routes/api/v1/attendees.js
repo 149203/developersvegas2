@@ -5,12 +5,13 @@ const event_member_model = require('../../../models/xref_event_member')
 const validate_input_for_event_member = require('../../../validation/event_member')
 const cast_to_object_id = require('mongodb').ObjectID
 
-// @route      GET api/v1/attendees
-// @desc       Get all event_members in the event_member resource
+// @route      GET api/v1/attendees/:event_id
+// @desc       Get all event_members for an event_id
 // @access     Public
-router.get('/', (req, res) => {
+router.get('/:event_id', (req, res) => {
+   const event_id = req.params.event_id
    event_member_model
-      .find()
+      .find({ event_id })
       .then(attendees => {
          res.json(attendees)
       })
@@ -44,7 +45,7 @@ router.post('/', (req, res) => {
             console.log('This member is already attending this event.')
             res.json(event_member)
          } else {
-            // Create event_member
+            // Create new event_member
             new event_member_model(event_member_obj)
                .save()
                .then(event_member => {
