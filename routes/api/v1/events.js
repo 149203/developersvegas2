@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
 
    const event_obj = {}
    // These are fields that can be updated via the API
-   if (body.title) event_obj.title = body.title // String
+   if (body.title) event_obj.title = body.title // String, required
    if (body.started_on) event_obj.started_on = body.started_on // Date, default Date.now()
    if (body.is_active) event_obj.is_active = body.is_active // Boolean, default true
 

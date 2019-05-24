@@ -4,12 +4,21 @@ const mongoose = require('mongoose')
 const event_member_model = require('../../../models/xref_event_member')
 const validate_input_for_event_member = require('../../../validation/event_member')
 const cast_to_object_id = require('mongodb').ObjectID
+const validator = require('validator')
 
 // @route      GET api/v1/attendees/:event_id
 // @desc       Get all event_members for an event_id
 // @access     Public
 router.get('/:event_id', (req, res) => {
    const event_id = req.params.event_id
+
+   // Validate URL
+   let errors = {}
+   if (!validator.isMongoId(event_id)) {
+      errors.event_id = 'event_id must be a valid Mongo ID.'
+      return res.status(400).json(errors)
+   }
+
    event_member_model
       .find({ event_id })
       .then(attendees => {
@@ -41,7 +50,7 @@ router.post('/', (req, res) => {
       .findOne({ member_id, event_id })
       .then(event_member => {
          if (event_member) {
-            // fail silently, let user continue without creating a new event_member
+            // if xref exists, fail silently. let user continue without creating a new event_member
             console.log('This member is already attending this event.')
             res.json(event_member)
          } else {
