@@ -3,12 +3,12 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const member_model = require('../../../models/member')
 const _map = require('lodash/map')
-const _to_lower = require('lodash/toLower')
 const _has = require('lodash/has')
 const validate_input_for_member = require('../../../validation/member')
 const append_slug_suffix = require('../../../utils/append_slug_suffix')
 const create_row_id = require('../../../utils/create_row_id')
 const mask_email = require('../../../utils/mask_email')
+const slug_format = require('../../../utils/slug_format')
 
 // @route      GET api/v1/members
 // @desc       Gets all members
@@ -42,6 +42,7 @@ router.post('/', (req, res) => {
    if (body.first_name) member_obj.first_name = body.first_name // String, required
    if (body.last_name) member_obj.last_name = body.last_name // String, required
    if (body.email) member_obj.email = body.email // String, required
+   if (body.row_id) member_obj.row_id = body.row_id // String
    if (body.portfolio_url) member_obj.portfolio_url = body.portfolio_url // String
    if (body.profile_photo_url)
       member_obj.profile_photo_url = body.profile_photo_url // String
@@ -60,9 +61,11 @@ router.post('/', (req, res) => {
                .catch(err => res.status(400).json(err))
          } else {
             // Create member
-            let slug = _to_lower(`${body.first_name}-${body.last_name}`) // john-smith
+            let slug = slug_format(`${body.first_name}-${body.last_name}`) // john-smith
             member_obj.slug = await append_slug_suffix(member_model, slug)
-            member_obj.row_id = await create_row_id(member_model)
+            if (!body.row_id) {
+               member_obj.row_id = await create_row_id(member_model)
+            }
             if (!_has(member_obj, 'portfolio_url'))
                member_obj.portfolio_url = ''
             if (!_has(member_obj, 'profile_photo_url'))

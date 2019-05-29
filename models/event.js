@@ -13,7 +13,7 @@ const event_schema = new schema({
    },
    started_on: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
    },
    slug: {
       type: String, // 'demo-day-2019-03-09'

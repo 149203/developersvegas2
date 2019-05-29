@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const technology_model = require('../../../models/technology')
 const create_row_id = require('../../../utils/create_row_id')
 const validate_input_for_technology = require('../../../validation/technology')
-const _kebab_case = require('lodash/kebabCase')
+const slug_format = require('../../../utils/slug_format')
 const append_slug_suffix = require('../../../utils/append_slug_suffix')
 
 // @route      GET api/v1/technologies
@@ -51,7 +51,7 @@ router.post('/', (req, res) => {
                .catch(err => res.status(400).json(err))
          } else {
             // Create technology
-            let slug = _kebab_case(body.name) // 'name-of-technology'
+            let slug = slug_format(body.name) // 'name-of-technology'
             technology_obj.slug = await append_slug_suffix(
                technology_model,
                slug

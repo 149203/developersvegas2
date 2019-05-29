@@ -3,7 +3,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const event_model = require('../../../models/event')
 const date_format = require('date-fns/format')
-const _kebab_case = require('lodash/kebabCase')
+const slug_format = require('../../../utils/slug_format')
 const append_slug_suffix = require('../../../utils/append_slug_suffix')
 const create_row_id = require('../../../utils/create_row_id')
 const validate_input_for_event = require('../../../validation/event')
@@ -34,7 +34,7 @@ router.post('/', (req, res) => {
    const event_obj = {}
    // These are fields that can be updated via the API
    if (body.title) event_obj.title = body.title // String, required
-   if (body.started_on) event_obj.started_on = body.started_on // Date, default Date.now()
+   if (body.started_on) event_obj.started_on = body.started_on // Date, default Date.now
    if (body.is_active) event_obj.is_active = body.is_active // Boolean, default true
 
    event_model
@@ -53,7 +53,7 @@ router.post('/', (req, res) => {
                body.started_on || Date.now(),
                'YYYY-MM-DD'
             )
-            let slug = _kebab_case(`${event_date}-${body.title}`)
+            let slug = slug_format(`${event_date}-${body.title}`)
             event_obj.slug = await append_slug_suffix(event_model, slug)
             event_obj.row_id = await create_row_id(event_model)
 

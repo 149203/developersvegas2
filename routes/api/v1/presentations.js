@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 const presentation_model = require('../../../models/presentation')
-const _kebab_case = require('lodash/kebabCase')
+const slug_format = require('../../../utils/slug_format')
 const append_slug_suffix = require('../../../utils/append_slug_suffix')
 const create_row_id = require('../../../utils/create_row_id')
 const validate_input_for_presentation = require('../../../validation/presentation')
@@ -58,7 +58,7 @@ router.post('/', (req, res) => {
                .catch(err => res.status(400).json(err))
          } else {
             // Create presentation
-            let slug = _kebab_case(body.title || 'untitled-project') // 'title-of-presentation' or 'untitled-project'
+            let slug = slug_format(body.title || 'untitled-project') // 'title-of-presentation' or 'untitled-project'
             presentation_obj.slug = await append_slug_suffix(
                presentation_model,
                slug

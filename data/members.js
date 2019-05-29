@@ -2428,10 +2428,10 @@ module.exports = members = [
             },
          },
       ],
-      email: 'mike@mikeziethlow.com',
+      email: 'mike@mikezetlow.com',
       first_name: 'Mike',
-      last_name: 'Ziethlow',
-      portfolio: 'http://mikeziethlow.com',
+      last_name: 'Zetlow',
+      portfolio: 'https://mikezetlow.com',
    },
    {
       _id: 143,
@@ -7060,8 +7060,8 @@ module.exports = members = [
          },
       ],
       email: 'scottb50@gmail.com',
-      first_name: '',
-      last_name: 'BERENZWEIG',
+      first_name: 'Scott',
+      last_name: 'Berenzweig',
       portfolio: '',
    },
    {
@@ -7589,7 +7589,7 @@ module.exports = members = [
       ],
       email: 'Adambrikman@gmail.com',
       first_name: 'Adam',
-      last_name: 'Adambrikman@gmail.com',
+      last_name: 'Brikman',
       portfolio: '',
    },
    {

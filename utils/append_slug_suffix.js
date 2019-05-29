@@ -21,4 +21,6 @@ const append_slug_suffix = (collection, slug) =>
       })
       .catch(err => console.log(err))
 
+function slugify_name(name) {}
+
 module.exports = append_slug_suffix

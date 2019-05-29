@@ -2,3 +2,6 @@
 package-lock.json
 .env
 /.vscode
+scripts/logs
+/data
+data/members.js

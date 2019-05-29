@@ -14,7 +14,7 @@ const presentation_schema = new schema({
    },
    signed_up_on: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
    },
    has_accepted_agreement: {
       type: Boolean,
