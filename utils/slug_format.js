@@ -9,7 +9,7 @@ const slug_format = str =>
       _to_lower,
       _deburr,
       _replace(/\s/gm, '-'), // replace any spaces with hyphen
-      _replace(/[^a-z-]/gm, ''), // remove non a-z and non hyphen chars
+      _replace(/[^a-z0-9-]/gm, ''), // remove non a-z, non 0-9, and non hyphen chars
       _replace(/[-]{2,}/gm, '-'), // replace any double or multiple hyphens with a single hyphen
       _replace(/^-|-$/gm, ''), // remove any single hyphen at beginning or end
       _trim // last step

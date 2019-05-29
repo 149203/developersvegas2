@@ -51,9 +51,9 @@ router.post('/', (req, res) => {
             // Create event
             let event_date = date_format(
                body.started_on || Date.now(),
-               'YYYY-MM-DD'
+               'MMMM-Do-YYYY'
             )
-            let slug = slug_format(`${event_date}-${body.title}`)
+            const slug = slug_format(`${event_date}-${body.title}`)
             event_obj.slug = await append_slug_suffix(event_model, slug)
             event_obj.row_id = await create_row_id(event_model)
 
