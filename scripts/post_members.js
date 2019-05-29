@@ -22,7 +22,7 @@ _for_each(members, member => {
          })
          .catch(err => {
             console.log(err.response.data)
-            fs.appendFileSync(
+            fs.appendFile(
                './logs/post_members.txt',
                `${JSON.stringify(new_member)} \n\n`,
                err => console.log(err)
