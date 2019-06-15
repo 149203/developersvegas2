@@ -2,27 +2,12 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const body_parser = require('body-parser')
-
-const allow_cors = function(req, res, next) {
-   res.header('Access-Control-Allow-Origin', '*')
-   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-   res.header(
-      'Access-Control-Allow-Headers',
-      'Content-Type, Authorization, Content-Length, X-Requested-With'
-   )
-
-   // intercept OPTIONS method
-   if ('OPTIONS' == req.method) {
-      res.send(200)
-   } else {
-      next()
-   }
-}
+const cors = require('cors') // Connor Leech's comment here: https://stackoverflow.com/a/11057628
 
 const app = express()
 
 // body-parser middleware
-app.use(allow_cors) // Allow CORS
+app.use(cors()) // Allow CORS
 app.use(body_parser.urlencoded({ extended: false }))
 app.use(body_parser.json())
 
