@@ -10,7 +10,7 @@ app.use(body_parser.urlencoded({ extended: false }))
 app.use(body_parser.json())
 
 // Database and connection
-const mlab_db = process.env.mlab_uri
+const mlab_db = require('./config/keys').mlab_uri
 mongoose
    .connect(mlab_db)
    .then(() => console.log('Connected to mLab!'))
