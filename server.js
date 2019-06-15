@@ -29,6 +29,6 @@ app.use(
 )
 app.get('/', (req, res) => res.send('Hello world.'))
 
-const port = process.env.port || 3333
+const port = process.env.PORT || 3333
 
 app.listen(port, () => console.log(`Server running on port ${port}`))
