@@ -6,6 +6,7 @@ const body_parser = require('body-parser')
 const app = express()
 
 // body-parser middleware
+app.use(allowCrossDomain) // Allow CORS
 app.use(body_parser.urlencoded({ extended: false }))
 app.use(body_parser.json())
 
