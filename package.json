@@ -5,7 +5,8 @@
    "main": "server.js",
    "scripts": {
       "start": "npm run server",
-      "server": "nodemon server.js"
+      "server": "server.js",
+      "dev": "nodemon server.js"
    },
    "author": "Mike Zetlow",
    "license": "MIT",
