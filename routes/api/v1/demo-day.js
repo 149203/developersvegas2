@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 const event_model = require('../../../models/event')
+const member_model = require('../../../models/member')
 const presentation_model = require('../../../models/presentation')
 const slug_format = require('../../../utils/slug_format')
 const append_slug_suffix = require('../../../utils/append_slug_suffix')
@@ -28,13 +29,19 @@ router.post('/', (req, res) => {
    _for_each(demo_days, async demo_day => {
       // get object_ids for event, member
 
-      const started_on = new Date(demo_day.event.date)
       let event_id
+      const started_on = new Date(demo_day.event.date)
       await event_model
          .findOne({ started_on })
          .then(event => (event_id = event._id))
 
-      console.log({ agreement_id, event_id })
+      let member_id
+      const row_id = demo_day.member.row_id
+      await member_model
+         .findOne({ row_id })
+         .then(member => (member_id = member._id))
+
+      console.log({ agreement_id, event_id, member_id })
 
       const presentation_obj = {}
       const presentation_technology_obj = {}
