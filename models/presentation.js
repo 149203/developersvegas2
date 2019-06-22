@@ -39,10 +39,16 @@ const presentation_schema = new schema({
       type: Number,
       required: true,
    },
+   video_screenshot_url: {
+      type: String,
+   },
+   video_screenshot_with_play_url: {
+      type: String,
+   },
    video_url: {
       type: String,
    },
-   video_screenshot_url: {
+   video_iframe: {
       type: String,
    },
    slug: {
