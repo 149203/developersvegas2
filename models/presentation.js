@@ -16,6 +16,21 @@ const presentation_schema = new schema({
       type: Date,
       default: Date.now,
    },
+   event_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'event',
+   },
+   member_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'member',
+   },
+   agreement_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'agreement',
+   },
    has_accepted_agreement: {
       type: Boolean,
       required: true,

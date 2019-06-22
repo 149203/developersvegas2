@@ -43,7 +43,7 @@ module.exports = function validate_input_for_member(input) {
    }
    if (!validator.isLength(input.portfolio_url, { max: 2000 })) {
       errors.portfolio_url =
-         'Your portfolio URL should be less than 2000 characters. Do you even SEO brah?'
+         'Your portfolio URL should be less than 2000 characters. Do you even SEO?'
    }
    if (!validator.isLength(input.bio, { max: 500 })) {
       errors.bio =
