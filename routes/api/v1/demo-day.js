@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const mongoose = require('mongoose')
 const event_model = require('../../../models/event')
 const member_model = require('../../../models/member')
 const presentation_model = require('../../../models/presentation')
@@ -9,9 +8,10 @@ const xref_presentation_technology_model = require('../../../models/xref_present
 const slug_format = require('../../../utils/slug_format')
 const append_slug_suffix = require('../../../utils/append_slug_suffix')
 const create_row_id = require('../../../utils/create_row_id')
+const convert_undefined = require('../../../utils/convert_undefined')
+const get_object_id = require('../../../utils/get_object_id')
 const validate_input_for_presentation = require('../../../validation/presentation')
 const cast_to_object_id = require('mongodb').ObjectID
-const _has = require('lodash/has')
 const _for_each = require('lodash/forEach')
 
 // @route      POST api/v1/demo-day
@@ -29,21 +29,13 @@ router.post('/', (req, res) => {
    const has_accepted_agreement = true
 
    _for_each(demo_days, async demo_day => {
-      let event_id
-      const started_on = new Date(demo_day.event.date)
-      await event_model
-         .findOne({ started_on })
-         .then(event => (event_id = event._id))
-         .catch(err => res.status(400).json(err))
+      const event_id = get_object_id(event_model, {
+         started_on: new Date(demo_day.event.date),
+      })
 
-      let member_id
-      const row_id = demo_day.member.row_id
-      await member_model
-         .findOne({ row_id })
-         .then(member => (member_id = member._id))
-         .catch(err => res.status(400).json(err))
-
-      console.log({ agreement_id, event_id, member_id })
+      const member_id = get_object_id(member_model, {
+         row_id: demo_day.member.row_id,
+      })
 
       const presentation_obj = {}
       const presentation_technology_obj = {}
@@ -55,20 +47,22 @@ router.post('/', (req, res) => {
       presentation_obj.title = demo_day.presentation.title
       presentation_obj.order = demo_day.presentation.order
       presentation_obj.is_active = demo_day.presentation.is_active
-      if (demo_day.presentation.video_screenshot_url)
-         presentation_obj.video_screenshot_url =
-            demo_day.presentation.video_screenshot_url
-      if (demo_day.presentation.video_screenshot_with_play_url)
-         presentation_obj.video_screenshot_with_play_url =
-            demo_day.presentation.video_screenshot_with_play_url
-      if (demo_day.presentation.video_url)
-         presentation_obj.video_url = demo_day.presentation.video_url
-      if (demo_day.presentation.video_iframe)
-         presentation_obj.video_iframe = demo_day.presentation.video_iframe
+      presentation_obj.video_screenshot_url = convert_undefined(
+         demo_day.presentation.video_screenshot_url
+      ) // optional
+      presentation_obj.video_screenshot_with_play_url = convert_undefined(
+         demo_day.presentation.video_screenshot_with_play_url
+      ) // optional
+      presentation_obj.video_url = convert_undefined(
+         demo_day.presentation.video_url
+      ) // optional
+      presentation_obj.video_iframe = convert_undefined(
+         demo_day.presentation.video_iframe
+      ) // optional
 
-      const technologies = demo_day.technologies.map(
-         technology => technology.id // an array of numbers
-      )
+      const technology_ids = demo_day.technologies.map(technology =>
+         get_object_id(technology_model, { row_id: technology.id })
+      ) // an array of object_ids
 
       await presentation_model
          .findOne({
@@ -78,14 +72,16 @@ router.post('/', (req, res) => {
          .then(async presentation => {
             if (presentation) {
                // if our search matches a document, update
-               presentation_model
+               await presentation_model
                   .findByIdAndUpdate(
                      presentation._id,
                      { $set: presentation_obj },
                      { new: true }
                   )
                   .then(updated_presentation => {
-                     // update presentation_technology
+                     // console.log({ updated_presentation })
+                     presentation_technology_obj.presentation_id =
+                        updated_presentation._id
                      // append to custom JSON response
                   })
                   .catch(err => res.status(400).json(err))
@@ -100,18 +96,10 @@ router.post('/', (req, res) => {
                )
                presentation_obj.row_id = await create_row_id(presentation_model)
 
-               if (!_has(presentation_obj, 'video_screenshot_url'))
-                  presentation_obj.video_screenshot_url = ''
-               if (!_has(presentation_obj, 'video_screenshot_with_play_url'))
-                  presentation_obj.video_screenshot_with_play_url = ''
-               if (!_has(presentation_obj, 'video_url'))
-                  presentation_obj.video_url = ''
-               if (!_has(presentation_obj, 'video_iframe'))
-                  presentation_obj.video_iframe = ''
-
-               new presentation_model(presentation_obj)
+               await new presentation_model(presentation_obj)
                   .save()
                   .then(presentation => {
+                     // console.log({ presentation })
                      presentation_technology_obj.presentation_id =
                         presentation._id
                      // update presentation_technology
@@ -122,37 +110,46 @@ router.post('/', (req, res) => {
          })
          .catch(err => res.status(400).json(err))
 
-      _for_each(technologies, async row_id => {
+      await technology_ids.forEach(async row_id => {
+         await console.log({ row_id })
          await technology_model
             .findOne({ row_id })
-            .then(
-               technology =>
-                  (presentation_technology_obj.technology_id = technology._id)
-            )
-            .catch(err => res.status(400).json(err))
+            .then(async technology => {
+               presentation_technology_obj.technology_id = technology._id
 
-         new xref_presentation_technology_model(presentation_technology_obj)
-            .save()
-            .then(presentation_technology => {
-               // append to custom JSON response
+               console.log({ presentation_technology_obj })
+
+               await xref_presentation_technology_model
+                  .findOne({
+                     presentation_id:
+                        presentation_technology_obj.presentation_id,
+                     technology_id: presentation_technology_obj.technology_id,
+                  })
+                  .then(async xref => {
+                     // only if this xref doesn't exist, create it
+                     if (!xref) {
+                        console.log(
+                           `I didnt find this xref: ${JSON.stringify(
+                              presentation_technology_obj
+                           )}`
+                        )
+                        await new xref_presentation_technology_model(
+                           presentation_technology_obj
+                        )
+                           .save()
+                           .then(presentation_technology => {
+                              // console.log({ presentation_technology })
+                              // append to custom JSON response
+                           })
+                           .catch(err => res.status(400).json(err))
+                     } // else console.log({ xref })
+                  })
+                  .catch(err => res.status(400).json(err))
             })
             .catch(err => res.status(400).json(err))
       })
    })
    // res.json(presentation) return a custom response with all fields
 })
-
-const example_api_return = {
-   _id: mongoose.Schema.Types.ObjectId,
-   title: String,
-   signed_up_on: Date,
-   has_accepted_agreement: Boolean,
-   order: Number,
-   video_url: String,
-   video_screenshot_url: String,
-   is_active: Boolean,
-   slug: String,
-   row_id: Number,
-}
 
 module.exports = router
