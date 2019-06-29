@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const mongoose = require('mongoose')
 const member_model = require('../../../models/member')
 const _map = require('lodash/map')
 const _has = require('lodash/has')
@@ -83,7 +82,7 @@ router.post('/', (req, res) => {
 })
 
 const example_api_return = {
-   _id: mongoose.Schema.Types.ObjectId,
+   _id: 'ObjectId',
    row_id: Number,
    first_name: String,
    last_name: String,

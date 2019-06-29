@@ -7,22 +7,25 @@ const create_row_id = require('./create_row_id')
 module.exports = upsert = query => {
    const response = []
    const errors = []
+   let result
 
    if (typeof query.filter === undefined || is_empty(query.filter)) {
-      insert_new_doc(query, response, errors)
-      // return {response, errors} ?
+      result = insert_new_doc(query, response, errors)
+      //console.log({ result })
+      return result
    } else if (has(query.filter, '_id')) {
-      update_doc_by_id(query, response, errors, insert_new_doc)
-      // return {response, errors} ?
+      result = update_doc_by_id(query, response, errors, insert_new_doc)
+      //console.log({ result })
+      return result
    } else {
-      update_doc_by_params(query, response, errors, insert_new_doc)
-      // return {response, errors} ?
+      result = update_doc_by_params(query, response, errors, insert_new_doc)
+      //console.log(result)
+      return result
    }
-   console.log({ response, errors })
+   // console.log({ response, errors })
 }
 
 async function insert_new_doc(query, response, errors) {
-   console.log('inserting a new doc')
    if (
       query.options.should_create_slug &&
       (!has(query.payload, 'slug') || query.payload.slug === '')
@@ -35,58 +38,51 @@ async function insert_new_doc(query, response, errors) {
       query.payload.row_id = await create_row_id(query.collection)
    }
 
-   new query.collection(query.payload)
+   let result
+   await new query.collection(query.payload)
       .save()
       .then(doc => {
-         console.log({ doc })
-         response.push(doc)
+         result = doc
       })
       .catch(err => {
-         console.log({ err })
-         errors.push({ save: err })
+         result = { error_on_save: err }
       })
+   //console.log({ result })
+   return result
 }
 
 function update_doc_by_id(query, response, errors) {
-   console.log('updating doc by id')
-   query.collection
+   return query.collection
       .findByIdAndUpdate(query.filter._id, query.payload, {
          new: true,
          runValidators: true,
       })
       .then(doc => {
          if (!doc) {
-            console.log('didnt find the doc')
-            insert_new_doc(query, response, errors)
+            return insert_new_doc(query, response, errors)
          } else {
-            console.log('From update_doc_by_id:', doc)
-            response.push(doc)
+            return doc
          }
       })
       .catch(err => {
-         console.log({ findByIdAndUpdate: err })
-         errors.push({ findByIdAndUpdate: err })
+         return { error: true, error_on_findByIdAndUpdate: err }
       })
 }
 
 function update_doc_by_params(query, response, errors) {
-   console.log('updating doc by params')
-   query.collection
+   return query.collection
       .findOneAndUpdate(query.filter, query.payload, {
          new: true,
          runValidators: true,
       })
       .then(doc => {
          if (!doc) {
-            console.log('didnt find the doc')
-            insert_new_doc(query, response, errors)
+            return insert_new_doc(query, response, errors)
          } else {
-            console.log('From update_doc_by_params:', doc)
-            response.push(doc)
+            return doc
          }
       })
       .catch(err => {
-         console.log({ findOneAndUpdate: err })
-         errors.push({ findOneAndUpdate: err })
+         return { error: true, error_on_findOneAndUpdate: err }
       })
 }

@@ -10,7 +10,6 @@ const get_object_id = require('../../../utils/get_object_id')
 const upsert = require('../../../utils/upsert')
 const validate_input_for_presentation = require('../../../validation/presentation')
 const cast_to_object_id = require('mongodb').ObjectID
-const _for_each = require('lodash/forEach')
 
 // @route      POST api/v1/demo-day
 // @desc       Create all data for a demo day
@@ -26,6 +25,8 @@ router.post('/', async (req, res) => {
    // hard-coded stuff for now
    const agreement_id = cast_to_object_id('5d0e6f4d63f3b43f2830cd4f')
    const has_accepted_agreement = true
+
+   const results = []
 
    for (let demo_day of demo_days) {
       // forEach doesn't work with async/await
@@ -59,7 +60,7 @@ router.post('/', async (req, res) => {
          demo_day.presentation.video_iframe
       ) // optional
 
-      await upsert({
+      const result = await upsert({
          payload: presentation_obj,
          collection: presentation_model,
          options: {
@@ -69,10 +70,15 @@ router.post('/', async (req, res) => {
          filter: { event_id, member_id },
       })
 
+      results.push(result)
+
       // const technology_ids = demo_day.technologies.map(technology =>
       //    get_object_id(technology_model, { row_id: technology.id })
       // ) // an array of object_ids
    }
+
+   console.log(results)
+
    // res.json(presentation) return a custom response with all fields
 })
 
