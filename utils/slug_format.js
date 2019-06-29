@@ -4,7 +4,7 @@ const _deburr = require('lodash/fp/deburr')
 const _replace = require('lodash/fp/replace')
 const _flow = require('lodash/fp/flow')
 
-const slug_format = str =>
+module.exports = slug_format = str =>
    _flow(
       _to_lower,
       _deburr,
@@ -22,5 +22,3 @@ const slug_format = str =>
 //  Mark-O'Brien
 // Jesse-Piño <-space
 // --A-shantí- Good-Phillips--
-
-module.exports = slug_format

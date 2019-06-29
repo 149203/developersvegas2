@@ -1,6 +1,6 @@
 const _random = require('lodash/random')
 
-const mask_email = email => {
+module.exports = mask_email = email => {
    let email_masked = ''
    if (email) {
       const local_part = email.slice(0, email.lastIndexOf('@') + 1)
@@ -9,5 +9,3 @@ const mask_email = email => {
    }
    return email_masked
 }
-
-module.exports = mask_email

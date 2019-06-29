@@ -15,7 +15,7 @@ const _for_each = require('lodash/forEach')
 // @route      POST api/v1/demo-day
 // @desc       Create all data for a demo day
 // @access     Public
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
    const demo_days = req.body
    // Validate user input
    // const { errors, is_valid } = validate_input_for_presentation(body)
@@ -27,7 +27,9 @@ router.post('/', (req, res) => {
    const agreement_id = cast_to_object_id('5d0e6f4d63f3b43f2830cd4f')
    const has_accepted_agreement = true
 
-   _for_each(demo_days, async demo_day => {
+   for (let demo_day of demo_days) {
+      // forEach doesn't work with async/await
+      // https://dev.to/burkeholland/asyncawait-and-the-foreach-pit-of-despair-2267
       const event_id = await get_object_id(event_model, {
          started_on: new Date(demo_day.event.date),
       })
@@ -57,23 +59,20 @@ router.post('/', (req, res) => {
          demo_day.presentation.video_iframe
       ) // optional
 
-      upsert({
+      await upsert({
          payload: presentation_obj,
          collection: presentation_model,
          options: {
             should_create_slug: true,
             should_create_row_id: true,
          },
-         filter: {
-            event_id: presentation_obj.event_id,
-            order: presentation_obj.order,
-         },
+         filter: { event_id, member_id },
       })
 
       // const technology_ids = demo_day.technologies.map(technology =>
       //    get_object_id(technology_model, { row_id: technology.id })
       // ) // an array of object_ids
-   })
+   }
    // res.json(presentation) return a custom response with all fields
 })
 

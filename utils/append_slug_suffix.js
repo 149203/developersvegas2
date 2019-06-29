@@ -1,7 +1,7 @@
 const _is_finite = require('lodash/isFinite')
 const _to_number = require('lodash/toNumber')
 
-const append_slug_suffix = (collection, slug) =>
+module.exports = append_slug_suffix = (collection, slug) =>
    collection
       .findOne({ slug })
       .then(item => {
@@ -20,7 +20,3 @@ const append_slug_suffix = (collection, slug) =>
          }
       })
       .catch(err => console.log(err))
-
-function slugify_name(name) {}
-
-module.exports = append_slug_suffix
