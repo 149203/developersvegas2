@@ -61,7 +61,7 @@ router.post('/', async (req, res) => {
          demo_day.presentation.video_iframe
       ) // optional
 
-      const result = await upsert({
+      const presentation = await upsert({
          payload: presentation_obj,
          collection: presentation_model,
          options: {
@@ -70,40 +70,36 @@ router.post('/', async (req, res) => {
          },
          filter: { event_id, member_id },
       })
+      const xref_presentation_technology = []
 
-      if (result.has_error) res.status(400).json(result)
+      if (presentation.has_error) res.status(400).json(presentation)
       else if (has(demo_day, 'technologies')) {
-         const presentation_id = result._id
+         const presentation_id = presentation._id
          const technology_ids = demo_day.technologies.map(technology =>
             get_object_id(technology_model, { row_id: technology.id })
          )
+
          for await (const technology_id of technology_ids) {
             // for await...of
             // https://medium.com/@ian.mundy/async-map-in-javascript-b19439f0099
             // https://stackoverflow.com/a/50874507
-            // console.log({ presentation_id, technology_id })
-            const xref_result = upsert({
+            const xref = await upsert({
                payload: { presentation_id, technology_id },
                collection: xref_presentation_technology_model,
                options: {
                   should_create_slug: false,
                   should_create_row_id: false,
                },
-               filter: { presentation_id, technology_id }, // will update with fields it already has (do nothing)
-            })
+               filter: { presentation_id, technology_id },
+            }) // will update with fields it already has (do nothing)
 
-            // push this result
+            if (xref.has_error) res.status(400).json(xref)
+            else xref_presentation_technology.push(xref)
          }
       }
-
-      results.push(result)
-
-      // push all results
+      results.push({ presentation, xref_presentation_technology })
    }
-
-   // console.log(results)
-
-   // res.json(presentation) return a custom response with all fields
+   res.json(results)
 })
 
 module.exports = router
