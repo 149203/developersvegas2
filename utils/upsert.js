@@ -30,8 +30,13 @@ async function insert_new_doc(query) {
    return new query.collection(query.payload)
       .save()
       .then(doc => doc)
-      .catch(err => {
-         return { error_on_save: err }
+      .catch(error => {
+         return {
+            has_error: true,
+            error,
+            function: arguments.callee.name,
+            query,
+         }
       })
 }
 
@@ -48,8 +53,13 @@ function update_doc_by_id(query) {
             return doc
          }
       })
-      .catch(err => {
-         return { error: true, error_on_findByIdAndUpdate: err }
+      .catch(error => {
+         return {
+            has_error: true,
+            error,
+            function: arguments.callee.name,
+            query,
+         }
       })
 }
 
@@ -66,7 +76,12 @@ function update_doc_by_params(query) {
             return doc
          }
       })
-      .catch(err => {
-         return { error: true, error_on_findOneAndUpdate: err }
+      .catch(error => {
+         return {
+            has_error: true,
+            error,
+            function: arguments.callee.name,
+            query,
+         }
       })
 }

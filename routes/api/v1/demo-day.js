@@ -10,6 +10,7 @@ const get_object_id = require('../../../utils/get_object_id')
 const upsert = require('../../../utils/upsert')
 const validate_input_for_presentation = require('../../../validation/presentation')
 const cast_to_object_id = require('mongodb').ObjectID
+const has = require('lodash/has')
 
 // @route      POST api/v1/demo-day
 // @desc       Create all data for a demo day
@@ -70,14 +71,37 @@ router.post('/', async (req, res) => {
          filter: { event_id, member_id },
       })
 
+      if (result.has_error) res.status(400).json(result)
+      else if (has(demo_day, 'technologies')) {
+         const presentation_id = result._id
+         const technology_ids = demo_day.technologies.map(technology =>
+            get_object_id(technology_model, { row_id: technology.id })
+         )
+         for await (const technology_id of technology_ids) {
+            // for await...of
+            // https://medium.com/@ian.mundy/async-map-in-javascript-b19439f0099
+            // https://stackoverflow.com/a/50874507
+            // console.log({ presentation_id, technology_id })
+            const xref_result = upsert({
+               payload: { presentation_id, technology_id },
+               collection: xref_presentation_technology_model,
+               options: {
+                  should_create_slug: false,
+                  should_create_row_id: false,
+               },
+               filter: { presentation_id, technology_id }, // will update with fields it already has (do nothing)
+            })
+
+            // push this result
+         }
+      }
+
       results.push(result)
 
-      // const technology_ids = demo_day.technologies.map(technology =>
-      //    get_object_id(technology_model, { row_id: technology.id })
-      // ) // an array of object_ids
+      // push all results
    }
 
-   console.log(results)
+   // console.log(results)
 
    // res.json(presentation) return a custom response with all fields
 })
