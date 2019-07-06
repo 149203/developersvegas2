@@ -8,6 +8,10 @@
 
 `git push heroku master`
 
+# Access the API
+
+`https://NAME_OF_YOUR_HEROKU_APP.herokuapp.com/api/v1/presentations`
+
 # Conventions
 
 lower_snake_case for everything except urls and filenames of web assets (like images).
