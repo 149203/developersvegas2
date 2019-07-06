@@ -7,6 +7,7 @@ const slug_format = require('../../../utils/slug_format')
 const append_slug_suffix = require('../../../utils/append_slug_suffix')
 const create_row_id = require('../../../utils/create_row_id')
 const validate_input_for_event = require('../../../validation/event')
+const validator = require('validator')
 
 // @route      GET api/v1/events
 // @desc       Gets all events
@@ -17,7 +18,27 @@ router.get('/', (req, res) => {
       .then(events => {
          res.json(events)
       })
-      .catch(err => console.log(err))
+      .catch(err => res.status(400).json(err))
+})
+
+// @route      GET api/v1/events/:event_id
+// @desc       Gets an event by its event_id
+// @access     Public
+router.get('/:event_id', (req, res) => {
+   const event_id = req.params.event_id
+   // Validate event_id
+   let errors = {}
+   if (!validator.isMongoId(event_id)) {
+      errors.event_id = 'event_id must be a valid Mongo ID.'
+      return res.status(400).json(errors)
+   } else {
+      event_model
+         .findById(event_id)
+         .then(event => {
+            res.json(event)
+         })
+         .catch(err => res.status(400).json(err))
+   }
 })
 
 // @route      POST api/v1/events

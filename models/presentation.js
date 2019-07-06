@@ -9,7 +9,7 @@ const presentation_schema = new schema({
    },
    title: {
       type: String,
-      default: 'Untitled project',
+      required: true,
       max: 80,
    },
    signed_up_on: {

@@ -11,17 +11,14 @@ const upsert = require('../../../utils/upsert')
 const validate_input_for_presentation = require('../../../validation/presentation')
 const cast_to_object_id = require('mongodb').ObjectID
 const has = require('lodash/has')
+const date_format = require('date-fns/format')
+const to_lower = require('lodash/toLower')
 
 // @route      POST api/v1/demo-day
 // @desc       Create all data for a demo day
 // @access     Public
 router.post('/', async (req, res) => {
    const demo_days = req.body
-   // Validate user input
-   // const { errors, is_valid } = validate_input_for_presentation(body)
-   // if (!is_valid) {
-   //    return res.status(400).json(errors)
-   // }
 
    // hard-coded stuff for now
    const agreement_id = cast_to_object_id('5d0e6f4d63f3b43f2830cd4f')
@@ -61,12 +58,32 @@ router.post('/', async (req, res) => {
          demo_day.presentation.video_iframe
       ) // optional
 
+      // Validate stuff before trying to upsert into db
+      const { errors, is_valid } = validate_input_for_presentation(
+         presentation_obj
+      )
+      if (!is_valid) {
+         return res.status(400).json(errors)
+      }
+
+      let slug_fields = [presentation_obj.title]
+      if (to_lower(presentation_obj.title) === 'untitled project') {
+         const event_date = await event_model
+            .findById(event_id)
+            .then(event => {
+               return date_format(event.started_on, 'MMMM-Do-YYYY')
+            })
+            .catch(err => res.status(400).json(err))
+         slug_fields = [event_date, presentation_obj.title]
+      }
+
       const presentation = await upsert({
          payload: presentation_obj,
          collection: presentation_model,
          options: {
             should_create_slug: true,
             should_create_row_id: true,
+            slug_fields, // an array of strings, in order
          },
          filter: { event_id, member_id },
       })

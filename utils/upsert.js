@@ -17,9 +17,10 @@ module.exports = upsert = query => {
 async function insert_new_doc(query) {
    if (
       query.options.should_create_slug &&
-      (!has(query.payload, 'slug') || query.payload.slug === '')
+      (!has(query.payload, 'slug') || query.payload.slug === '') &&
+      query.options.slug_fields.length > 0
    ) {
-      const slug = slug_format(query.payload.title || 'untitled-project')
+      const slug = slug_format(query.options.slug_fields.join('-'))
       query.payload.slug = await append_slug_suffix(query.collection, slug)
    }
 

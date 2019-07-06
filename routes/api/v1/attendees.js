@@ -12,7 +12,7 @@ const validator = require('validator')
 router.get('/:event_id', (req, res) => {
    const event_id = req.params.event_id
 
-   // Validate URL
+   // Validate event_id
    let errors = {}
    if (!validator.isMongoId(event_id)) {
       errors.event_id = 'event_id must be a valid Mongo ID.'
