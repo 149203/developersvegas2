@@ -4,6 +4,10 @@
 
 `npm start`
 
+# Deploy
+
+`git push heroku master`
+
 # Conventions
 
 lower_snake_case for everything except urls and filenames of web assets (like images).
