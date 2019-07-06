@@ -70,9 +70,7 @@ router.post('/', async (req, res) => {
       if (to_lower(presentation_obj.title) === 'untitled project') {
          const event_date = await event_model
             .findById(event_id)
-            .then(event => {
-               return date_format(event.started_on, 'MMMM-Do-YYYY')
-            })
+            .then(event => date_format(event.started_on, 'MMMM-Do-YYYY'))
             .catch(err => res.status(400).json(err))
          slug_fields = [event_date, presentation_obj.title]
       }
