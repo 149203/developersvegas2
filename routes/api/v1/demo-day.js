@@ -18,7 +18,7 @@ const to_lower = require('lodash/toLower')
 // @desc       Create all data for a demo day
 // @access     Public
 router.post('/', async (req, res) => {
-   const demo_days = req.body.demo_day_presentations
+   const demo_days = req.body
 
    // hard-coded stuff for now
    const agreement_id = cast_to_object_id('5d0e6f4d63f3b43f2830cd4f')
