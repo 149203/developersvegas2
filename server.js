@@ -26,6 +26,7 @@ app.use('/api/v1/agreements', require('./routes/api/v1/agreements'))
 app.use('/api/v1/technologies', require('./routes/api/v1/technologies'))
 app.use('/api/v1/attendees', require('./routes/api/v1/attendees'))
 app.use('/api/v1/demo-day', require('./routes/api/v1/demo-day'))
+app.use('/api/v1/test', require('./routes/api/v1/test'))
 app.get('/', (req, res) => res.send('Hello world.'))
 
 const port = process.env.PORT || 3333
