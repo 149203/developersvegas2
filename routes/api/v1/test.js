@@ -5,7 +5,7 @@ const router = express.Router()
 // @desc       Return what was posted to it
 // @access     Public
 router.post('/', async (req, res) => {
-   res.json(req)
+   res.json(req.body)
 })
 
 module.exports = router
