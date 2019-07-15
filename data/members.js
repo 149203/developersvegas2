@@ -243,6 +243,19 @@ module.exports = members = [
       _id: 32,
       demo_days: [
          {
+            date: '2019-07-13',
+            project: {
+               name: '"Tribble Troubles" game',
+               technologies: [
+                  {
+                     id: 199,
+                     name: 'Unity',
+                     popularity: 40,
+                  },
+               ],
+            },
+         },
+         {
             date: '2019-03-09',
             project: {
                link: '',
@@ -319,6 +332,12 @@ module.exports = members = [
    {
       _id: 35,
       demo_days: [
+         {
+            date: '2019-07-13',
+         },
+         {
+            date: '2019-06-08',
+         },
          {
             date: '2019-03-09',
          },
@@ -1860,6 +1879,9 @@ module.exports = members = [
       _id: 129,
       demo_days: [
          {
+            date: '2019-06-08',
+         },
+         {
             date: '2016-11-12',
             project: {
                link: 'http://blitzpick.co',
@@ -2253,6 +2275,24 @@ module.exports = members = [
       _id: 142,
       demo_days: [
          {
+            date: '2019-07-13',
+            project: {
+               name: 'How to use lodash fp for improved JavaScript readability',
+               technologies: [
+                  {
+                     id: 1,
+                     name: 'JavaScript',
+                     popularity: 60,
+                  },
+                  {
+                     id: 66,
+                     name: 'Node.js',
+                     popularity: 50,
+                  },
+               ],
+            },
+         },
+         {
             date: '2019-05-11',
             project: {
                name: 'Customization Made Easy In Our B2B Web Portal',
@@ -2428,10 +2468,10 @@ module.exports = members = [
             },
          },
       ],
-      email: 'mike@mikezetlow.com',
+      email: 'mike@mikeziethlow.com',
       first_name: 'Mike',
-      last_name: 'Zetlow',
-      portfolio: 'https://mikezetlow.com',
+      last_name: 'Ziethlow',
+      portfolio: 'http://mikeziethlow.com',
    },
    {
       _id: 143,
@@ -3180,6 +3220,12 @@ module.exports = members = [
       _id: 179,
       demo_days: [
          {
+            date: '2019-07-13',
+            project: {
+               name: '',
+            },
+         },
+         {
             date: '2017-10-14',
             project: {
                link: '',
@@ -3496,6 +3542,12 @@ module.exports = members = [
    {
       _id: 197,
       demo_days: [
+         {
+            date: '2019-06-08',
+            project: {
+               name: 'µCosmos prototype in Figma',
+            },
+         },
          {
             date: '2019-02-09',
             project: {
@@ -4091,6 +4143,7 @@ module.exports = members = [
    {
       _id: 237,
       demo_days: [
+         null,
          {
             date: '2019-05-11',
             project: {
@@ -4469,6 +4522,9 @@ module.exports = members = [
       _id: 261,
       demo_days: [
          {
+            date: '2019-07-13',
+         },
+         {
             date: '2018-05-12',
             project: {
                link: 'http://ccosse.github.io',
@@ -4499,6 +4555,12 @@ module.exports = members = [
    {
       _id: 263,
       demo_days: [
+         {
+            date: '2019-07-13',
+         },
+         {
+            date: '2019-06-08',
+         },
          {
             date: '2019-05-11',
          },
@@ -4950,6 +5012,12 @@ module.exports = members = [
       _id: 286,
       demo_days: [
          {
+            date: '2019-07-13',
+         },
+         {
+            date: '2019-06-08',
+         },
+         {
             date: '2019-04-06',
             project: {
                name: 'Learning by doing',
@@ -5083,6 +5151,39 @@ module.exports = members = [
       _id: 292,
       demo_days: [
          {
+            date: '2019-07-13',
+            project: {
+               name: 'Untitled Project',
+               technologies: [
+                  {
+                     id: 47,
+                     name: 'HTML',
+                     popularity: 50,
+                  },
+                  {
+                     id: 71,
+                     name: 'PHP',
+                     popularity: 50,
+                  },
+                  {
+                     id: 88,
+                     name: 'SQL',
+                     popularity: 50,
+                  },
+                  {
+                     id: 26,
+                     name: 'CSS',
+                     popularity: 50,
+                  },
+                  {
+                     id: 1,
+                     name: 'JavaScript',
+                     popularity: 60,
+                  },
+               ],
+            },
+         },
+         {
             date: '2019-04-06',
             project: {
                name: 'Untitled project, April 6th, 2019',
@@ -5156,6 +5257,9 @@ module.exports = members = [
       _id: 295,
       demo_days: [
          {
+            date: '2019-07-13',
+         },
+         {
             date: '2019-04-06',
          },
          {
@@ -5170,6 +5274,12 @@ module.exports = members = [
    {
       _id: 296,
       demo_days: [
+         {
+            date: '2019-07-13',
+            project: {
+               name: 'Vue.js Wrapper Components',
+            },
+         },
          {
             date: '2019-05-11',
             project: {
@@ -5335,6 +5445,9 @@ module.exports = members = [
    {
       _id: 304,
       demo_days: [
+         {
+            date: '2019-06-08',
+         },
          {
             date: '2019-05-11',
          },
@@ -5666,6 +5779,34 @@ module.exports = members = [
       _id: 320,
       demo_days: [
          {
+            date: '2019-06-08',
+            project: {
+               name: 'Full Stack App',
+               technologies: [
+                  {
+                     id: 66,
+                     name: 'Node.js',
+                     popularity: 50,
+                  },
+                  {
+                     id: 129,
+                     name: 'Express',
+                     popularity: 40,
+                  },
+                  {
+                     id: 79,
+                     name: 'React',
+                     popularity: 50,
+                  },
+                  {
+                     id: 179,
+                     name: 'Redux',
+                     popularity: 40,
+                  },
+               ],
+            },
+         },
+         {
             date: '2019-05-11',
             project: {
                name: 'Metric Imperial Converter',
@@ -5983,6 +6124,12 @@ module.exports = members = [
       _id: 335,
       demo_days: [
          {
+            date: '2019-07-13',
+            project: {
+               name: 'MIGasGuys.com',
+            },
+         },
+         {
             date: '2019-05-11',
          },
          {
@@ -6124,6 +6271,16 @@ module.exports = members = [
       _id: 343,
       demo_days: [
          {
+            date: '2019-07-13',
+         },
+         {
+            date: '2019-06-08',
+            project: {
+               name:
+                  'Develop for every platform with Quasar Framework & Vue.js',
+            },
+         },
+         {
             date: '2019-04-06',
             project: {
                name: 'Reveal.js - a Powerpoint alternative',
@@ -6154,6 +6311,19 @@ module.exports = members = [
    {
       _id: 344,
       demo_days: [
+         {
+            date: '2019-06-08',
+            project: {
+               name: 'Quick figures and student observations',
+               technologies: [
+                  {
+                     id: 66,
+                     name: 'Node.js',
+                     popularity: 50,
+                  },
+               ],
+            },
+         },
          {
             date: '2019-01-12',
             project: {
@@ -6485,6 +6655,9 @@ module.exports = members = [
       _id: 366,
       demo_days: [
          {
+            date: '2019-06-08',
+         },
+         {
             date: '2019-05-11',
          },
          {
@@ -6571,9 +6744,22 @@ module.exports = members = [
       _id: 372,
       demo_days: [
          {
+            date: '2019-07-13',
+            project: {
+               name: 'Topic Modeling over 500k emails',
+               technologies: [
+                  {
+                     id: 75,
+                     name: 'Python',
+                     popularity: 50,
+                  },
+               ],
+            },
+         },
+         {
             date: '2019-04-06',
             project: {
-               name: 'Teaching a Machine to Appreciate Adele and Bob Marley',
+               name: 'Topic Modeling over 500k emails',
                technologies: [
                   {
                      id: 75,
@@ -6808,6 +6994,9 @@ module.exports = members = [
       _id: 382,
       demo_days: [
          {
+            date: '2019-07-13',
+         },
+         {
             date: '2019-01-12',
          },
       ],
@@ -6819,6 +7008,7 @@ module.exports = members = [
    {
       _id: 383,
       demo_days: [
+         null,
          {
             date: '2019-05-11',
             project: {
@@ -6986,6 +7176,32 @@ module.exports = members = [
       _id: 390,
       demo_days: [
          {
+            date: '2019-07-13',
+         },
+         {
+            date: '2019-06-08',
+            project: {
+               name: 'React Native App Generator',
+               technologies: [
+                  {
+                     id: 177,
+                     name: 'React Native',
+                     popularity: 40,
+                  },
+                  {
+                     id: 66,
+                     name: 'Node.js',
+                     popularity: 50,
+                  },
+                  {
+                     id: 114,
+                     name: 'Bash',
+                     popularity: 40,
+                  },
+               ],
+            },
+         },
+         {
             date: '2019-02-09',
             project: {
                link: '',
@@ -7060,13 +7276,16 @@ module.exports = members = [
          },
       ],
       email: 'scottb50@gmail.com',
-      first_name: 'Scott',
-      last_name: 'Berenzweig',
+      first_name: '',
+      last_name: 'BERENZWEIG',
       portfolio: '',
    },
    {
       _id: 396,
       demo_days: [
+         {
+            date: '2019-06-08',
+         },
          {
             date: '2019-05-11',
          },
@@ -7138,6 +7357,9 @@ module.exports = members = [
    {
       _id: 401,
       demo_days: [
+         {
+            date: '2019-07-13',
+         },
          {
             date: '2019-05-11',
          },
@@ -7401,6 +7623,15 @@ module.exports = members = [
       _id: 424,
       demo_days: [
          {
+            date: '2019-07-13',
+         },
+         {
+            date: '2019-06-08',
+            project: {
+               name: 'Path',
+            },
+         },
+         {
             date: '2019-05-11',
          },
          {
@@ -7530,6 +7761,9 @@ module.exports = members = [
       _id: 433,
       demo_days: [
          {
+            date: '2019-06-08',
+         },
+         {
             date: '2019-05-11',
          },
          {
@@ -7589,7 +7823,7 @@ module.exports = members = [
       ],
       email: 'Adambrikman@gmail.com',
       first_name: 'Adam',
-      last_name: 'Brikman',
+      last_name: 'Adambrikman@gmail.com',
       portfolio: '',
    },
    {
@@ -7651,5 +7885,599 @@ module.exports = members = [
       first_name: 'Malia',
       last_name: 'Booker',
       portfolio: '',
+   },
+   {
+      _id: 442,
+      demo_days: [
+         {
+            date: '2019-06-08',
+            project: {
+               name:
+                  'An Introduction to hpxMP, an OpenMP runtime implemented with HPX',
+               technologies: [
+                  {
+                     id: 20,
+                     name: 'C++',
+                     popularity: 50,
+                  },
+               ],
+            },
+         },
+      ],
+      email: 'harter019@gmail.com',
+      first_name: 'Tianyi',
+      last_name: 'Zhang',
+      portfolio: '',
+   },
+   {
+      _id: 443,
+      demo_days: [
+         {
+            date: '2019-06-08',
+            project: {
+               name: 'Smart Assistant',
+               technologies: [
+                  {
+                     id: 75,
+                     name: 'Python',
+                     popularity: 50,
+                  },
+                  {
+                     id: 92,
+                     name: 'TensorFlow',
+                     popularity: 50,
+                  },
+               ],
+            },
+         },
+      ],
+      email: 'ayaan.panda1@gmail.com',
+      first_name: 'Ayaan',
+      last_name: 'Panda',
+      portfolio: '',
+   },
+   {
+      _id: 444,
+      demo_days: [
+         {
+            date: '2019-06-08',
+         },
+      ],
+      email: 'Jeremy.brady702@gmail.com',
+      first_name: 'Jeremy',
+      last_name: 'Brady',
+      portfolio: 'Www.jeremybrady.dev',
+   },
+   {
+      _id: 445,
+      demo_days: [
+         {
+            date: '2019-06-08',
+         },
+      ],
+      email: 'elliot1011@hotmail.com',
+      first_name: 'Elliot',
+      last_name: 'Knuth',
+      portfolio: 'https://github.com/eknuth1002/portfolio/',
+   },
+   {
+      _id: 446,
+      demo_days: [
+         {
+            date: '2019-06-08',
+         },
+      ],
+      email: 'danrodriguez.me@gmail.com',
+      first_name: 'Daniel',
+      last_name: 'Rodriguez',
+      portfolio: '',
+   },
+   {
+      _id: 447,
+      demo_days: [
+         {
+            date: '2019-07-13',
+            project: {
+               name: 'RoboGutsS.T.E.A.M. Education Program',
+               technologies: [
+                  {
+                     id: 359,
+                     name: 'BASIC',
+                     popularity: 20,
+                  },
+               ],
+            },
+         },
+         {
+            date: '2019-06-08',
+            project: {
+               name: 'RoboGuts',
+               technologies: [
+                  {
+                     id: 1244,
+                     name: 'Pick Basic',
+                     popularity: 10,
+                  },
+               ],
+            },
+         },
+      ],
+      email: 'wperko@brainless.org',
+      first_name: 'Walt',
+      last_name: 'Perko',
+      portfolio: '',
+   },
+   {
+      _id: 448,
+      demo_days: [
+         {
+            date: '2019-06-08',
+         },
+      ],
+      email: 'stephanie6304@gmail.com',
+      first_name: 'Stephanie',
+      last_name: 'Revis',
+      portfolio: 'https://github.com/FullstackStephanie',
+   },
+   {
+      _id: 449,
+      demo_days: [
+         {
+            date: '2019-06-08',
+         },
+      ],
+      email: 'smaslesa@gmail.com',
+      first_name: 'Senad',
+      last_name: 'Maslesa',
+      portfolio: '',
+   },
+   {
+      _id: 450,
+      demo_days: [
+         {
+            date: '2019-06-08',
+         },
+      ],
+      email: 'bojan.samar@gmail.com',
+      first_name: 'BOJAN',
+      last_name: 'SAMARDZIJA',
+      portfolio: '',
+   },
+   {
+      _id: 451,
+      demo_days: [
+         {
+            date: '2019-06-08',
+            project: {
+               name: 'Horse Racing',
+            },
+         },
+      ],
+      email: 'craigwilliams670930@hotmail.com',
+      first_name: 'Craig',
+      last_name: 'Williams',
+      portfolio: '',
+   },
+   {
+      _id: 452,
+      demo_days: [
+         {
+            date: '2019-07-13',
+         },
+         {
+            date: '2019-06-08',
+         },
+      ],
+      email: 'Terryz1961@Yahoo.com',
+      first_name: 'Terry',
+      last_name: 'Zak',
+      portfolio: '',
+   },
+   {
+      _id: 453,
+      demo_days: [
+         {
+            date: '2019-06-08',
+         },
+      ],
+      email: 'Cdunn@ghostrockdigital.com',
+      first_name: 'Constance',
+      last_name: 'Dunn',
+      portfolio: 'Ghostrockdigital.com',
+   },
+   {
+      _id: 454,
+      demo_days: [
+         {
+            date: '2019-06-08',
+         },
+      ],
+      email: 'Geoff.hutson.89@gmail.com ',
+      first_name: 'Geoffrey',
+      last_name: 'Hutson',
+      portfolio: '',
+   },
+   {
+      _id: 455,
+      demo_days: [
+         {
+            date: '2019-06-08',
+         },
+      ],
+      email: 'charles.melchin@gmail.com',
+      first_name: 'Charles',
+      last_name: 'Melchin',
+      portfolio: '',
+   },
+   {
+      _id: 456,
+      demo_days: [
+         {
+            date: '2019-06-08',
+         },
+      ],
+      email: 'jcsarda@gmail.com',
+      first_name: 'Jeremy',
+      last_name: 'Sarda',
+      portfolio: '',
+   },
+   {
+      _id: 457,
+      demo_days: [
+         {
+            date: '2019-07-13',
+            project: {
+               name: 'Untitled Project',
+            },
+         },
+      ],
+      email: 'peter.antonov.marketing@gmail.com',
+      first_name: 'Peter',
+      last_name: 'Antonov',
+      portfolio: '',
+   },
+   {
+      _id: 458,
+      email: 'peter.antonov.marketing@gmail.com',
+      first_name: 'Peter',
+      last_name: 'Antonov',
+      portfolio: '',
+   },
+   {
+      _id: 459,
+      email: 'peter.antonov.marketing@gmail.com',
+      first_name: 'Peter',
+      last_name: 'Antonov',
+      portfolio: '',
+   },
+   {
+      _id: 460,
+      email: 'peter.antonov.marketing@gmail.com',
+      first_name: 'Peter',
+      last_name: 'Antonov',
+      portfolio: '',
+   },
+   {
+      _id: 461,
+      email: 'peter.antonov.marketing@gmail.com',
+      first_name: 'Peter',
+      last_name: 'Antonov',
+      portfolio: '..',
+   },
+   {
+      _id: 462,
+      email: 'peter.antonov.marketing@gmail.com',
+      first_name: 'Peter',
+      last_name: 'Antonov',
+      portfolio: '..',
+   },
+   {
+      _id: 463,
+      email: 'peter.antonov.marketing@gmail.com',
+      first_name: 'Peter',
+      last_name: 'Antonov',
+      portfolio: '..',
+   },
+   {
+      _id: 464,
+      email: 'jkeatinco@gmail.com',
+      first_name: 'Jeff',
+      last_name: 'Keating',
+      portfolio: 'http://jkeatinco.github.io/',
+   },
+   {
+      _id: 465,
+      email: 'jkeatinco@gmail.com',
+      first_name: 'Jeff',
+      last_name: 'Keating',
+      portfolio: 'http://jkeatinco.github.io/',
+   },
+   {
+      _id: 466,
+      email: 'jkeatinco@gmail.com',
+      first_name: 'Jeff',
+      last_name: 'Keating',
+      portfolio: 'http://jkeatinco.github.io/',
+   },
+   {
+      _id: 467,
+      email: 'jkeatinco@gmail.com',
+      first_name: 'Jeff',
+      last_name: 'Keating',
+      portfolio: 'http://jkeatinco.github.io/',
+   },
+   {
+      _id: 468,
+      email: 'jkeatinco@gmail.com',
+      first_name: 'Jeff',
+      last_name: 'Keating',
+      portfolio: 'http://jkeatinco.github.io/',
+   },
+   {
+      _id: 469,
+      email: 'jkeatinco@gmail.com',
+      first_name: 'Jeff',
+      last_name: 'Keating',
+      portfolio: 'http://jkeatinco.github.io/',
+   },
+   {
+      _id: 470,
+      email: 'jkeatinco@gmail.com',
+      first_name: 'Jeff',
+      last_name: 'Keating',
+      portfolio: 'http://jkeatinco.github.io/',
+   },
+   {
+      _id: 471,
+      email: 'jkeatinco@gmail.com',
+      first_name: 'Jeff',
+      last_name: 'Keating',
+      portfolio: 'http://jkeatinco.github.io/',
+   },
+   {
+      _id: 472,
+      email: 'jkeatinco@gmail.com',
+      first_name: 'Jeff',
+      last_name: 'Keating',
+      portfolio: 'http://jkeatinco.github.io/',
+   },
+   {
+      _id: 473,
+      email: 'jkeatinco@gmail.com',
+      first_name: 'Jeff',
+      last_name: 'Keating',
+      portfolio: 'http://jkeatinco.github.io/',
+   },
+   {
+      _id: 474,
+      email: 'jkeatinco@gmail.com',
+      first_name: 'Jeff',
+      last_name: 'Keating',
+      portfolio: 'http://jkeatinco.github.io/',
+   },
+   {
+      _id: 475,
+      email: 'jkeatinco@gmail.com',
+      first_name: 'Jeff',
+      last_name: 'Keating',
+      portfolio: 'http://jkeatinco.github.io/',
+   },
+   {
+      _id: 476,
+      email: 'jkeatinco@gmail.com',
+      first_name: 'Jeff',
+      last_name: 'Keating',
+      portfolio: 'http://jkeatinco.github.io/',
+   },
+   {
+      _id: 477,
+      email: 'jkeatinco@gmail.com',
+      first_name: 'Jeff',
+      last_name: 'Keating',
+      portfolio: 'http://jkeatinco.github.io/ ',
+   },
+   {
+      _id: 478,
+      email: 'jkeatinco@gmail.com',
+      first_name: 'Jeff',
+      last_name: 'Keating',
+      portfolio: 'http://jkeatinco.github.io/ ',
+   },
+   {
+      _id: 479,
+      email: 'jkeatinco@gmail.com',
+      first_name: 'Jeff',
+      last_name: 'Keating',
+      portfolio: 'http://jkeatinco.github.io/ ',
+   },
+   {
+      _id: 480,
+      demo_days: [
+         {
+            date: '2019-07-13',
+         },
+      ],
+      email: 'madvlad00@gmail.com',
+      first_name: 'David',
+      last_name: 'Bohan',
+      portfolio: 'Blank.com',
+   },
+   {
+      _id: 481,
+      demo_days: [
+         {
+            date: '2019-07-13',
+         },
+      ],
+      email: 'eli@inspace.co',
+      first_name: 'Eli',
+      last_name: 'Atkins',
+      portfolio: 'www.inspace.co',
+   },
+   {
+      _id: 482,
+      demo_days: [
+         {
+            date: '2019-07-13',
+         },
+      ],
+      email: 'wentingshen90@gmail.com',
+      first_name: 'Wenting',
+      last_name: 'Bohan',
+      portfolio: 'na.com',
+   },
+   {
+      _id: 483,
+      demo_days: [
+         {
+            date: '2019-07-13',
+            project: {
+               name: 'MyParks.vegas Full Stack MongoDB, Express, Node.js App',
+            },
+         },
+      ],
+      email: 'josephpotechin@gmail.com',
+      first_name: 'Joseph',
+      last_name: 'Potechin',
+      portfolio: 'https://www.potechin.dev',
+   },
+   {
+      _id: 484,
+      email: 'elijeffreyarmstrong@gmail.com',
+      first_name: 'Eli',
+      last_name: 'Armstrong',
+      portfolio:
+         'https://github.com/MagicianMedicine and https://github.com/EliJArmstrong',
+   },
+   {
+      _id: 485,
+      email: 'elijeffreyarmstrong@gmail.com',
+      first_name: 'Eli',
+      last_name: 'Armstrong',
+      portfolio:
+         'https://github.com/MagicianMedicine and https://github.com/EliJArmstrong',
+   },
+   {
+      _id: 486,
+      email: 'elijeffreyarmstrong@gmail.com',
+      first_name: 'Eli',
+      last_name: 'Armstrong',
+      portfolio:
+         'https://github.com/MagicianMedicine and https://github.com/EliJArmstrong',
+   },
+   {
+      _id: 487,
+      email: 'elijeffreyarmstrong@gmail.com',
+      first_name: 'Eli',
+      last_name: 'Armstrong',
+      portfolio:
+         'https://github.com/MagicianMedicine and https://github.com/EliJArmstrong',
+   },
+   {
+      _id: 488,
+      email: 'elijeffreyarmstrong@gmail.com',
+      first_name: 'Eli',
+      last_name: 'Armstrong',
+      portfolio:
+         'https://github.com/MagicianMedicine and https://github.com/EliJArmstrong',
+   },
+   {
+      _id: 489,
+      email: 'elijeffreyarmstrong@gmail.com',
+      first_name: 'Eli',
+      last_name: 'Armstrong',
+      portfolio:
+         'https://github.com/MagicianMedicine and https://github.com/EliJArmstrong',
+   },
+   {
+      _id: 490,
+      email: 'elijeffreyarmstrong@gmail.com',
+      first_name: 'Eli',
+      last_name: 'Armstrong',
+      portfolio:
+         'https://github.com/MagicianMedicine and https://github.com/EliJArmstrong',
+   },
+   {
+      _id: 491,
+      email: 'elijeffreyarmstrong@gmail.com',
+      first_name: 'Eli',
+      last_name: 'Armstrong',
+      portfolio:
+         'https://github.com/MagicianMedicine and https://github.com/EliJArmstrong',
+   },
+   {
+      _id: 492,
+      email: 'elijeffreyarmstrong@gmail.com',
+      first_name: 'Eli',
+      last_name: 'Armstrong',
+      portfolio:
+         'https://github.com/MagicianMedicine and https://github.com/EliJArmstrong',
+   },
+   {
+      _id: 493,
+      demo_days: [
+         {
+            date: '2019-07-13',
+         },
+      ],
+      email: 'Jack@SilentRich.com',
+      first_name: 'Jack',
+      last_name: 'Colton',
+      portfolio: 'Www.aol.com',
+   },
+   {
+      _id: 494,
+      demo_days: [
+         {
+            date: '2019-07-13',
+         },
+      ],
+      email: 'mj.benton@outlook.com',
+      first_name: 'Michael',
+      last_name: 'Benton',
+      portfolio: 'https://www.visualcv.com/michaelbentonmaster',
+   },
+   {
+      _id: 495,
+      email: 'Ali.elhelali12@gmail.com',
+      first_name: 'Ali',
+      last_name: 'Elhelali',
+      portfolio: 'Elhelali.com',
+   },
+   {
+      _id: 496,
+      demo_days: [
+         {
+            date: '2019-07-13',
+         },
+      ],
+      email: 'Gunnr85@gmail.com',
+      first_name: 'Ryan',
+      last_name: 'Gunn',
+      portfolio: 'Www.blank.com',
+   },
+   {
+      _id: 497,
+      demo_days: [
+         {
+            date: '2019-07-13',
+         },
+      ],
+      email: 'pei_liu@hotmail.com',
+      first_name: 'Pei',
+      last_name: 'Liu',
+      portfolio: 'blankdoesnotwork.com',
+   },
+   {
+      _id: 498,
+      demo_days: [
+         {
+            date: '2019-07-13',
+         },
+      ],
+      email: 'ncspence21@yahoo.com',
+      first_name: 'Nickoli',
+      last_name: 'Spence',
+      portfolio: 'America.com',
    },
 ]
