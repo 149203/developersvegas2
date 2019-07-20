@@ -11,6 +11,19 @@ const _has = require('lodash/has')
 // @route      GET api/v1/presentations
 // @desc       Gets all presentations
 // @access     Public
+router.get('/:event_id', (req, res) => {
+   const event_id = req.params.event_id
+   presentation_model
+      .find({ event_id })
+      .then(presentations => {
+         res.json(presentations)
+      })
+      .catch(err => res.status(400).json(err))
+})
+
+// @route      GET api/v1/presentations/:event-id
+// @desc       Gets all presentations for a specified event
+// @access     Public
 router.get('/', (req, res) => {
    presentation_model
       .find()
