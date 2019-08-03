@@ -10,32 +10,29 @@ const _has = require('lodash/has')
 const member = require('../../../models/member')
 const event = require('../../../models/event')
 
-// @route      GET api/v1/presentations/:event-id
-// @desc       Gets all presentations for a specified event
-// @access     Public
-
-router.get('/:event_id', (req, res) => {
-   const event_id = req.params.event_id
-   presentation_model
-      .find({ event_id })
-      .populate('member_id', ['first_name', 'last_name'], member)
-      .populate('event_id', ['title', 'started_on'], event)
-      .then(presentations => {
-         res.json(presentations)
-      })
-      .catch(err => res.status(400).json(err))
-})
-
 // @route      GET api/v1/presentations
 // @desc       Gets all presentations
 // @access     Public
 router.get('/', (req, res) => {
-   presentation_model
-      .find()
-      .then(presentations => {
-         res.json(presentations)
-      })
-      .catch(err => console.log(err))
+   console.log(req.query.event_id)
+   if (req.query.event_id) {
+      const event_id = req.query.event_id
+      presentation_model
+         .find({ event_id })
+         .populate('member_id', ['first_name', 'last_name'], member)
+         .populate('event_id', ['title', 'started_on'], event)
+         .then(presentations => {
+            res.json(presentations)
+         })
+         .catch(err => res.status(400).json(err))
+   } else {
+      presentation_model
+         .find()
+         .then(presentations => {
+            res.json(presentations)
+         })
+         .catch(err => console.log(err))
+   }
 })
 
 // @route      POST api/v1/presentations
