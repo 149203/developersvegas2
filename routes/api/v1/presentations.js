@@ -14,7 +14,6 @@ const event = require('../../../models/event')
 // @desc       Gets all presentations
 // @access     Public
 router.get('/', (req, res) => {
-   console.log(req.query.event_id)
    if (req.query.event_id) {
       const event_id = req.query.event_id
       presentation_model
