@@ -30,7 +30,7 @@ router.get('/', (req, res) => {
          .then(presentations => {
             res.json(presentations)
          })
-         .catch(err => console.log(err))
+         .catch(err => res.status(400).json(err))
    }
 })
 
