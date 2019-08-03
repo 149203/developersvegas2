@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
-const schema = mongoose.Schema
 
-const member_schema = new schema({
+const member_schema = new mongoose.Schema({
    // row_id is for migration to SQL
    row_id: {
       type: Number, // auto-incremented ID

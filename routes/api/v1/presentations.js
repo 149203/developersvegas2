@@ -7,22 +7,27 @@ const append_slug_suffix = require('../../../utils/append_slug_suffix')
 const create_row_id = require('../../../utils/create_row_id')
 const validate_input_for_presentation = require('../../../validation/presentation')
 const _has = require('lodash/has')
+const member = require('../../../models/member')
+const event = require('../../../models/event')
 
-// @route      GET api/v1/presentations
-// @desc       Gets all presentations
+// @route      GET api/v1/presentations/:event-id
+// @desc       Gets all presentations for a specified event
 // @access     Public
+
 router.get('/:event_id', (req, res) => {
    const event_id = req.params.event_id
    presentation_model
       .find({ event_id })
+      .populate('member_id', ['first_name', 'last_name'], member)
+      .populate('event_id', ['title', 'started_on'], event)
       .then(presentations => {
          res.json(presentations)
       })
       .catch(err => res.status(400).json(err))
 })
 
-// @route      GET api/v1/presentations/:event-id
-// @desc       Gets all presentations for a specified event
+// @route      GET api/v1/presentations
+// @desc       Gets all presentations
 // @access     Public
 router.get('/', (req, res) => {
    presentation_model

@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
-const schema = mongoose.Schema
 
-const presentation_schema = new schema({
+const presentation_schema = new mongoose.Schema({
    // row_id is for migration to SQL
    row_id: {
       type: Number, // auto-incremented ID
@@ -21,7 +20,7 @@ const presentation_schema = new schema({
       required: true,
       ref: 'event',
    },
-   member_id: {
+   member: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'member',
