@@ -6,11 +6,11 @@ module.exports = function validate_input_for_presentation(input) {
 
    // These have an order and will overwrite each other
 
-   if (!validator.isLength(String(input.title), { max: 80 })) {
+   if (input.title && !validator.isLength(String(input.title), { max: 80 })) {
       errors.title =
          'The title of your presentation can be no longer than 80 characters. Brevity is the soul of wit!'
    }
-   if (validator.matches(String(input.title), /-\d+\s*$/)) {
+   if (input.title && validator.matches(String(input.title), /-\d+\s*$/)) {
       errors.title =
          'Hey, I know this is weird. But your title cannot end with a dash followed by a number.'
    }
@@ -22,6 +22,13 @@ module.exports = function validate_input_for_presentation(input) {
       !validator.isURL(String(input.video_screenshot_url))
    ) {
       errors.video_screenshot_url = 'video_screenshot_url is not a valid URL.'
+   }
+   if (
+      input.video_screenshot_with_play_url &&
+      !validator.isURL(String(input.video_screenshot_with_play_url))
+   ) {
+      errors.video_screenshot_url =
+         'video_screenshot_with_play_url is not a valid URL.'
    }
    if (
       input.signed_up_on &&
@@ -39,7 +46,7 @@ module.exports = function validate_input_for_presentation(input) {
       errors.has_accepted_agreement =
          'has_accepted_agreement must be a Boolean.'
    }
-   if (!validator.isNumeric(String(input.order))) {
+   if (input.order && !validator.isNumeric(String(input.order))) {
       errors.order = 'order must be a number.'
    }
 

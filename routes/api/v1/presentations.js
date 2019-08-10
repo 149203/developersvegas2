@@ -9,6 +9,7 @@ const validate_input_for_presentation = require('../../../validation/presentatio
 const _has = require('lodash/has')
 const member = require('../../../models/member')
 const event = require('../../../models/event')
+const cast_to_object_id = require('mongodb').ObjectID
 
 // @route      GET api/v1/presentations
 // @desc       Gets all presentations
@@ -37,84 +38,57 @@ router.get('/', (req, res) => {
 // @route      POST api/v1/presentations
 // @desc       Create a new presentation in the presentations resource
 // @access     Public
-router.post('/', (req, res) => {
-   const body = req.body
-   // Validate user input
-   const { errors, is_valid } = validate_input_for_presentation(body)
-   if (!is_valid) {
-      return res.status(400).json(errors)
-   }
+router.post('/', async (req, res) => {
+   console.log('SERVER: ', req.body.demo_day_presentations)
+   const demo_days = JSON.parse(req.body.demo_day_presentations)
+   const results = []
 
-   const presentation_obj = {}
-   // These are fields that can be updated via the API
-   if (body.title) presentation_obj.title = body.title // String
-   if (body.has_accepted_agreement)
-      presentation_obj.has_accepted_agreement = body.has_accepted_agreement // Boolean, required
-   if (body.order) presentation_obj.order = body.order // Number, required
-   if (body.video_screenshot_url)
-      presentation_obj.video_screenshot_url = body.video_screenshot_url // String
-   if (body.video_screenshot_with_play_url)
-      presentation_obj.video_screenshot_with_play_url =
-         body.video_screenshot_with_play_url // String
-   if (body.video_url) presentation_obj.video_url = body.video_url // String
-   if (body.video_iframe) presentation_obj.video_iframe = body.video_iframe // String
+   for (let demo_day of demo_days) {
+      // forEach doesn't work with async/await
+      // https://dev.to/burkeholland/asyncawait-and-the-foreach-pit-of-despair-2267
 
-   if (body.signed_up_on) presentation_obj.signed_up_on = body.signed_up_on // Date, default now
-   if (body.is_active) presentation_obj.is_active = body.is_active // Boolean, default true
+      const presentation_obj = {}
+      presentation_obj._id = cast_to_object_id(demo_day._id)
+      presentation_obj.title = convert_undefined(demo_day.title)
+      presentation_obj.order = convert_undefined(demo_day.order)
+      presentation_obj.has_accepted_agreement = convert_undefined(
+         demo_day.has_accepted_agreement
+      )
+      presentation_obj.video_screenshot_url = convert_undefined(
+         demo_day.video_screenshot_url
+      ) // optional
+      presentation_obj.video_screenshot_with_play_url = convert_undefined(
+         demo_day.video_screenshot_with_play_url
+      ) // optional
+      presentation_obj.video_url = convert_undefined(demo_day.video_url) // optional
+      presentation_obj.video_iframe = convert_undefined(demo_day.video_iframe) // optional
 
-   presentation_model
-      .findById(body._id)
-      .then(async presentation => {
-         if (presentation) {
-            // if we include an id in the request and it matches a document, update
-            presentation_model
-               .findByIdAndUpdate(
-                  body._id,
-                  { $set: presentation_obj },
-                  { new: true }
-               )
-               .then(updated_presentation => res.json(updated_presentation))
-               .catch(err => res.status(400).json(err))
-         } else {
-            // Create presentation
-            let slug = slug_format(body.title || 'untitled-project') // 'title-of-presentation' or 'untitled-project'
-            presentation_obj.slug = await append_slug_suffix(
-               presentation_model,
-               slug
-            )
-            presentation_obj.row_id = await create_row_id(presentation_model)
+      // Validate stuff before trying to upsert into db
+      const { errors, is_valid } = validate_input_for_presentation(
+         presentation_obj
+      )
+      if (!is_valid) {
+         return res.status(400).json(errors)
+      }
 
-            if (!_has(presentation_obj, 'video_screenshot_url'))
-               presentation_obj.video_screenshot_url = ''
-            if (!_has(presentation_obj, 'video_screenshot_with_play_url'))
-               presentation_obj.video_screenshot_with_play_url = ''
-            if (!_has(presentation_obj, 'video_url'))
-               presentation_obj.video_url = ''
-            if (!_has(presentation_obj, 'video_iframe'))
-               presentation_obj.video_iframe = ''
+      let slug_fields = []
 
-            new presentation_model(presentation_obj)
-               .save()
-               .then(presentation => {
-                  res.json(presentation)
-               })
-               .catch(err => res.status(400).json(err))
-         }
+      const presentation = await upsert({
+         payload: presentation_obj,
+         collection: presentation_model,
+         options: {
+            should_create_slug: false,
+            should_create_row_id: false,
+            slug_fields, // an array of strings, in order
+         },
+         filter: { _id: presentation_obj._id },
       })
-      .catch(err => res.status(400).json(err))
-})
 
-const example_api_return = {
-   _id: mongoose.Schema.Types.ObjectId,
-   title: String,
-   signed_up_on: Date,
-   has_accepted_agreement: Boolean,
-   order: Number,
-   video_url: String,
-   video_screenshot_url: String,
-   is_active: Boolean,
-   slug: String,
-   row_id: Number,
-}
+      if (presentation.has_error) res.status(400).json(presentation)
+
+      results.push({ presentation })
+   }
+   res.json(results)
+})
 
 module.exports = router
