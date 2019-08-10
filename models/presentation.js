@@ -20,7 +20,7 @@ const presentation_schema = new mongoose.Schema({
       required: true,
       ref: 'event',
    },
-   member: {
+   member_id: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'member',
