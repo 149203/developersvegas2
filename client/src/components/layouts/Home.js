@@ -6,7 +6,7 @@ function Home() {
          <div className="row">
             <div className="col-12 mt-3">
                <h1>Hello world</h1>
-               <p className="text-danger">It's working</p>
+               <p className="text-primary">It's working</p>
             </div>
          </div>
       </div>
