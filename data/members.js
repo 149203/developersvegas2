@@ -1448,6 +1448,12 @@ module.exports = members = [
       _id: 120,
       demo_days: [
          {
+            date: '2019-08-10',
+            project: {
+               name: 'CallTheScammers.live',
+            },
+         },
+         {
             date: '2019-03-09',
             project: {
                link: '',
@@ -1873,6 +1879,9 @@ module.exports = members = [
       _id: 129,
       demo_days: [
          {
+            date: '2019-08-10',
+         },
+         {
             date: '2019-06-08',
          },
          {
@@ -2268,6 +2277,12 @@ module.exports = members = [
    {
       _id: 142,
       demo_days: [
+         {
+            date: '2019-08-10',
+            project: {
+               name: 'Stop PowerPoint Spam. Deliver Better Presentations.',
+            },
+         },
          {
             date: '2019-07-13',
             project: {
@@ -3433,6 +3448,29 @@ module.exports = members = [
       _id: 195,
       demo_days: [
          {
+            date: '2019-08-10',
+            project: {
+               name: 'StudioBoss',
+               technologies: [
+                  {
+                     id: 66,
+                     name: 'Node.js',
+                     popularity: 50,
+                  },
+                  {
+                     id: 63,
+                     name: 'MongoDB',
+                     popularity: 50,
+                  },
+                  {
+                     id: 117,
+                     name: 'Bootstrap',
+                     popularity: 40,
+                  },
+               ],
+            },
+         },
+         {
             date: '2019-05-11',
             project: {
                name: 'Studio Boss',
@@ -3815,6 +3853,29 @@ module.exports = members = [
    {
       _id: 212,
       demo_days: [
+         {
+            date: '2019-08-10',
+            project: {
+               name: 'Pig Dice Game',
+               technologies: [
+                  {
+                     id: 1,
+                     name: 'JavaScript',
+                     popularity: 60,
+                  },
+                  {
+                     id: 26,
+                     name: 'CSS',
+                     popularity: 50,
+                  },
+                  {
+                     id: 47,
+                     name: 'HTML',
+                     popularity: 50,
+                  },
+               ],
+            },
+         },
          {
             date: '2019-02-09',
             project: {
@@ -4444,6 +4505,29 @@ module.exports = members = [
       _id: 257,
       demo_days: [
          {
+            date: '2019-08-10',
+            project: {
+               name: 'Website hosted on firebase',
+               technologies: [
+                  {
+                     id: 34,
+                     name: 'Firebase',
+                     popularity: 50,
+                  },
+                  {
+                     id: 117,
+                     name: 'Bootstrap',
+                     popularity: 40,
+                  },
+                  {
+                     id: 1,
+                     name: 'JavaScript',
+                     popularity: 60,
+                  },
+               ],
+            },
+         },
+         {
             date: '2018-04-14',
             project: {
                link: '',
@@ -4515,6 +4599,9 @@ module.exports = members = [
    {
       _id: 261,
       demo_days: [
+         {
+            date: '2019-08-10',
+         },
          {
             date: '2019-07-13',
          },
@@ -5251,6 +5338,9 @@ module.exports = members = [
       _id: 295,
       demo_days: [
          {
+            date: '2019-08-10',
+         },
+         {
             date: '2019-07-13',
          },
          {
@@ -5402,6 +5492,9 @@ module.exports = members = [
       _id: 302,
       demo_days: [
          {
+            date: '2019-08-10',
+         },
+         {
             date: '2019-05-11',
          },
          {
@@ -5439,6 +5532,19 @@ module.exports = members = [
    {
       _id: 304,
       demo_days: [
+         {
+            date: '2019-08-10',
+            project: {
+               name: 'Webview Wrapper',
+               technologies: [
+                  {
+                     id: 177,
+                     name: 'React Native',
+                     popularity: 40,
+                  },
+               ],
+            },
+         },
          {
             date: '2019-06-08',
          },
@@ -5772,6 +5878,9 @@ module.exports = members = [
    {
       _id: 320,
       demo_days: [
+         {
+            date: '2019-08-10',
+         },
          {
             date: '2019-06-08',
             project: {
@@ -6117,6 +6226,19 @@ module.exports = members = [
    {
       _id: 335,
       demo_days: [
+         {
+            date: '2019-08-10',
+            project: {
+               name: 'Unique identifiers ',
+               technologies: [
+                  {
+                     id: 88,
+                     name: 'SQL',
+                     popularity: 50,
+                  },
+               ],
+            },
+         },
          {
             date: '2019-07-13',
             project: {
@@ -6531,6 +6653,9 @@ module.exports = members = [
       _id: 359,
       demo_days: [
          {
+            date: '2019-08-10',
+         },
+         {
             date: '2019-05-11',
          },
          {
@@ -6649,7 +6774,16 @@ module.exports = members = [
       _id: 366,
       demo_days: [
          {
+            date: '2019-08-10',
+            project: {
+               name: 'How to set a project into grave',
+            },
+         },
+         {
             date: '2019-06-08',
+            project: {
+               name: '',
+            },
          },
          {
             date: '2019-05-11',
@@ -6796,6 +6930,34 @@ module.exports = members = [
    {
       _id: 373,
       demo_days: [
+         {
+            date: '2019-08-10',
+            project: {
+               name: 'Flip Stride: 20 Hour Game Jam Game',
+               technologies: [
+                  {
+                     id: 896,
+                     name: 'Game Maker Language',
+                     popularity: 10,
+                  },
+                  {
+                     id: 7,
+                     name: 'Android',
+                     popularity: 50,
+                  },
+                  {
+                     id: 208,
+                     name: 'Windows',
+                     popularity: 40,
+                  },
+                  {
+                     id: 1,
+                     name: 'JavaScript',
+                     popularity: 60,
+                  },
+               ],
+            },
+         },
          {
             date: '2019-05-11',
             project: {
@@ -7530,6 +7692,9 @@ module.exports = members = [
       _id: 413,
       demo_days: [
          {
+            date: '2019-08-10',
+         },
+         {
             date: '2019-03-09',
          },
       ],
@@ -7970,6 +8135,19 @@ module.exports = members = [
       _id: 447,
       demo_days: [
          {
+            date: '2019-08-10',
+            project: {
+               name: 'RoboGuts STEAM Education Program',
+               technologies: [
+                  {
+                     id: 359,
+                     name: 'BASIC',
+                     popularity: 20,
+                  },
+               ],
+            },
+         },
+         {
             date: '2019-07-13',
             project: {
                name: 'RoboGutsS.T.E.A.M. Education Program',
@@ -8211,6 +8389,11 @@ module.exports = members = [
    null,
    {
       _id: 492,
+      demo_days: [
+         {
+            date: '2019-08-10',
+         },
+      ],
       email: 'elijeffreyarmstrong@gmail.com',
       first_name: 'Eli',
       last_name: 'Armstrong',
@@ -8231,6 +8414,9 @@ module.exports = members = [
    {
       _id: 494,
       demo_days: [
+         {
+            date: '2019-08-10',
+         },
          {
             date: '2019-07-13',
          },
@@ -8281,6 +8467,129 @@ module.exports = members = [
       email: 'ncspence21@yahoo.com',
       first_name: 'Nickoli',
       last_name: 'Spence',
+      portfolio: '',
+   },
+   {
+      _id: 499,
+      demo_days: [
+         {
+            date: '2019-08-10',
+         },
+      ],
+      email: 'dyllan.godfrey@gmail.com',
+      first_name: 'Dyllan',
+      last_name: 'Godfrey',
+      portfolio: '',
+   },
+   {
+      _id: 500,
+      demo_days: [
+         {
+            date: '2019-08-10',
+         },
+      ],
+      email: 'gevandbalayan@gmail.com',
+      first_name: 'Geo',
+      last_name: 'Balayan',
+      portfolio: '',
+   },
+   {
+      _id: 501,
+      demo_days: [
+         {
+            date: '2019-08-10',
+            project: {
+               name: 'Quartrly',
+               technologies: [
+                  {
+                     id: 63,
+                     name: 'MongoDB',
+                     popularity: 50,
+                  },
+                  {
+                     id: 8,
+                     name: 'Angular',
+                     popularity: 50,
+                  },
+                  {
+                     id: 52,
+                     name: 'Java',
+                     popularity: 50,
+                  },
+               ],
+            },
+         },
+      ],
+      email: 'phillip.v.duong@gmail.com',
+      first_name: 'Phillip',
+      last_name: 'Duong',
+      portfolio: 'www.quartrly.com',
+   },
+   {
+      _id: 502,
+      demo_days: [
+         {
+            date: '2019-08-10',
+         },
+      ],
+      email: 'saregoitom@gmail.com',
+      first_name: 'Sare',
+      last_name: 'Goitom',
+      portfolio: '',
+   },
+   {
+      _id: 503,
+      demo_days: [
+         {
+            date: '2019-08-10',
+         },
+      ],
+      email: 'aerileeking@gmail.com',
+      first_name: 'Aeri',
+      last_name: 'King',
+      portfolio: '',
+   },
+   {
+      _id: 504,
+      demo_days: [
+         {
+            date: '2019-08-10',
+         },
+      ],
+      email: 'boyd.harmon@sbcglobal.net',
+      first_name: 'Boyd',
+      last_name: 'Harmon',
+      portfolio: '',
+   },
+   {
+      _id: 505,
+      demo_days: [
+         {
+            date: '2019-08-10',
+         },
+      ],
+      email: 'irapatu44@gmail.com',
+      first_name: 'Patrick',
+      last_name: 'Iradukunda',
+      portfolio: '',
+   },
+   {
+      _id: 506,
+      demo_days: [
+         {
+            date: '2019-08-10',
+         },
+      ],
+      email: 'dieterhildebrand1@gmail.com',
+      first_name: 'DIETER',
+      last_name: 'HILDEBRAND',
+      portfolio: '',
+   },
+   {
+      _id: 507,
+      email: 'Alan.gruskoff@gmail.com',
+      first_name: 'Alan',
+      last_name: 'Gruskoff',
       portfolio: '',
    },
 ]
