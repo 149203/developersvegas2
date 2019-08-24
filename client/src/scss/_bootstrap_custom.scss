@@ -253,7 +253,7 @@ $yiq-text-light:            $white;
 // Quickly modify global styling by enabling or disabling optional features.
 
 $enable-caret:                                true;
-$enable-rounded:                              true;
+$enable-rounded:                              false;
 $enable-shadows:                              false;
 $enable-gradients:                            false;
 $enable-transitions:                          true;
@@ -274,16 +274,20 @@ $enable-deprecation-messages:                 true;
 // You can add more entries to the $spacers map, should you need more variation.
 
 $spacer: 1rem;
-$spacers: ();
+$spacers: (
+   6: ($spacer * 1.875),
+   7: ($spacer * 2.5),
+   8: ($spacer * 3.375),
+);
 // stylelint-disable-next-line scss/dollar-variable-default
 $spacers: map-merge(
   (
     0: 0,
-    1: ($spacer * .25),
-    2: ($spacer * .5),
-    3: $spacer,
-    4: ($spacer * 1.5),
-    5: ($spacer * 3)
+    1: ($spacer * .375),
+    2: ($spacer * .5625),
+    3: ($spacer * .75),
+    4: $spacer,
+    5: ($spacer * 1.375),
   ),
   $spacers
 );
@@ -315,18 +319,18 @@ $body-color:                $gray-900;
 //
 // Style anchor elements.
 
-$link-color:                              theme-color("primary");
+$link-color:                              $blue-500;
 $link-decoration:                         none;
-$link-hover-color:                        darken($link-color, 15%);
-$link-hover-decoration:                   underline;
+$link-hover-color:                        $blue-700;
+$link-hover-decoration:                   none;
 // Darken percentage for links with `.text-*` class (e.g. `.text-success`)
-$emphasized-link-hover-darken-percentage: 15%;
+$emphasized-link-hover-darken-percentage: 0%;
 
 // Paragraphs
 //
 // Style p element.
 
-$paragraph-margin-bottom:   1rem;
+$paragraph-margin-bottom:   $spacer;
 
 
 // Grid breakpoints
@@ -365,7 +369,7 @@ $container-max-widths: (
 // Set the number of columns and specify the width of the gutters.
 
 $grid-columns:                12;
-$grid-gutter-width:           30px;
+$grid-gutter-width:           16px;
 
 
 // Components
@@ -376,7 +380,7 @@ $line-height-lg:              1.5;
 $line-height-sm:              1.5;
 
 $border-width:                1px;
-$border-color:                $gray-300;
+$border-color:                $gray-200;
 
 $border-radius:               .25rem;
 $border-radius-lg:            .3rem;
@@ -415,15 +419,18 @@ $embed-responsive-aspect-ratios: join(
 //
 // Font, line-height, and color for body text, headings, and more.
 
+// Using "Source Sans Pro Light", "Source Sans Pro Regular", "Source Sans Pro Regular Italic", "Source Sans Pro Bold"
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=swap');
+
 // stylelint-disable value-keyword-case
-$font-family-sans-serif:      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-sans-serif:      "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 $font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 $font-family-base:            $font-family-sans-serif;
 // stylelint-enable value-keyword-case
 
 $font-size-base:              1rem; // Assumes the browser default, typically `16px`
-$font-size-lg:                $font-size-base * 1.25;
-$font-size-sm:                $font-size-base * .875;
+$font-size-lg:                $font-size-base * 1.375;
+$font-size-sm:                $font-size-base * .75;
 
 $font-weight-lighter:         lighter;
 $font-weight-light:           300;
@@ -434,16 +441,16 @@ $font-weight-bolder:          bolder;
 $font-weight-base:            $font-weight-normal;
 $line-height-base:            1.5;
 
-$h1-font-size:                $font-size-base * 2.5;
-$h2-font-size:                $font-size-base * 2;
-$h3-font-size:                $font-size-base * 1.75;
-$h4-font-size:                $font-size-base * 1.5;
-$h5-font-size:                $font-size-base * 1.25;
-$h6-font-size:                $font-size-base;
+$h1-font-size:                $font-size-base * 3.375;
+$h2-font-size:                $font-size-base * 2.5;
+$h3-font-size:                $font-size-base * 1.875;
+$h4-font-size:                $font-size-base * 1.375;
+$h5-font-size:                $font-size-base * 1;
+$h6-font-size:                $font-size-base * .75;
 
 $headings-margin-bottom:      $spacer / 2;
 $headings-font-family:        null;
-$headings-font-weight:        500;
+$headings-font-weight:        400;
 $headings-line-height:        1.2;
 $headings-color:              null;
 
@@ -458,16 +465,16 @@ $display3-weight:             300;
 $display4-weight:             300;
 $display-line-height:         $headings-line-height;
 
-$lead-font-size:              $font-size-base * 1.25;
-$lead-font-weight:            300;
+$lead-font-size:              $font-size-base * 1.375;
+$lead-font-weight:            400;
 
-$small-font-size:             80%;
+$small-font-size:             75%;
 
 $text-muted:                  $gray-600;
 
 $blockquote-small-color:      $gray-600;
 $blockquote-small-font-size:  $small-font-size;
-$blockquote-font-size:        $font-size-base * 1.25;
+$blockquote-font-size:        $font-size-base * 1.375;
 
 $hr-border-color:             rgba($black, .1);
 $hr-border-width:             $border-width;
@@ -481,7 +488,7 @@ $nested-kbd-font-weight:      $font-weight-bold;
 
 $list-inline-padding:         .5rem;
 
-$mark-bg:                     #fcf8e3;
+$mark-bg:                     $yellow-100;
 
 $hr-margin-y:                 $spacer;
 
@@ -1272,5 +1279,5 @@ $print-body-min-width:              map-get($grid-breakpoints, "lg");
 // ________________________________________________________________ //
 
 // Bootstrap and its default variables must come after overrides
-// TODO: replace this with individual scss components
+// TODO: replace this with individual Bootstrap SCSS components
 @import '../scss/bootstrap/bootstrap.scss';
