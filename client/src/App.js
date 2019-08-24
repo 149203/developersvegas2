@@ -1,12 +1,9 @@
 import React from 'react'
-import './App.css'
+import './scss/master.scss' // applies global scss styles
+import Home from './components/layouts/Home'
 
 function App() {
-   return (
-      <div className="App">
-         <h1>HELLO WORLD</h1>
-      </div>
-   )
+   return <Home />
 }
 
 export default App
