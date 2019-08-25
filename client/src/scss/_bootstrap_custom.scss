@@ -534,8 +534,8 @@ $table-border-level:          -6;
 //
 // Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
 
-$input-btn-padding-y:         .375rem;
-$input-btn-padding-x:         .75rem;
+$input-btn-padding-y:         map-get($spacers, 2);
+$input-btn-padding-x:         map-get($spacers, 4);
 $input-btn-font-family:       null;
 $input-btn-font-size:         $font-size-base;
 $input-btn-line-height:       $line-height-base;
