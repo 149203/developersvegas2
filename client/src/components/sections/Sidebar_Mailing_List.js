@@ -21,18 +21,21 @@ function Sidebar_Mailing_List() {
             id="mailing_list_first_name"
             className="form-control"
             type="text"
+            autocomplete="fuck-autocomplete"
          ></input>
          <label for="mailing_list_last_name">Last name</label>
          <input
             id="mailing_list_last_name"
             className="form-control"
             type="text"
+            autocomplete="fuck-autocomplete"
          ></input>
          <label for="mailing_list_email">Email</label>
          <input
             id="mailing_list_email"
             className="form-control"
             type="text"
+            autocomplete="fuck-autocomplete"
          ></input>
          <button className="btn btn-primary float-right mt-2">
             Occasionally email me
