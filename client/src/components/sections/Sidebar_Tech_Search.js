@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import color from '../../style/colors'
 import spacer from '../../style/spacers'
 
-function SidebarTechSearch() {
+function Sidebar_Tech_Search() {
    return (
       <div>
          <div className="clearfix"></div>
@@ -11,4 +11,4 @@ function SidebarTechSearch() {
    )
 }
 
-export default SidebarTechSearch
+export default Sidebar_Tech_Search

@@ -1,6 +1,6 @@
 import React from 'react'
-import SidebarMailingList from '../sections/SidebarMailingList'
-import SidebarTechSearch from '../sections/SidebarTechSearch'
+import Sidebar_Mailing_List from '../sections/Sidebar_Mailing_List'
+import Sidebar_Tech_Search from '../sections/Sidebar_Tech_Search'
 
 function Home() {
    return (
@@ -15,8 +15,8 @@ function Home() {
                <h3>Next event</h3>
             </div>
             <div className="col-3">
-               <SidebarMailingList />
-               <SidebarTechSearch />
+               <Sidebar_Mailing_List />
+               <Sidebar_Tech_Search />
             </div>
          </div>
       </div>
