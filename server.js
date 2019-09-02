@@ -12,10 +12,10 @@ app.use(body_parser.urlencoded({ extended: false }))
 app.use(body_parser.json())
 
 // Database and connection
-const mlab_db = require('./config/keys').mlab_uri
+const db_server = require('./config/keys').db_uri
 mongoose
-   .connect(mlab_db)
-   .then(() => console.log('Connected to mLab!'))
+   .connect(db_server)
+   .then(() => console.log('Connected to remote server!'))
    .catch(err => console.log(err))
 
 // Routes

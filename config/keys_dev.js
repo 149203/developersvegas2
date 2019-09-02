@@ -1,3 +1,3 @@
 module.exports = {
-   mlab_uri: process.env.mlab_uri,
+   db_uri: process.env.development_db_uri,
 }

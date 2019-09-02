@@ -7,13 +7,14 @@
       "install-client": "npm install --prefix client",
       "start": "npm run server",
       "client": "npm start --prefix client",
-      "server": "node server.js",
+      "server": "NODE_ENV=production node server.js",
       "dev-server": "nodemon server.js",
-      "dev": "concurrently \"npm run dev-server\" \"npm run client\""
+      "dev": "cross-env NODE_ENV=development concurrently \"npm run dev-server\" \"npm run client\""
    },
    "author": "Mike Zetlow",
    "license": "MIT",
    "devDependencies": {
+      "cross-env": "^5.2.1",
       "nodemon": "^1.18.9"
    },
    "dependencies": {
