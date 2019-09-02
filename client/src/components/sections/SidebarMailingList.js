@@ -11,7 +11,7 @@ const Sidebar = styled.div`
    }
 `
 
-function Sidebar_Mailing_List() {
+function SidebarMailingList() {
    return (
       <Sidebar>
          <h4>Stay in the loop</h4>
@@ -45,4 +45,4 @@ function Sidebar_Mailing_List() {
    )
 }
 
-export default Sidebar_Mailing_List
+export default SidebarMailingList
