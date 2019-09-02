@@ -7,7 +7,7 @@
       "install-client": "npm install --prefix client",
       "start": "npm run server",
       "client": "npm start --prefix client",
-      "server": "node server.js",
+      "server": "NODE_ENV=production node server.js",
       "dev-server": "nodemon server.js",
       "dev": "cross-env NODE_ENV=development concurrently \"npm run dev-server\" \"npm run client\""
    },
