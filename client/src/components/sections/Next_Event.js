@@ -48,7 +48,7 @@ function Next_Event() {
                      <p>Details:</p>
                   </div>
                   <div className="col-10">
-                     <p>
+                     <p className="text-justify">
                         Demo Day is an "open mic" event for coders to show and
                         tell what they're working on. Sign up at noon. All ages,
                         programming languages, and skill levels are welcome.
