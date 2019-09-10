@@ -5,10 +5,13 @@ import spacer from '../../style/spacers'
 
 const Sidebar = styled.div`
    background-color: ${color.gray_100};
-   padding: ${spacer[5]};
+   padding: ${spacer[4]};
    input {
       margin-bottom: ${spacer[2]};
    }
+   /* button.btn-primary {
+      border: ${color.blue_600} 1px solid;
+   } */
 `
 class Sidebar_Mailing_List extends Component {
    constructor() {
@@ -28,25 +31,25 @@ class Sidebar_Mailing_List extends Component {
             <label for="mailing_list_first_name">First name</label>
             <input
                id="mailing_list_first_name"
-               className="form-control"
+               className="form-control form-control-sm"
                type="text"
-               autocomplete="fuck-autocomplete"
+               autocomplete="fu-autocomplete"
             ></input>
             <label for="mailing_list_last_name">Last name</label>
             <input
                id="mailing_list_last_name"
-               className="form-control"
+               className="form-control form-control-sm"
                type="text"
-               autocomplete="fuck-autocomplete"
+               autocomplete="fu-autocomplete"
             ></input>
             <label for="mailing_list_email">Email</label>
             <input
                id="mailing_list_email"
-               className="form-control"
+               className="form-control form-control-sm"
                type="text"
-               autocomplete="fuck-autocomplete"
+               autocomplete="fu-autocomplete"
             ></input>
-            <button className="btn btn-primary float-right mt-2">
+            <button className="btn btn-sm btn-primary float-right mt-2">
                Occasionally email me
             </button>
             <div className="clearfix"></div>
