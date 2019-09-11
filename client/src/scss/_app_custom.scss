@@ -2,3 +2,16 @@
 h1 {
    font-weight: 300;
 }
+
+blockquote {
+   color: $gray-500;
+   font-style: italic;
+}
+
+blockquote a {
+   color: $blue-400;
+}
+
+blockquote a:hover {
+   color: $blue-500;
+}

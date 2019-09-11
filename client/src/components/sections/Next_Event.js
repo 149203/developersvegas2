@@ -23,7 +23,11 @@ function Next_Event() {
                   </div>
                   <div className="col-10">
                      <p>
-                        <a href="https://www.innevation.com/" target="_blank">
+                        <a
+                           href="https://www.innevation.com/"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                        >
                            Innevation Center
                            <br />
                            6795 S Edmond St.

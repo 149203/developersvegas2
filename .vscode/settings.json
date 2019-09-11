@@ -1,5 +1,8 @@
 {
-   "cSpell.words": ["mlab"],
+   "cSpell.words": [
+      "evangelista",
+      "mlab"
+   ],
    "editor.defaultFormatter": "esbenp.prettier-vscode",
    "prettier.requireConfig": true,
    "editor.formatOnSave": true,
