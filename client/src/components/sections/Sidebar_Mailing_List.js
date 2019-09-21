@@ -149,8 +149,8 @@ class Sidebar_Mailing_List extends Component {
                </Modal.Header>
                <Modal.Body>
                   <p>
-                     Thanks for signing up, {this.state.first_name}. We'll keep
-                     you in the loop.
+                     Thanks for signing up, {this.state.first_name}. We'll let
+                     you know about future events.
                   </p>
                   <button
                      className="btn btn-primary float-right"
