@@ -799,8 +799,8 @@ $custom-file-text: (
 
 // Form validation
 
-$form-feedback-margin-top:          $form-text-margin-top;
-$form-feedback-font-size:           $small-font-size;
+$form-feedback-margin-top:          map-get($spacers, 0);
+$form-feedback-font-size:           $font-size-base;
 $form-feedback-valid-color:         theme-color("success");
 $form-feedback-invalid-color:       theme-color("danger");
 
