@@ -39,7 +39,8 @@ module.exports = function validate_input_for_member(input) {
       errors.email = 'Double-check that. Please enter a valid email.'
    }
    if (validator.isEmpty(input.email)) {
-      errors.email = 'An email address is required, stranger.'
+      errors.email =
+         'An email address is required, friend. We want to keep you in the loop if there are any important changes.'
    }
    if (!validator.isLength(input.portfolio_url, { max: 2000 })) {
       errors.portfolio_url =

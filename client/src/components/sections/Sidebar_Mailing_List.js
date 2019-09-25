@@ -2,9 +2,13 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import color from '../../style/colors'
 import spacer from '../../style/spacers'
-import axios from 'axios'
 import classnames from 'classnames'
 import Modal from 'react-bootstrap/Modal'
+
+// import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux' // allows connecting redux to this react component
+import { upsert_member } from '../../actions/signup_actions'
 
 const Sidebar = styled.div`
    background-color: ${color.gray_100};
@@ -25,6 +29,15 @@ class Sidebar_Mailing_List extends Component {
       }
    }
 
+   componentWillReceiveProps(nextProps) {
+      // deprecated way of passing props into component state
+      // once we receive new properties, update component state
+      if (nextProps.errors) {
+         // if there is errors
+         this.setState({ errors: nextProps.errors })
+      }
+   }
+
    on_change(e) {
       const new_state = { [e.target.id]: e.target.value }
       // console.log({ new_state })
@@ -39,19 +52,21 @@ class Sidebar_Mailing_List extends Component {
          last_name,
          email,
       }
-      // this.props.register_user(new_user)
+
+      this.props.upsert_member(new_member) // use new_member data in the upsert_member action // uses withRouter at the bottom of the page
+
       console.log(new_member)
       // axios POST!
-      axios
-         .post('/api/v1/members', new_member) // recall we put a PROXY value in our client package.json
-         .then(res => {
-            console.log(res.data)
-            this.setState({
-               errors: {},
-               is_success_modal_open: true,
-            })
-         })
-         .catch(err => this.setState({ errors: err.response.data }))
+      // axios
+      //    .post('/api/v1/members', new_member) // recall we put a PROXY value in our client package.json
+      //    .then(res => {
+      //       console.log(res.data)
+      //       this.setState({
+      //          errors: {},
+      //          is_success_modal_open: true,
+      //       })
+      //    })
+      //    .catch(err => this.setState({ errors: err.response.data }))
    }
 
    render() {
@@ -165,4 +180,17 @@ class Sidebar_Mailing_List extends Component {
    }
 }
 
-export default Sidebar_Mailing_List
+// export default Sidebar_Mailing_List
+
+const map_state_to_props = state => ({
+   signup: {
+      first_name: state.first_name,
+      last_name: state.last_name,
+      email: state.email,
+   }, // we named signup in our root reducer (reducers/index.js)
+   errors: state.errors,
+}) // wrap the return in () to use arrow function syntax for return shortcut
+export default connect(
+   map_state_to_props,
+   { upsert_member }
+)(withRouter(Sidebar_Mailing_List))
