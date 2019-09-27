@@ -36,6 +36,11 @@ class Sidebar_Mailing_List extends Component {
          // if there is errors
          this.setState({ errors: nextProps.errors })
       }
+      if (nextProps.is_success_modal_open) {
+         this.setState({
+            is_success_modal_open: nextProps.is_success_modal_open,
+         })
+      }
    }
 
    on_change(e) {
@@ -184,11 +189,9 @@ class Sidebar_Mailing_List extends Component {
 // export default Sidebar_Mailing_List
 
 const map_state_to_props = state => ({
-   // first_name: state.first_name,
-   // last_name: state.last_name,
-   // email: state.email,
-   // we named mailing_list_signup in our root reducer
    errors: state.mailing_list_signup.errors,
+   is_success_modal_open:
+      state.mailing_list_signup.has_signed_up_for_mailing_list,
 }) // wrap the return in () to use arrow function syntax for return shortcut
 export default connect(
    map_state_to_props,
