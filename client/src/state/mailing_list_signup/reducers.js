@@ -1,4 +1,4 @@
-import { GET_ERRORS } from '../actions/types'
+import { GET_ERRORS } from './types'
 
 const initial_state = {} // the errors obj itself
 
@@ -7,7 +7,7 @@ export default function(state = initial_state, action) {
    switch (action.type) {
       // will have different cases for action types
       case GET_ERRORS:
-         return action.payload
+         return { errors: action.payload }
       default:
          return state
    }

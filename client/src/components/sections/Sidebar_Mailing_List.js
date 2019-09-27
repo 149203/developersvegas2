@@ -8,7 +8,7 @@ import Modal from 'react-bootstrap/Modal'
 // import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux' // allows connecting redux to this react component
-import { upsert_member } from '../../actions/signup_actions'
+import { upsert_member } from '../../state/mailing_list_signup/actions'
 
 const Sidebar = styled.div`
    background-color: ${color.gray_100};
@@ -53,6 +53,7 @@ class Sidebar_Mailing_List extends Component {
          email,
       }
 
+      //this.props.dispatch(upsert_member(new_member))
       this.props.upsert_member(new_member) // use new_member data in the upsert_member action // uses withRouter at the bottom of the page
 
       console.log(new_member)
@@ -183,12 +184,11 @@ class Sidebar_Mailing_List extends Component {
 // export default Sidebar_Mailing_List
 
 const map_state_to_props = state => ({
-   signup: {
-      first_name: state.first_name,
-      last_name: state.last_name,
-      email: state.email,
-   }, // we named signup in our root reducer (reducers/index.js)
-   errors: state.errors,
+   // first_name: state.first_name,
+   // last_name: state.last_name,
+   // email: state.email,
+   // we named mailing_list_signup in our root reducer
+   errors: state.mailing_list_signup.errors,
 }) // wrap the return in () to use arrow function syntax for return shortcut
 export default connect(
    map_state_to_props,
