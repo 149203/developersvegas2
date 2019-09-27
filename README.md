@@ -50,6 +50,19 @@ Map tables follow the convention:
 
 Map tables do not have a row_id / primary key.
 
+Data returned from an API should be an array of "flat" objects, one level deep:
+
+```
+[{
+   member_id: 1234,
+   member_name: 'Mike Zetlow',
+   presentation_id: 5678,
+   presentation_title: 'Return flat objects for easy iteration in components',
+   event_id: 90,
+   event_date: '2019-09-25'
+}]
+```
+
 # Commits
 
 ## VS Code
