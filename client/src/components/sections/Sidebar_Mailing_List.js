@@ -9,7 +9,8 @@ import axios from 'axios'
 // import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux' // allows connecting redux to this react component
-import { upsert_member } from '../../state/app'
+import { store_mailing_list_success } from '../../state/app'
+import { store_current_member } from '../../state/current_member'
 
 const Sidebar = styled.div`
    background-color: ${color.gray_100};
@@ -48,22 +49,15 @@ class Sidebar_Mailing_List extends Component {
       axios
          .post('/api/v1/members', new_member) // recall we put a PROXY value in our client package.json
          .then(res => {
-            // On response
-            // Store member in current_member redux store
             // Store success modal variable in redux store
-            console.log(res.data)
-            this.props.upsert_member(res.data)
-            // dispatch({
-            //    type: HAS_SIGNED_UP_FOR_MAILING_LIST,
-            // })
+            this.props.store_mailing_list_success()
+            // Store member in current_member redux store
+            this.props.store_current_member(res.data)
          })
          .catch(err => {
             // On error, update error state
             this.setState({ errors: err.response.data })
          })
-
-      // this.props.upsert_member(new_member) // use new_member data in the upsert_member action // upsert_member was mapped to props in the connect function at the bottom // this is an action creator
-      console.log(new_member)
    }
 
    render() {
@@ -189,5 +183,5 @@ const map_store_to_props = store => {
 } // wrap the return in () to use arrow function syntax for return shortcut
 export default connect(
    map_store_to_props, // mapStateToProps
-   { upsert_member } // mapDispatchToProps, here an 'action creator' wrapped in an object
+   { store_mailing_list_success, store_current_member } // mapDispatchToProps, here an 'action creator' wrapped in an object
 )(withRouter(Sidebar_Mailing_List))

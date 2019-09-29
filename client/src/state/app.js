@@ -1,10 +1,9 @@
-import { HAS_SIGNED_UP_FOR_MAILING_LIST } from './types'
+import { MAILING_LIST_SUCCESS } from './types'
 
 // Action creators
-export const upsert_member = response => dispatch => {
+export const store_mailing_list_success = () => dispatch => {
    dispatch({
-      type: HAS_SIGNED_UP_FOR_MAILING_LIST,
-      payload: response,
+      type: MAILING_LIST_SUCCESS,
    })
 }
 
@@ -12,7 +11,7 @@ export const upsert_member = response => dispatch => {
 export function app(state = {}, action) {
    switch (action.type) {
       // will have different cases for action types
-      case HAS_SIGNED_UP_FOR_MAILING_LIST:
+      case MAILING_LIST_SUCCESS:
          return {
             has_signed_up_for_mailing_list: true,
          }

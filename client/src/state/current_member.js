@@ -1,10 +1,10 @@
-import { HAS_SIGNED_UP_FOR_MAILING_LIST } from './types'
+import { UPDATE_CURRENT_MEMBER } from './types'
 
 // Action creators
-export const upsert_member = response => dispatch => {
+export const store_current_member = payload => dispatch => {
    dispatch({
-      type: HAS_SIGNED_UP_FOR_MAILING_LIST,
-      payload: response,
+      type: UPDATE_CURRENT_MEMBER,
+      payload,
    })
 }
 
@@ -12,7 +12,7 @@ export const upsert_member = response => dispatch => {
 export function current_member(state = {}, action) {
    switch (action.type) {
       // will have different cases for action types
-      case HAS_SIGNED_UP_FOR_MAILING_LIST:
+      case UPDATE_CURRENT_MEMBER:
          return action.payload
       default:
          return state
