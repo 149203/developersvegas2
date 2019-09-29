@@ -20,20 +20,19 @@ const Sidebar = styled.div`
    }
 `
 class Sidebar_Mailing_List extends Component {
-   constructor() {
-      super()
+   constructor(props) {
+      super(props)
       this.state = {
          first_name: '',
          last_name: '',
          email: '',
          errors: {},
-         is_success_modal_open: false,
       }
+      this.props.store_mailing_list_success(false)
    }
 
    on_change(e) {
       const new_state = { [e.target.id]: e.target.value } // shorthand for a variable property name!
-      // console.log({ new_state })
       this.setState(new_state)
    }
 
@@ -50,25 +49,23 @@ class Sidebar_Mailing_List extends Component {
          .post('/api/v1/members', new_member) // recall we put a PROXY value in our client package.json
          .then(res => {
             // Store success modal variable in redux store
-            this.props.store_mailing_list_success()
+            this.props.store_mailing_list_success(true)
             // Store member in current_member redux store
             this.props.store_current_member(res.data)
+            this.setState({
+               first_name: '',
+               last_name: '',
+               email: '',
+               errors: {},
+            })
          })
-         .catch(err => {
-            // On error, update error state
-            this.setState({ errors: err.response.data })
-         })
+         .catch(err => this.setState({ errors: err.response.data }))
    }
 
    render() {
       const { errors } = this.state
       const close_success_modal = () => {
-         this.setState({
-            is_success_modal_open: false,
-            first_name: '',
-            last_name: '',
-            email: '',
-         })
+         this.props.store_mailing_list_success(false)
       }
 
       return (
@@ -147,7 +144,7 @@ class Sidebar_Mailing_List extends Component {
             */}
 
             <Modal
-               show={this.state.is_success_modal_open}
+               show={this.props.stored_has_signed_up_for_mailing_list}
                onHide={close_success_modal}
             >
                <Modal.Header closeButton>
@@ -155,8 +152,8 @@ class Sidebar_Mailing_List extends Component {
                </Modal.Header>
                <Modal.Body>
                   <p>
-                     Thanks for signing up, {this.state.first_name}. We'll let
-                     you know about future events.
+                     Thanks for signing up, {this.props.stored_first_name}.
+                     We'll let you know about future events.
                   </p>
                   <button
                      className="btn btn-primary float-right"
@@ -171,14 +168,13 @@ class Sidebar_Mailing_List extends Component {
    }
 }
 
-// export default Sidebar_Mailing_List
-
 const map_store_to_props = store => {
+   // so I can use stored values as props
+   // https://stackoverflow.com/a/38678454
    return {
-      // returns an object of only the redux store we need
-      // errors: store.mailing_list_signup.errors,
-      // is_success_modal_open:
-      //    store.mailing_list_signup.has_signed_up_for_mailing_list,
+      stored_first_name: store.current_member.first_name,
+      stored_has_signed_up_for_mailing_list:
+         store.app.has_signed_up_for_mailing_list,
    }
 } // wrap the return in () to use arrow function syntax for return shortcut
 export default connect(
