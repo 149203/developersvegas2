@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
-import mailing_list_signup from './mailing_list_signup/reducers'
+import app from './app/reducers' // The reducer itself returns an anonymous function. I name it here.
+import current_member from './current_member/reducers'
 
 export default combineReducers({
-   mailing_list_signup,
+   app,
+   current_member,
 })

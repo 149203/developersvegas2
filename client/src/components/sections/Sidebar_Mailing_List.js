@@ -4,11 +4,12 @@ import color from '../../style/colors'
 import spacer from '../../style/spacers'
 import classnames from 'classnames'
 import Modal from 'react-bootstrap/Modal'
+import axios from 'axios'
 
 // import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux' // allows connecting redux to this react component
-import { upsert_member } from '../../state/mailing_list_signup/actions'
+import { upsert_member } from '../../state/app/actions'
 
 const Sidebar = styled.div`
    background-color: ${color.gray_100};
@@ -29,24 +30,10 @@ class Sidebar_Mailing_List extends Component {
       }
    }
 
-   componentWillReceiveProps(nextProps) {
-      // deprecated way of passing props into component state
-      // once we receive new properties, update component state
-      if (nextProps.errors) {
-         // if there is errors
-         this.setState({ errors: nextProps.errors })
-      }
-      if (nextProps.is_success_modal_open) {
-         this.setState({
-            is_success_modal_open: nextProps.is_success_modal_open,
-         })
-      }
-   }
-
    on_change(e) {
-      const new_state = { [e.target.id]: e.target.value }
+      const new_state = { [e.target.id]: e.target.value } // shorthand for a variable property name!
       // console.log({ new_state })
-      this.setState(new_state) // shorthand for a variable property name!
+      this.setState(new_state)
    }
 
    on_submit(e) {
@@ -57,22 +44,26 @@ class Sidebar_Mailing_List extends Component {
          last_name,
          email,
       }
+      // Call API
+      axios
+         .post('/api/v1/members', new_member) // recall we put a PROXY value in our client package.json
+         .then(res => {
+            // On response
+            // Store member in current_member redux store
+            // Store success modal variable in redux store
+            console.log(res.data)
+            this.props.upsert_member(res.data)
+            // dispatch({
+            //    type: HAS_SIGNED_UP_FOR_MAILING_LIST,
+            // })
+         })
+         .catch(err => {
+            // On error, update error state
+            this.setState({ errors: err.response.data })
+         })
 
-      //this.props.dispatch(upsert_member(new_member))
-      this.props.upsert_member(new_member) // use new_member data in the upsert_member action // uses withRouter at the bottom of the page
-
+      // this.props.upsert_member(new_member) // use new_member data in the upsert_member action // upsert_member was mapped to props in the connect function at the bottom // this is an action creator
       console.log(new_member)
-      // axios POST!
-      // axios
-      //    .post('/api/v1/members', new_member) // recall we put a PROXY value in our client package.json
-      //    .then(res => {
-      //       console.log(res.data)
-      //       this.setState({
-      //          errors: {},
-      //          is_success_modal_open: true,
-      //       })
-      //    })
-      //    .catch(err => this.setState({ errors: err.response.data }))
    }
 
    render() {
@@ -188,12 +179,15 @@ class Sidebar_Mailing_List extends Component {
 
 // export default Sidebar_Mailing_List
 
-const map_state_to_props = state => ({
-   errors: state.mailing_list_signup.errors,
-   is_success_modal_open:
-      state.mailing_list_signup.has_signed_up_for_mailing_list,
-}) // wrap the return in () to use arrow function syntax for return shortcut
+const map_store_to_props = store => {
+   return {
+      // returns an object of only the redux store we need
+      // errors: store.mailing_list_signup.errors,
+      // is_success_modal_open:
+      //    store.mailing_list_signup.has_signed_up_for_mailing_list,
+   }
+} // wrap the return in () to use arrow function syntax for return shortcut
 export default connect(
-   map_state_to_props,
-   { upsert_member }
+   map_store_to_props, // mapStateToProps
+   { upsert_member } // mapDispatchToProps, here an 'action creator' wrapped in an object
 )(withRouter(Sidebar_Mailing_List))

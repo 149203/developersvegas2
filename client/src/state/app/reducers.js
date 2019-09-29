@@ -9,7 +9,6 @@ export default function(state = initial_state, action) {
       case HAS_SIGNED_UP_FOR_MAILING_LIST:
          return {
             has_signed_up_for_mailing_list: true,
-            current_member: action.payload,
          }
       default:
          return state
