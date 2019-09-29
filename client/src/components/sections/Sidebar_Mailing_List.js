@@ -11,6 +11,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux' // allows connecting redux to this react component
 import { store_mailing_list_success } from '../../state/app'
 import { store_current_member } from '../../state/current_member'
+import Mailing_List_Success from '../overlays/Mailing_List_Success'
 
 const Sidebar = styled.div`
    background-color: ${color.gray_100};
@@ -137,31 +138,17 @@ class Sidebar_Mailing_List extends Component {
             </form>
             <div className="clearfix"></div>
 
-            {/*
-               MAH DUDE
-               If you want to break the modal into its own component, you'll have to use Redux (or a parent component, but you don't want that).
-               Because the open and closed state of the modal exists in this component AND the modal component, so you must share its state.
-            */}
-
             <Modal
                show={this.props.stored_has_signed_up_for_mailing_list}
                onHide={close_success_modal}
             >
-               <Modal.Header closeButton>
-                  <Modal.Title>We'll keep you in the loop!</Modal.Title>
-               </Modal.Header>
-               <Modal.Body>
-                  <p>
-                     Thanks for signing up, {this.props.stored_first_name}.
-                     We'll let you know about future events.
-                  </p>
-                  <button
-                     className="btn btn-primary float-right"
-                     onClick={close_success_modal}
-                  >
-                     AWESOME
-                  </button>
-               </Modal.Body>
+               <Mailing_List_Success
+                  first_name={this.props.stored_first_name}
+                  store_mailing_list_success={
+                     this.props.store_mailing_list_success
+                  }
+                  email={this.props.stored_email}
+               />
             </Modal>
          </Sidebar>
       )
@@ -175,8 +162,9 @@ const map_store_to_props = store => {
       stored_first_name: store.current_member.first_name,
       stored_has_signed_up_for_mailing_list:
          store.app.has_signed_up_for_mailing_list,
+      stored_email: store.current_member.email,
    }
-} // wrap the return in () to use arrow function syntax for return shortcut
+}
 export default connect(
    map_store_to_props, // mapStateToProps
    { store_mailing_list_success, store_current_member } // mapDispatchToProps, here an 'action creator' wrapped in an object
