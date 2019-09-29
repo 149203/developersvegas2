@@ -9,7 +9,7 @@ import axios from 'axios'
 // import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux' // allows connecting redux to this react component
-import { upsert_member } from '../../state/app/actions'
+import { upsert_member } from '../../state/app'
 
 const Sidebar = styled.div`
    background-color: ${color.gray_100};
