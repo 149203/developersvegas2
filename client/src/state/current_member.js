@@ -11,7 +11,6 @@ export const store_current_member = payload => dispatch => {
 // Reducers
 export function current_member(state = {}, action) {
    switch (action.type) {
-      // will have different cases for action types
       case UPDATE_CURRENT_MEMBER:
          return action.payload
       default:

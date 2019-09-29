@@ -10,7 +10,6 @@ export const store_mailing_list_success = () => dispatch => {
 // Reducers
 export function app(state = {}, action) {
    switch (action.type) {
-      // will have different cases for action types
       case MAILING_LIST_SUCCESS:
          return {
             has_signed_up_for_mailing_list: true,
