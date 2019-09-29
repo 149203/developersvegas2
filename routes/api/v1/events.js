@@ -5,20 +5,43 @@ const event_model = require('../../../models/event')
 const date_format = require('date-fns/format')
 const slug_format = require('../../../utils/slug_format')
 const append_slug_suffix = require('../../../utils/append_slug_suffix')
-const create_row_id = require('../../../utils/create_row_id')
 const validate_input_for_event = require('../../../validation/event')
 const validator = require('validator')
 
-// @route      GET api/v1/events
-// @desc       Gets all events
+// @route      GET api/v1/events?occurs&date
+// @desc       Gets all events, or all events preceding today, or the upcoming event
 // @access     Public
 router.get('/', (req, res) => {
-   event_model
-      .find()
-      .then(events => {
-         res.json(events)
-      })
-      .catch(err => res.status(400).json(err))
+   if (req.query.occurs && req.query.date) {
+      const today = req.query.date
+      console.log(today)
+      if (req.query.occurs === 'before') {
+         event_model
+            .find({ ended_on: { $lt: today } })
+            .sort({ ended_on: 'desc' })
+            .then(events => {
+               res.json(events)
+            })
+            .catch(err => res.status(400).json(err))
+      } else if (req.query.occurs === 'after') {
+         event_model
+            .findOne({ ended_on: { $gt: today } })
+            .then(events => {
+               res.json(events)
+            })
+            .catch(err => res.status(400).json(err))
+      } else
+         res.status(400).json(
+            'There is a problem with the occurs and date queries in this request.'
+         )
+   } else {
+      event_model
+         .find()
+         .then(events => {
+            res.json(events)
+         })
+         .catch(err => res.status(400).json(err))
+   }
 })
 
 // @route      GET api/v1/events/:event_id
@@ -55,8 +78,20 @@ router.post('/', (req, res) => {
    const event_obj = {}
    // These are fields that can be updated via the API
    if (body.title) event_obj.title = body.title // String, required
-   if (body.started_on) event_obj.started_on = body.started_on // Date, default Date.now
+   if (body.started_on) event_obj.started_on = body.started_on // Date, required
+   if (body.ended_on) event_obj.ended_on = body.ended_on // Date, required
    if (body.is_active) event_obj.is_active = body.is_active // Boolean, default true
+   if (body.location_name) event_obj.location_name = body.location_name // String, required
+   if (body.location_street_1)
+      event_obj.location_street_1 = body.location_street_1 // String, required
+   if (body.location_street_2)
+      event_obj.location_street_2 = body.location_street_2 // String, required
+   if (body.location_city) event_obj.location_city = body.location_city // String, required
+   if (body.location_state) event_obj.location_state = body.location_state // String, required
+   if (body.location_zip) event_obj.location_zip = body.location_zip // String, required
+   if (body.location_url) event_obj.location_url = body.location_url // String, required
+   if (body.cost) event_obj.cost = body.cost // String, required
+   if (body.description) event_obj.description = body.description // String, required
 
    event_model
       .findById(body._id)
@@ -76,7 +111,6 @@ router.post('/', (req, res) => {
             )
             const slug = slug_format(`${event_date}-${body.title}`)
             event_obj.slug = await append_slug_suffix(event_model, slug)
-            event_obj.row_id = await create_row_id(event_model)
 
             new event_model(event_obj)
                .save()
@@ -88,14 +122,5 @@ router.post('/', (req, res) => {
       })
       .catch(err => res.status(400).json(err))
 })
-
-const example_api_return = {
-   _id: mongoose.Schema.Types.ObjectId,
-   row_id: Number,
-   title: String,
-   started_on: Date,
-   slug: String,
-   is_active: Boolean,
-}
 
 module.exports = router
