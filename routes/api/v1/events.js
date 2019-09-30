@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const mongoose = require('mongoose')
 const event_model = require('../../../models/event')
 const date_format = require('date-fns/format')
 const slug_format = require('../../../utils/slug_format')
 const append_slug_suffix = require('../../../utils/append_slug_suffix')
 const validate_input_for_event = require('../../../validation/event')
 const validator = require('validator')
+const convert_datetime_num_to_str = require('../../../utils/convert_datetime_num_to_str')
 
 // @route      GET api/v1/events?occurs&date
 // @desc       Gets all events, or all events preceding today, or the upcoming event
@@ -78,8 +78,8 @@ router.post('/', (req, res) => {
    const event_obj = {}
    // These are fields that can be updated via the API
    if (body.title) event_obj.title = body.title // String, required
-   if (body.started_on) event_obj.started_on = body.started_on // Date, required
-   if (body.ended_on) event_obj.ended_on = body.ended_on // Date, required
+   if (body.started_on) event_obj.started_on = body.started_on // Number, required
+   if (body.ended_on) event_obj.ended_on = body.ended_on // Number, required
    if (body.is_active) event_obj.is_active = body.is_active // Boolean, default true
    if (body.location_name) event_obj.location_name = body.location_name // String, required
    if (body.location_street_1)
@@ -105,10 +105,9 @@ router.post('/', (req, res) => {
                .catch(err => res.status(400).json(err))
          } else {
             // Create event
-            let event_date = date_format(
-               body.started_on || Date.now(),
-               'MMMM-Do-YYYY'
-            )
+            const datetime = convert_datetime_num_to_str(body.started_on)
+            console.log(datetime)
+            let event_date = date_format(datetime, 'MMMM-Do-YYYY')
             const slug = slug_format(`${event_date}-${body.title}`)
             event_obj.slug = await append_slug_suffix(event_model, slug)
 

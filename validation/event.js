@@ -23,18 +23,6 @@ module.exports = function validate_input_for_event(input) {
    if (validator.isEmpty(input.title)) {
       errors.title = 'A title for the event is required.'
    }
-   if (
-      input.ended_on &&
-      !validator.isISO8601(input.ended_on, { strict: true })
-   ) {
-      errors.ended_on = 'ended_on is not a valid date.'
-   }
-   if (
-      input.started_on &&
-      !validator.isISO8601(input.started_on, { strict: true })
-   ) {
-      errors.started_on = 'started_on is not a valid date.'
-   }
    if (input.is_active && !validator.isBoolean(input.is_active)) {
       errors.is_active = 'is_active must be a Boolean.'
    }

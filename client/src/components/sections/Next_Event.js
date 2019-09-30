@@ -3,7 +3,7 @@ import axios from 'axios'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux' // allows connecting redux to this react component
 import { store_next_event } from '../../state/next_event'
-import { format } from 'date-fns-timezone'
+import { format } from 'date-fns'
 
 class Next_Event extends Component {
    constructor() {
@@ -22,7 +22,7 @@ class Next_Event extends Component {
 
    render() {
       const friendly_format_date = date => {
-         return format(date, 'EEEE')
+         return date
       }
 
       const {

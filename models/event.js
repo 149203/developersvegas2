@@ -7,11 +7,11 @@ const event_schema = new schema({
       required: true,
    },
    started_on: {
-      type: Date,
+      type: Number, // first 8 digits: date, next 4 digits: time
       required: true,
    },
    ended_on: {
-      type: Date,
+      type: Number, // first 8 digits: date, next 4 digits: time
       required: true,
    },
    location_name: {
