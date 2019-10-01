@@ -1,6 +1,6 @@
 export default time => {
-   // given a 4-digit time as a string: 0000, 1200, 0345, 2200, 1201, 0001
-   // return a friendly time string: midnight, noon, 3:45am, 10pm, 12:01pm, 12:01am
+   // given a 4-digit time as a string: 0000, 1200, 0345, 2200, 1201, 0001, 2400
+   // return a friendly time string: midnight, noon, 3:45am, 10pm, 12:01pm, 12:01am, invalid time
    if (time) {
       if (time.length !== 4) return 'invalid time'
       let hour
