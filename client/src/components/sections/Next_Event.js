@@ -89,8 +89,12 @@ class Next_Event extends Component {
                               {location_name}
                               <br />
                               {location_street_1}
-                              <br />
-                              {location_street_2}
+                              {location_street_2 && (
+                                 <span>
+                                    <br />
+                                    {location_street_2}
+                                 </span>
+                              )}
                               <br />
                               {location_city}, {location_state} {location_zip}
                            </a>
