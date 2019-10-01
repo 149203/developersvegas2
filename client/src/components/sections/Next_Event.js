@@ -3,13 +3,14 @@ import axios from 'axios'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux' // allows connecting redux to this react component
 import { store_next_event } from '../../state/next_event'
-import { format } from 'date-fns'
+import { format as date_format } from 'date-fns'
+import convert_datetime_num_to_str from '../../utils/convert_datetime_num_to_str'
+import friendly_format_time from '../../utils/friendly_format_time'
 
 class Next_Event extends Component {
    constructor() {
       super()
-      const todays_datetime = new Date()
-      console.log(todays_datetime.toISOString())
+      const todays_datetime = date_format(new Date(), 'yyyyMMddkkmm')
 
       axios
          .get(`/api/v1/events?occurs=after&date=${todays_datetime}`) // recall we put a PROXY value in our client package.json
@@ -21,10 +22,6 @@ class Next_Event extends Component {
    }
 
    render() {
-      const friendly_format_date = date => {
-         return date
-      }
-
       const {
          _id,
          title,
@@ -40,6 +37,20 @@ class Next_Event extends Component {
          cost,
          description,
       } = this.props.stored_next_event
+
+      const friendly_format_date = date => {
+         if (date) {
+            const date_str = convert_datetime_num_to_str(date)
+            return date_format(new Date(date_str), 'eeee MMMM do, yyyy')
+         }
+      }
+
+      const trim_time = datetime => {
+         if (datetime) {
+            return String(datetime).slice(-4)
+         }
+      }
+
       return (
          <div>
             <h3 className="mb-1">Next event</h3>
@@ -55,7 +66,13 @@ class Next_Event extends Component {
                         <p>Time:</p>
                      </div>
                      <div className="col-10">
-                        <p>Noon to 3pm</p>
+                        <p>
+                           <span className="text-capitalize">
+                              {friendly_format_time(trim_time(started_on))}
+                           </span>
+                           &nbsp;to&nbsp;
+                           {friendly_format_time(trim_time(ended_on))}
+                        </p>
                      </div>
                   </div>
                   <div className="row">
@@ -103,8 +120,6 @@ class Next_Event extends Component {
       )
    }
 }
-
-//export default Next_Event
 
 const map_store_to_props = store => {
    // so I can use stored values as props

@@ -25,7 +25,7 @@ function Past_Event_List() {
                   Zetlow, Dorian Dominguez, Ben Denzer, and Sunny Clark.
                </p>
                <p>
-                  <a href="#" className="float-right">
+                  <a href="https://google.com" className="float-right">
                      See all videos from this event
                   </a>
                </p>
@@ -40,7 +40,8 @@ function Past_Event_List() {
                   “Las Vegas Developers was INSTRUMENTAL in meeting people and
                   making the connections that ultimately led to my first job as
                   a developer. Go to Demo Day if you want to make something of
-                  yourself.” — <a href="#">Victor Evangelista</a>
+                  yourself.” —{' '}
+                  <a href="https://google.com">Victor Evangelista</a>
                </blockquote>
             </div>
          </div>
