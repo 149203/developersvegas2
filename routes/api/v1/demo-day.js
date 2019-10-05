@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
       // https://dev.to/burkeholland/asyncawait-and-the-foreach-pit-of-despair-2267
       console.log('EVENT DATE FROM SIGN IN LIST: ', demo_day.event.date)
       const event_id = await get_object_id(event_model, {
-         started_on: new Date(demo_day.event.date),
+         started_on: new Date(String(demo_day.event.date)),
       })
 
       const member_id = await get_object_id(member_model, {
