@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
       // forEach doesn't work with async/await
       // https://dev.to/burkeholland/asyncawait-and-the-foreach-pit-of-despair-2267
       const event_id = await get_object_id(event_model, {
-         started_on: new Date(demo_day.event.date),
+         started_on: demo_day.event.date,
       })
 
       const member_id = await get_object_id(member_model, {
