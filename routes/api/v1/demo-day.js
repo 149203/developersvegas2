@@ -81,7 +81,7 @@ router.post('/', async (req, res) => {
          collection: presentation_model,
          options: {
             should_create_slug: true,
-            should_create_row_id: true,
+            should_create_row_id: false,
             slug_fields, // an array of strings, in order
          },
          filter: { event_id, member_id },
