@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
       })
 
       const member_id = await get_object_id(member_model, {
-         row_id: demo_day.member.row_id,
+         email: demo_day.member.email,
       })
 
       const presentation_obj = {}
