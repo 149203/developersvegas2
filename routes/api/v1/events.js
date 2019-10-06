@@ -64,6 +64,50 @@ router.get('/:event_id', (req, res) => {
    }
 })
 
+// @route      POST api/v1/events/:event_id
+// @desc       Updates an event by its event_id
+// @access     Public
+router.post('/:event_id', (req, res) => {
+   const event_id = req.params.event_id
+   const body = req.body
+   // Validate user input
+   const { errors, is_valid } = validate_input_for_event(body)
+   if (!is_valid) {
+      return res.status(400).json(errors)
+   }
+
+   const event_obj = {}
+   // These are fields that can be updated via the API
+   if (body.title) event_obj.title = body.title // String, required
+   if (body.started_on) event_obj.started_on = body.started_on // Number, required
+   if (body.ended_on) event_obj.ended_on = body.ended_on // Number, required
+   if (body.is_active) event_obj.is_active = body.is_active // Boolean, default true
+   if (body.location_name) event_obj.location_name = body.location_name // String, required
+   if (body.location_street_1)
+      event_obj.location_street_1 = body.location_street_1 // String, required
+   if (body.location_street_2)
+      event_obj.location_street_2 = body.location_street_2 // String, required
+   if (body.location_city) event_obj.location_city = body.location_city // String, required
+   if (body.location_state) event_obj.location_state = body.location_state // String, required
+   if (body.location_zip) event_obj.location_zip = body.location_zip // String, required
+   if (body.location_url) event_obj.location_url = body.location_url // String, required
+   if (body.cost) event_obj.cost = body.cost // String, required
+   if (body.description) event_obj.description = body.description // String, required
+
+   // Validate event_id
+   if (!validator.isMongoId(event_id)) {
+      errors.event_id = 'event_id must be a valid Mongo ID.'
+      return res.status(400).json(errors)
+   } else {
+      event_model
+         .findByIdAndUpdate(event_id, event_obj, { new: true })
+         .then(event => {
+            res.json(event)
+         })
+         .catch(err => res.status(400).json(err))
+   }
+})
+
 // @route      POST api/v1/events
 // @desc       Create a new event in the events resource
 // @access     Public
