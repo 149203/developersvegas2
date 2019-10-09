@@ -1,11 +1,6 @@
 const mongoose = require('mongoose')
 
 const presentation_schema = new mongoose.Schema({
-   // row_id is for migration to SQL
-   row_id: {
-      type: Number, // auto-incremented ID
-      required: true,
-   },
    title: {
       type: String,
       required: true,
