@@ -12,6 +12,14 @@
 
 `https://NAME_OF_YOUR_HEROKU_APP.herokuapp.com/api/v1/presentations`
 
+# Backup
+
+Go to `C:\Program Files\MongoDB\Server\4.0\bin`
+
+Enter the `mongodump_cli` command from your `.env` file.
+
+Then go to the folder in `P:\Code\backups` and append today's date to the folder.
+
 # Conventions
 
 lower_snake_case for everything except urls and filenames of web assets (like images).
