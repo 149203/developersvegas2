@@ -8,6 +8,7 @@ const xref_presentation_technology_model = require('../../../models/xref_present
 const convert_undefined = require('../../../utils/convert_undefined')
 const get_object_id = require('../../../utils/get_object_id')
 const upsert = require('../../../utils/upsert')
+const convert_datetime_num_to_str = require('../../../utils/convert_datetime_num_to_str')
 const validate_input_for_presentation = require('../../../validation/presentation')
 const cast_to_object_id = require('mongodb').ObjectID
 const has = require('lodash/has')
@@ -30,10 +31,11 @@ router.post('/', async (req, res) => {
    for (let demo_day of demo_days) {
       // forEach doesn't work with async/await
       // https://dev.to/burkeholland/asyncawait-and-the-foreach-pit-of-despair-2267
-      console.log('EVENT DATE FROM SIGN IN LIST: ', String(demo_day.event.date))
-      const event_id = await get_object_id(event_model, {
-         started_on: new Date(String(demo_day.event.date)),
-      })
+      console.log(
+         'EVENT DATE FROM SIGN IN LIST: ',
+         String(demo_day.event.started_on)
+      )
+      const event_id = await get_object_id(event_model, { started_on })
 
       const member_id = await get_object_id(member_model, {
          email: demo_day.member.email,
@@ -72,7 +74,12 @@ router.post('/', async (req, res) => {
       if (to_lower(presentation_obj.title) === 'untitled project') {
          const event_date = await event_model
             .findById(event_id)
-            .then(event => date_format(event.started_on, 'MMMM-Do-YYYY'))
+            .then(event =>
+               date_format(
+                  convert_datetime_num_to_str(event.started_on),
+                  'MMMM-Do-YYYY'
+               )
+            )
             .catch(err => res.status(400).json(err))
          slug_fields = [event_date, presentation_obj.title]
       }
