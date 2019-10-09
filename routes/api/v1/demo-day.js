@@ -35,7 +35,9 @@ router.post('/', async (req, res) => {
          'EVENT DATE FROM SIGN IN LIST: ',
          String(demo_day.event.started_on)
       )
-      const event_id = await get_object_id(event_model, { started_on })
+      const event_id = await get_object_id(event_model, {
+         started_on: demo_day.event.started_on,
+      })
 
       const member_id = await get_object_id(member_model, {
          email: demo_day.member.email,
