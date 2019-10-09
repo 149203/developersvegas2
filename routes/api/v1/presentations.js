@@ -1,26 +1,23 @@
 const express = require('express')
 const router = express.Router()
-const mongoose = require('mongoose')
 const presentation_model = require('../../../models/presentation')
-const slug_format = require('../../../utils/slug_format')
-const append_slug_suffix = require('../../../utils/append_slug_suffix')
-const create_row_id = require('../../../utils/create_row_id')
 const validate_input_for_presentation = require('../../../validation/presentation')
-const _has = require('lodash/has')
 const member = require('../../../models/member')
 const event = require('../../../models/event')
 const cast_to_object_id = require('mongodb').ObjectID
 
-// @route      GET api/v1/presentations
-// @desc       Gets all presentations
+// @route      GET api/v1/presentations?event_id
+// @desc       Gets all presentations or presentations filtered by event_id
 // @access     Public
 router.get('/', (req, res) => {
    if (req.query.event_id) {
       const event_id = req.query.event_id
+      console.log(event_id)
       presentation_model
          .find({ event_id })
          .populate('member_id', ['first_name', 'last_name'], member)
          .populate('event_id', ['title', 'started_on'], event)
+         .sort({ order: 'asc' })
          .then(presentations => {
             res.json(presentations)
          })
