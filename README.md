@@ -12,13 +12,19 @@
 
 `https://NAME_OF_YOUR_HEROKU_APP.herokuapp.com/api/v1/presentations`
 
-# Backup
+# Backup from production
 
 Go to `C:\Program Files\MongoDB\Server\4.0\bin`
 
-Enter the `mongodump_cli` command from your `.env` file.
+Enter the `mongodump_prod` command from your `.env` file.
 
 Then go to the folder in `P:\Code\backups` and append today's date to the folder.
+
+# Restore to development
+
+Go to `C:\Program Files\MongoDB\Server\4.0\bin`
+
+Enter the `mongorestore_dev` command from your `.env` file with the proper folder name.
 
 # Conventions
 

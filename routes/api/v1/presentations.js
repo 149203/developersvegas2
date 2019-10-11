@@ -6,20 +6,25 @@ const member = require('../../../models/member')
 const event = require('../../../models/event')
 const cast_to_object_id = require('mongodb').ObjectID
 
-// @route      GET api/v1/presentations?event_id
-// @desc       Gets all presentations or presentations filtered by event_id
+// @route      GET api/v1/presentations?started_on
+// @desc       Gets all presentations filtered by the event's started_on date, else all presentations
 // @access     Public
 router.get('/', (req, res) => {
-   if (req.query.event_id) {
-      const event_id = req.query.event_id
-      console.log(event_id)
+   if (req.query.started_on) {
+      const started_on = Number(req.query.started_on)
+      console.log(started_on)
       presentation_model
-         .find({ event_id })
+         .find()
          .populate('member_id', ['first_name', 'last_name'], member)
          .populate('event_id', ['title', 'started_on'], event)
          .sort({ order: 'asc' })
          .then(presentations => {
-            res.json(presentations)
+            const filtered_presentations = presentations.filter(
+               presentation => {
+                  return presentation.event_id.started_on === started_on
+               }
+            )
+            res.json(filtered_presentations)
          })
          .catch(err => res.status(400).json(err))
    } else {
