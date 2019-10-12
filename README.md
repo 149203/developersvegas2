@@ -14,7 +14,7 @@
 
 # Backup from production
 
-Go to `C:\Program Files\MongoDB\Server\4.0\bin`
+Enter `cd C:\Program Files\MongoDB\Server\4.0\bin` in the Windows command prompt.
 
 Enter the `mongodump_prod` command from your `.env` file.
 
