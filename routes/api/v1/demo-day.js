@@ -14,6 +14,7 @@ const cast_to_object_id = require('mongodb').ObjectID
 const has = require('lodash/has')
 const date_format = require('date-fns/format')
 const to_lower = require('lodash/toLower')
+const trim = require('lodash/trim')
 
 // @route      POST api/v1/demo-day
 // @desc       Create all data for a demo day
@@ -37,12 +38,14 @@ router.post('/', async (req, res) => {
       //    String(demo_day.event.started_on)
       // )
 
+      // console.log('DEMO DAY MEMBER EMAIL:', demo_day.member.email)
+
       const event_id = await get_object_id(event_model, {
          started_on: demo_day.event.started_on,
       })
 
       const member_id = await get_object_id(member_model, {
-         email: demo_day.member.email,
+         email: trim(demo_day.member.email),
       })
 
       const presentation_obj = {}
@@ -84,7 +87,9 @@ router.post('/', async (req, res) => {
                   'MMMM-Do-YYYY'
                )
             )
-            .catch(err => res.status(400).json(err))
+            .catch(err => {
+               return res.status(400).json(err)
+            })
          slug_fields = [event_date, presentation_obj.title]
       }
 
@@ -100,8 +105,9 @@ router.post('/', async (req, res) => {
       })
       const xref_presentation_technology = []
 
-      if (presentation.has_error) res.status(400).json(presentation)
-      else if (has(demo_day, 'technologies')) {
+      if (presentation.has_error) {
+         return res.status(400).json(presentation)
+      } else if (has(demo_day, 'technologies')) {
          const presentation_id = presentation._id
          const technology_ids = demo_day.technologies.map(technology =>
             get_object_id(technology_model, { row_id: technology.id })
@@ -121,14 +127,15 @@ router.post('/', async (req, res) => {
                filter: { presentation_id, technology_id },
             }) // will update with fields it already has (do nothing)
 
-            if (xref.has_error) res.status(400).json(xref)
-            else xref_presentation_technology.push(xref)
+            if (xref.has_error) {
+               return res.status(400).json(xref)
+            } else xref_presentation_technology.push(xref)
          }
       }
       results.push({ presentation, xref_presentation_technology })
    }
-   res.json(results)
-   return
+   return res.json(results)
+   // return // TODO: return res.json(results)
 })
 
 module.exports = router
