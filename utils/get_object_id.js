@@ -3,7 +3,7 @@ module.exports = get_object_id = async (collection, find_by_obj) => {
    await collection
       .findOne(find_by_obj)
       .then(doc => {
-         console.log({ doc })
+         console.log('GOT MEMBER ID:', doc)
          object_id = doc._id
       })
       .catch(err => (object_id = err))

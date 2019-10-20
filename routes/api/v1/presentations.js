@@ -12,7 +12,7 @@ const cast_to_object_id = require('mongodb').ObjectID
 router.get('/', (req, res) => {
    if (req.query.started_on) {
       const started_on = Number(req.query.started_on)
-      console.log(started_on)
+      // console.log(started_on)
       presentation_model
          .find()
          .populate('member_id', ['first_name', 'last_name'], member)

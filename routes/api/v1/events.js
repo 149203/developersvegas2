@@ -14,7 +14,7 @@ const convert_datetime_num_to_str = require('../../../utils/convert_datetime_num
 router.get('/', (req, res) => {
    if (req.query.occurs && req.query.date) {
       const today = req.query.date
-      console.log(today)
+      // console.log(today)
       if (req.query.occurs === 'before') {
          event_model
             .find({ ended_on: { $lt: today } })
@@ -150,7 +150,7 @@ router.post('/', (req, res) => {
          } else {
             // Create event
             const datetime = convert_datetime_num_to_str(body.started_on)
-            console.log(datetime)
+            // console.log(datetime)
             let event_date = date_format(datetime, 'MMMM-Do-YYYY')
             const slug = slug_format(`${event_date}-${body.title}`)
             event_obj.slug = await append_slug_suffix(event_model, slug)

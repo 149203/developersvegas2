@@ -31,10 +31,10 @@ router.post('/', async (req, res) => {
    for (let demo_day of demo_days) {
       // forEach doesn't work with async/await
       // https://dev.to/burkeholland/asyncawait-and-the-foreach-pit-of-despair-2267
-      console.log(
-         'EVENT DATE FROM SIGN IN LIST: ',
-         String(demo_day.event.started_on)
-      )
+      // console.log(
+      //    'EVENT DATE FROM SIGN IN LIST: ',
+      //    String(demo_day.event.started_on)
+      // )
       const event_id = await get_object_id(event_model, {
          started_on: demo_day.event.started_on,
       })
