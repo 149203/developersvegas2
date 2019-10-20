@@ -125,7 +125,7 @@ router.post('/', async (req, res) => {
       }
       results.push({ presentation, xref_presentation_technology })
    }
-   res.json(results)
+   return res.json(results)
 })
 
 module.exports = router
