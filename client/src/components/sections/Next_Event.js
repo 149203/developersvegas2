@@ -3,14 +3,14 @@ import axios from 'axios'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux' // allows connecting redux to this react component
 import { store_next_event } from '../../state/next_event'
-import { format as date_format } from 'date-fns'
+import { format as format_date } from 'date-fns'
 import convert_datetime_num_to_str from '../../utils/convert_datetime_num_to_str'
 import friendly_format_time from '../../utils/friendly_format_time'
 
 class Next_Event extends Component {
    constructor() {
       super()
-      const todays_datetime = date_format(new Date(), 'yyyyMMddkkmm')
+      const todays_datetime = format_date(new Date(), 'yyyyMMddkkmm')
 
       axios
          .get(`/api/v1/events?occurs=after&date=${todays_datetime}`) // recall we put a PROXY value in our client package.json
@@ -18,7 +18,7 @@ class Next_Event extends Component {
             console.log(res.data)
             this.props.store_next_event(res.data)
          })
-         .catch(err => this.setState({ errors: err.response.data }))
+         .catch(err => console.log({ errors: err.response.data }))
    }
 
    render() {
@@ -38,10 +38,10 @@ class Next_Event extends Component {
          description,
       } = this.props.stored_next_event
 
-      const friendly_format_date = date => {
-         if (date) {
-            const date_str = convert_datetime_num_to_str(date)
-            return date_format(new Date(date_str), 'eeee MMMM do, yyyy')
+      const friendly_date_format = date_num => {
+         if (date_num) {
+            const date_str = convert_datetime_num_to_str(date_num)
+            return format_date(new Date(date_str), 'eeee MMMM do, yyyy')
          }
       }
 
@@ -59,7 +59,7 @@ class Next_Event extends Component {
                <div className="col-md-6"></div>
                <div className="col-md-6" key={_id}>
                   <h4>
-                     {title} - {friendly_format_date(started_on)}
+                     {title} - {friendly_date_format(started_on)}
                   </h4>
                   <div className="row">
                      <div className="col-2">
