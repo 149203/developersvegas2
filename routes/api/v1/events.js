@@ -32,7 +32,9 @@ router.get('/', async (req, res) => {
                   let past_presentations = []
                   await presentation_model
                      .find({ event_id: event._id })
-                     .select('title member_id order is_active slug video_url')
+                     .select(
+                        'title member_id order is_active slug video_url video_iframe'
+                     )
                      .populate(
                         // populate member data for each presentation
                         'member_id',

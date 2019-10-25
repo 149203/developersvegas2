@@ -16,12 +16,14 @@ class Past_Event_List extends Component {
    constructor() {
       super()
       const todays_datetime = format_date(new Date(), 'yyyyMMddkkmm')
+      this.state = { past_events: [] }
 
       axios
          .get(`/api/v1/events?occurs=before&date=${todays_datetime}`) // recall we put a PROXY value in our client package.json
          .then(res => {
             console.log(res.data)
-            this.props.store_past_events(res.data)
+            // this.props.store_past_events(res.data) TODO: rip out Redux here and use local state instead
+            this.setState({ past_events: res.data })
          })
          .catch(err => console.log({ errors: err.response.data }))
    }
