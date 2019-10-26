@@ -2,8 +2,8 @@ const express = require('express')
 const router = express.Router()
 const presentation_model = require('../../../models/presentation')
 const validate_input_for_presentation = require('../../../validation/presentation')
-const member = require('../../../models/member')
-const event = require('../../../models/event')
+const member_model = require('../../../models/member')
+const event_model = require('../../../models/event')
 const cast_to_object_id = require('mongodb').ObjectID
 
 // @route      GET api/v1/presentations?started_on
@@ -15,8 +15,8 @@ router.get('/', (req, res) => {
       // console.log(started_on)
       presentation_model
          .find()
-         .populate('member_id', ['first_name', 'last_name'], member)
-         .populate('event_id', ['title', 'started_on'], event)
+         .populate('member_id', ['first_name', 'last_name'], member_model)
+         .populate('event_id', ['title', 'started_on'], event_model)
          .sort({ order: 'asc' })
          .then(presentations => {
             const filtered_presentations = presentations.filter(

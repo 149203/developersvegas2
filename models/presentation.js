@@ -33,6 +33,9 @@ const presentation_schema = new mongoose.Schema({
       type: Number,
       required: true,
    },
+   is_featured: {
+      type: Boolean,
+   },
    video_screenshot_url: {
       type: String,
    },
