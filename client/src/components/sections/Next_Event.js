@@ -4,8 +4,8 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux' // allows connecting redux to this react component
 import { store_next_event } from '../../state/next_event'
 import { format as format_date } from 'date-fns'
-import convert_datetime_num_to_str from '../../utils/convert_datetime_num_to_str'
 import friendly_format_time from '../../utils/friendly_format_time'
+import friendly_format_date from '../../utils/friendly_format_date'
 
 class Next_Event extends Component {
    constructor() {
@@ -38,13 +38,6 @@ class Next_Event extends Component {
          description,
       } = this.props.stored_next_event
 
-      const friendly_date_format = date_num => {
-         if (date_num) {
-            const date_str = convert_datetime_num_to_str(date_num)
-            return format_date(new Date(date_str), 'eeee MMMM do, yyyy')
-         }
-      }
-
       const trim_time = datetime => {
          if (datetime) {
             return String(datetime).slice(-4)
@@ -59,7 +52,7 @@ class Next_Event extends Component {
                <div className="col-md-6"></div>
                <div className="col-md-6" key={_id}>
                   <h4>
-                     {title} - {friendly_date_format(started_on)}
+                     {title} - {friendly_format_date(started_on)}
                   </h4>
                   <div className="row">
                      <div className="col-2">

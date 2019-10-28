@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { format as format_date } from 'date-fns'
+import friendly_format_date from '../../utils/friendly_format_date'
 
 function embed_html_video() {
    return {
@@ -19,7 +20,6 @@ class Past_Event_List extends Component {
          .get(`/api/v1/events?occurs=before&date=${todays_datetime}`) // recall we put a PROXY value in our client package.json
          .then(res => {
             console.log(res.data)
-            // this.props.store_past_events(res.data) TODO: rip out Redux here and use local state instead
             this.setState({ past_events: res.data })
          })
          .catch(err => console.log({ errors: err.response.data }))
@@ -30,28 +30,65 @@ class Past_Event_List extends Component {
          <div>
             <h3 className="mb-1">Past events</h3>
             <hr className="mt-0" />
-            <div className="row">
-               <div className="col-md-4">
-                  <div dangerouslySetInnerHTML={embed_html_video()} />
-               </div>
-               <div className="col-md-8 ml-md-n4 pr-md-0">
-                  <h4>Demo Day - June 8th, 2019</h4>
-                  <p className="text-justify">
-                     This event saw presentations from Jose Figueroa, Peter
-                     Couture, Veronica Saldivar, Robert Andersen, Karl
-                     Kettelhut, Victor Evangelista, Tony Suriyathep, Chad
-                     Columbus, Mike Zetlow, Dorian Dominguez, Ben Denzer, and
-                     Sunny Clark.
-                  </p>
-                  <p>
-                     <a href="https://google.com" className="float-right">
-                        See all videos from this event
-                     </a>
-                  </p>
-               </div>
-            </div>
+            {this.state.past_events && (
+               <div>
+                  {this.state.past_events.map(data => (
+                     <div key={data.event._id}>
+                        <div className="row">
+                           <div className="col-md-4">
+                              <div
+                                 dangerouslySetInnerHTML={embed_html_video()}
+                              />
+                           </div>
+                           <div className="col-md-8 ml-md-n4 pr-md-0">
+                              <h4>
+                                 {data.event.title}
+                                 {' - '}
+                                 {friendly_format_date(data.event.started_on)}
+                              </h4>
+                              <p className="text-justify">
+                                 <a
+                                    href="https://www.meetup.com/Las-Vegas-Developers/"
+                                    target="_blank"
+                                 >
+                                    Las Vegas Developers
+                                 </a>{' '}
+                                 met on{' '}
+                                 {friendly_format_date(data.event.started_on)}{' '}
+                                 at{' '}
+                                 <a
+                                    href={data.event.location_url}
+                                    target="_blank"
+                                 >
+                                    {data.event.location_name}
+                                 </a>{' '}
+                                 in {data.event.location_city},{' '}
+                                 {data.event.location_state}. We saw
+                                 presentations from{' '}
+                                 {data.past_presentations.map(
+                                    (presentation, presentations) => {
+                                       return (
+                                          presentation.member_first_name +
+                                          ' ' +
+                                          presentation.member_last_name +
+                                          ', '
+                                       )
+                                    }
+                                 )}
+                                 {/* Jose Figueroa, Peter
+                                 Couture, Veronica Saldivar, Robert Andersen,
+                                 Karl Kettelhut, Victor Evangelista, Tony
+                                 Suriyathep, Chad Columbus, Mike Zetlow, Dorian
+                                 Dominguez, Ben Denzer, and Sunny Clark. */}
+                              </p>
+                           </div>
+                        </div>
 
-            <hr />
+                        <hr />
+                     </div>
+                  ))}
+               </div>
+            )}
 
             {/* <div className="row">
                <div className="col-md-12">
