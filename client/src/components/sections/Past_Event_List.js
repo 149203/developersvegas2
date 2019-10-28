@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { withRouter } from 'react-router-dom'
-import { connect } from 'react-redux' // allows connecting redux to this react component
-import { store_past_events } from '../../state/past_events'
 import { format as format_date } from 'date-fns'
 
 function embed_html_video() {
@@ -75,14 +72,5 @@ class Past_Event_List extends Component {
       )
    }
 }
-const map_store_to_props = store => {
-   // so I can use stored values as props
-   // https://stackoverflow.com/a/38678454
-   return {
-      stored_past_events: store.past_events,
-   }
-}
-export default connect(
-   map_store_to_props, // mapStateToProps
-   { store_past_events } // mapDispatchToProps, here an 'action creator' wrapped in an object
-)(withRouter(Past_Event_List))
+
+export default Past_Event_List
