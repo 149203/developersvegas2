@@ -3,10 +3,9 @@ import axios from 'axios'
 import { format as format_date } from 'date-fns'
 import friendly_format_date from '../../utils/friendly_format_date'
 
-function embed_html_video() {
+function embed_html_video(html) {
    return {
-      __html:
-         '<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/353151536?color=ffffff&title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>',
+      __html: html,
    }
 }
 
@@ -26,6 +25,13 @@ class Past_Event_List extends Component {
    }
 
    render() {
+      function featured_video_html(data) {
+         const html = data.past_presentations.filter(presentation => {
+            return presentation.is_featured
+         })[0].video_iframe
+         return html
+      }
+
       return (
          <div>
             <h3 className="mb-1">Past events</h3>
@@ -37,7 +43,9 @@ class Past_Event_List extends Component {
                         <div className="row">
                            <div className="col-md-4">
                               <div
-                                 dangerouslySetInnerHTML={embed_html_video()}
+                                 dangerouslySetInnerHTML={embed_html_video(
+                                    featured_video_html(data)
+                                 )}
                               />
                            </div>
                            <div className="col-md-8 ml-md-n4 pr-md-0">
@@ -63,23 +71,32 @@ class Past_Event_List extends Component {
                                     {data.event.location_name}
                                  </a>{' '}
                                  in {data.event.location_city},{' '}
-                                 {data.event.location_state}. We saw
+                                 {data.event.location_state} and saw
                                  presentations from{' '}
                                  {data.past_presentations.map(
-                                    (presentation, presentations) => {
+                                    (presentation, i, arr) => {
                                        return (
-                                          presentation.member_first_name +
-                                          ' ' +
-                                          presentation.member_last_name +
-                                          ', '
+                                          <span>
+                                             <a
+                                                href={presentation.video_url}
+                                                target="_blank"
+                                             >
+                                                {presentation.member_first_name +
+                                                   ' ' +
+                                                   presentation.member_last_name}
+                                             </a>
+                                             {presentation.is_featured
+                                                ? ' (featured)'
+                                                : ''}
+                                             {i === arr.length - 2
+                                                ? ', and '
+                                                : ''}
+                                             {i < arr.length - 2 ? ', ' : ''}
+                                             {i === arr.length - 1 ? '.' : ''}
+                                          </span>
                                        )
                                     }
                                  )}
-                                 {/* Jose Figueroa, Peter
-                                 Couture, Veronica Saldivar, Robert Andersen,
-                                 Karl Kettelhut, Victor Evangelista, Tony
-                                 Suriyathep, Chad Columbus, Mike Zetlow, Dorian
-                                 Dominguez, Ben Denzer, and Sunny Clark. */}
                               </p>
                            </div>
                         </div>
@@ -100,9 +117,8 @@ class Past_Event_List extends Component {
                      <a href="https://google.com">Victor Evangelista</a>
                   </blockquote>
                </div>
+               <hr />
             </div> */}
-
-            <hr />
 
             <div className="clearfix"></div>
          </div>

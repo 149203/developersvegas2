@@ -66,7 +66,9 @@ router.get('/', async (req, res) => {
                      .catch(err => res.status(400).json(err))
 
                   // push {event, presentations}
-                  past_events.push({ event, past_presentations })
+                  if (past_presentations.length > 0) {
+                     past_events.push({ event, past_presentations })
+                  }
                }
 
                return res.json(past_events)
