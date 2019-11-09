@@ -41,11 +41,11 @@ vimeo_account.request(
                video_screenshot_with_play_url:
                   video.pictures.sizes[2].link_with_play_button,
                //member_id: get_member_id(video.description),
-               member_first_name: get_first_name(video.description), // TODO: remove
-               member_last_name: get_last_name(video.description), // TODO: remove
+               member_first_name: get_first_name(video.description), // TODO: remove, get member_id
+               member_last_name: get_last_name(video.description), // TODO: remove, get member_id
                event_id: get_event_id(video.description),
-               event_title: 'Demo Day', // TODO: remove
-               event_started_on: get_event_started_on(video.description), // TODO: remove
+               event_title: 'Demo Day', // TODO: remove, get event_id
+               event_started_on: get_event_started_on(video.description), // TODO: remove, get event_id
                description: video.description, // TODO: remove
             }
          })
