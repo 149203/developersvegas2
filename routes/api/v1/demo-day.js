@@ -56,6 +56,7 @@ router.post('/', async (req, res) => {
       presentation_obj.title = demo_day.presentation.title
       presentation_obj.order = demo_day.presentation.order
       presentation_obj.is_active = demo_day.presentation.is_active
+      presentation_obj.is_featured = demo_day.presentation.is_featured
       presentation_obj.video_screenshot_url = convert_undefined(
          demo_day.presentation.video_screenshot_url
       ) // optional

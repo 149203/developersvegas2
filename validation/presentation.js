@@ -39,6 +39,9 @@ module.exports = function validate_input_for_presentation(input) {
    if (input.is_active && !validator.isBoolean(String(input.is_active))) {
       errors.is_active = 'is_active must be a Boolean.'
    }
+   if (input.is_featured && !validator.isBoolean(String(input.is_featured))) {
+      errors.is_featured = 'is_featured must be a Boolean.'
+   }
    if (
       input.has_accepted_agreement &&
       !validator.isBoolean(String(input.has_accepted_agreement))
