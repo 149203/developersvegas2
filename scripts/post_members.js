@@ -12,7 +12,6 @@ _for_each(members, member => {
          first_name: _trim(member.first_name),
          last_name: _trim(member.last_name),
          email: _trim(member.email),
-         row_id: member._id,
          portfolio_url: _trim(member.portfolio),
       }
       axios
