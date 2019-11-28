@@ -1,11 +1,12 @@
 module.exports = convert_friendly_date_to_num_str = str => {
    // expects a string in this format:
-   // September 14th, 2019
+   // November 9th, 2019
    // returns a string in this format:
-   // 20190914
+   // 20191109
    const month_str = String(str.match(/^\w*/))
    const year = String(str.match(/\d{4}$/))
-   const day = String(str.match(/\d+/))
+   let day = String(str.match(/\d+/))
+   if (day.length === 1) day = '0' + day // pad single-digit days with a zero
    let month
    switch (month_str) {
       case 'January':
