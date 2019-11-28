@@ -26,16 +26,16 @@ class Past_Event_List extends Component {
             console.log(res.data)
             this.setState({ past_events: res.data })
          })
-         .catch(err => console.log({ errors: err.response.data }))
+         .catch(err => console.log({ errors: err }))
    }
 
    render() {
-      function featured_video_html(data) {
-         const html = data.past_presentations.filter(presentation => {
+      function featured_video_id(data) {
+         const id = data.past_presentations.filter(presentation => {
             return presentation.is_featured
-         })[0].video_iframe
-         console.log(html)
-         return html
+         })[0].video_id
+         console.log('Featured video id: ', id)
+         return id
       }
 
       return (
@@ -49,10 +49,28 @@ class Past_Event_List extends Component {
                         <div className="row">
                            <div className="col-md-4">
                               <div
-                                 dangerouslySetInnerHTML={embed_html_video(
-                                    featured_video_html(data)
-                                 )}
-                              />
+                                 style={{
+                                    padding: '56.25% 0 0 0',
+                                    position: 'relative',
+                                 }}
+                              >
+                                 <iframe
+                                    src={`https://player.vimeo.com/video/${featured_video_id(
+                                       data
+                                    )}?color=ffffff&title=0&byline=0&portrait=0`}
+                                    style={{
+                                       position: 'absolute',
+                                       top: 0,
+                                       left: 0,
+                                       width: '100%',
+                                       height: '100%',
+                                    }}
+                                    frameBorder="0"
+                                    allow="autoplay; fullscreen"
+                                    allowFullScreen
+                                 ></iframe>
+                              </div>
+                              {/* <script src="https://player.vimeo.com/api/player.js"></script> */}
                            </div>
                            <div className="col-md-8 ml-md-n4 pr-md-0">
                               <h4>

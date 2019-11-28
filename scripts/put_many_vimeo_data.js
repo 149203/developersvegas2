@@ -15,7 +15,7 @@ const for_each = require('lodash/forEach')
 // Databases
 const development_db_uri = process.env.development_db_uri
 const production_db_uri = process.env.production_db_uri
-const db = development_db_uri // SELECT DB
+const db = production_db_uri // SELECT DB
 
 const updated_presentations = map(db_presentations, presentation => {
    const filtered_videos = filter(vimeo_videos, video => {
