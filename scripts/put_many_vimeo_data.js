@@ -1,13 +1,21 @@
+// IMPORTANT: Backup up databases before running!
+// IMPORTANT: Select database below before running!
 // Updates presentation data in db from video details fetched from vimeo
 
 // Imports
 require('dotenv').config({ path: '../.env' })
-const fs = require('fs')
 const mongoose = require('mongoose')
-const db_presentations = require('../data/get_presentations.json') // presentations in the db
-const vimeo_videos = require('../data/get_vimeo_videos.json') // video data from vimeo
+const presentation_collection = require('../models/presentation') // DEFINE YOUR COLLECTION FROM /models
+const db_presentations = require('../data/get_presentations.json') // json of presentations in the db
+const vimeo_videos = require('../data/get_vimeo_videos.json') // json of video data from vimeo
 const map = require('lodash/map')
 const filter = require('lodash/filter')
+const for_each = require('lodash/forEach')
+
+// Databases
+const development_db_uri = process.env.development_db_uri
+const production_db_uri = process.env.production_db_uri
+const db = development_db_uri // SELECT DB
 
 const updated_presentations = map(db_presentations, presentation => {
    const filtered_videos = filter(vimeo_videos, video => {
@@ -27,4 +35,24 @@ const updated_presentations = map(db_presentations, presentation => {
 
    return presentation
 })
-console.log(updated_presentations)
+
+mongoose.connect(db).then(() => {
+   for_each(updated_presentations, presentation => {
+      presentation_collection
+         .findByIdAndUpdate(presentation._id, presentation, {
+            new: true,
+            runValidators: true,
+         })
+         .then(docs => {
+            console.log(`NO ERROR: `, docs)
+            mongoose.disconnect()
+         })
+         .catch(err => {
+            console.log(err)
+            mongoose.disconnect()
+         })
+   }).catch(err => {
+      console.log(err)
+      mongoose.disconnect()
+   })
+})
