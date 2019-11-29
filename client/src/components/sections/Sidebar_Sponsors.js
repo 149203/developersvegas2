@@ -21,13 +21,19 @@ function Sidebar_Sponsors() {
 
          <div className="row">
             <div className="col-12 mb-2">
-               <a href="https://www.vehiclehistory.com/" target="_blank">
-                  <img src={vh_logo} style={{ height: '40px' }} />
-               </a>
+               <img
+                  src={vh_logo}
+                  style={{ height: '40px' }}
+                  alt="Vehicle History logo"
+               />
             </div>
          </div>
          <p>
-            <a href="https://www.vehiclehistory.com/" target="_blank">
+            <a
+               href="https://www.vehiclehistory.com/"
+               target="_blank"
+               rel="noopener noreferrer"
+            >
                VehicleHistory.com
             </a>{' '}
             believes everyone deserves access to unbiased, accurate information
@@ -37,14 +43,20 @@ function Sidebar_Sponsors() {
 
          <div className="row">
             <div className="col-12 mb-2">
-               <a href="https://chsiconnections.com/" target="_blank">
-                  <img src={chsi_logo} style={{ height: '40px' }} />
-               </a>
+               <img
+                  src={chsi_logo}
+                  style={{ height: '40px' }}
+                  alt="CHSI Technologies logo"
+               />
             </div>
          </div>
          <p>
             CHSI Technologies makes{' '}
-            <a href="https://chsiconnections.com/" target="_blank">
+            <a
+               href="https://chsiconnections.com/"
+               target="_blank"
+               rel="noopener noreferrer"
+            >
                Connections
             </a>
             —award-winning insurance and risk management software—with a team of
@@ -54,18 +66,24 @@ function Sidebar_Sponsors() {
 
          <div className="row">
             <div className="col-12 mb-2">
-               <a href="http://the.vegas/" target="_blank">
-                  <img src={dot_logo} style={{ height: '40px' }} />
-               </a>
+               <img
+                  src={dot_logo}
+                  style={{ height: '40px' }}
+                  alt="Dot Vegas domains logo"
+               />
             </div>
          </div>
          <p className="mb-0">
             Enjoy an immediate affiliation to one of the most exciting brands in
             the world. Host your web product on a{' '}
-            <a href="http://the.vegas/" target="_blank">
-               .Vegas
-            </a>{' '}
-            domain.
+            <a
+               href="http://the.vegas/"
+               target="_blank"
+               rel="noopener noreferrer"
+            >
+               .Vegas domain
+            </a>
+            .
          </p>
 
          <div className="clearfix"></div>

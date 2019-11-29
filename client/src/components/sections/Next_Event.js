@@ -16,7 +16,6 @@ class Next_Event extends Component {
       axios
          .get(`/api/v1/events?occurs=after&date=${todays_datetime}`) // recall we put a PROXY value in our client package.json
          .then(res => {
-            console.log(res.data)
             this.props.store_next_event(res.data)
          })
          .catch(err => console.log({ errors: err.response.data }))
@@ -53,8 +52,9 @@ class Next_Event extends Component {
                <div className="col-md-6">
                   <img
                      src={main_image}
-                     class="img-fluid"
-                     alt="Responsive image"
+                     className="img-fluid"
+                     alt="Las Vegas Developers at our monthly coding meetup"
+                     title="Las Vegas Developers at our monthly coding meetup"
                   />
                </div>
                <div className="col-md-6" key={_id}>

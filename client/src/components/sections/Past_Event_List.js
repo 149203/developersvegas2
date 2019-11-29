@@ -20,11 +20,18 @@ class Past_Event_List extends Component {
 
    render() {
       function featured_video_id(data) {
-         const id = data.past_presentations.filter(presentation => {
+         const featured_video = data.past_presentations.filter(presentation => {
             return presentation.is_featured
-         })[0].video_id
-         console.log('Featured video id: ', id)
-         return id
+         })[0]
+         return featured_video.video_id
+      }
+
+      function featured_video_title(data) {
+         const featured_video = data.past_presentations.filter(presentation => {
+            return presentation.is_featured
+         })[0]
+         const { member_first_name, member_last_name, title } = featured_video
+         return `${member_first_name} ${member_last_name} - ${title}`
       }
 
       return (
@@ -57,6 +64,7 @@ class Past_Event_List extends Component {
                                     frameBorder="0"
                                     allow="autoplay; fullscreen"
                                     allowFullScreen
+                                    title={featured_video_title(data)}
                                  ></iframe>
                               </div>
                               {/* <script src="https://player.vimeo.com/api/player.js"></script> */}
@@ -71,6 +79,7 @@ class Past_Event_List extends Component {
                                  <a
                                     href="https://www.meetup.com/Las-Vegas-Developers/"
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                  >
                                     Las Vegas Developers
                                  </a>{' '}
@@ -80,6 +89,7 @@ class Past_Event_List extends Component {
                                  <a
                                     href={data.event.location_url}
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                  >
                                     {data.event.location_name}
                                  </a>{' '}
@@ -89,10 +99,11 @@ class Past_Event_List extends Component {
                                  {data.past_presentations.map(
                                     (presentation, i, arr) => {
                                        return (
-                                          <span>
+                                          <span key={presentation._id}>
                                              <a
                                                 href={presentation.video_url}
                                                 target="_blank"
+                                                rel="noopener noreferrer"
                                              >
                                                 {presentation.member_first_name +
                                                    ' ' +
