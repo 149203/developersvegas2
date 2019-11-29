@@ -6,6 +6,7 @@ import { store_next_event } from '../../state/next_event'
 import { format as format_date } from 'date-fns'
 import friendly_format_time from '../../utils/friendly_format_time'
 import friendly_format_date from '../../utils/friendly_format_date'
+import main_image from '../../img/las-vegas-developers-coding-meetup-main-image.jpg'
 
 class Next_Event extends Component {
    constructor() {
@@ -49,7 +50,13 @@ class Next_Event extends Component {
             <h3 className="mb-1">Next event</h3>
             <hr className="mt-0" />
             <div className="row">
-               <div className="col-md-6"></div>
+               <div className="col-md-6">
+                  <img
+                     src={main_image}
+                     class="img-fluid"
+                     alt="Responsive image"
+                  />
+               </div>
                <div className="col-md-6" key={_id}>
                   <h4>
                      {title} - {friendly_format_date(started_on)}
@@ -107,7 +114,7 @@ class Next_Event extends Component {
                         <p>Details:</p>
                      </div>
                      <div className="col-10">
-                        <p className="text-justify">{description}</p>
+                        <p>{description}</p>
                      </div>
                   </div>
                </div>

@@ -61,7 +61,7 @@ class Past_Event_List extends Component {
                               </div>
                               {/* <script src="https://player.vimeo.com/api/player.js"></script> */}
                            </div>
-                           <div className="col-md-8 ml-md-n4 pr-md-0">
+                           <div className="col-md-8">
                               <h4>
                                  {data.event.title}
                                  {' - '}
