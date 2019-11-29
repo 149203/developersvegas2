@@ -1,9 +1,7 @@
 import React from 'react'
-import Sidebar_Mailing_List from '../sections/Sidebar_Mailing_List'
-import Sidebar_Tech_Search from '../sections/Sidebar_Tech_Search'
 import Next_Event from '../sections/Next_Event'
 import Past_Event_List from '../sections/Past_Event_List'
-import Sidebar_Sponsors from '../sections/Sidebar_Sponsors'
+import Sidebar from '../layouts/Sidebar'
 
 function Home() {
    return (
@@ -14,15 +12,11 @@ function Home() {
             </div>
          </div>
          <div className="row">
-            <div className="col-md-9">
+            <div className="col-xl-9 col-lg-12">
                <Next_Event />
                <Past_Event_List />
             </div>
-            <div className="col-md-3">
-               <Sidebar_Mailing_List />
-               <Sidebar_Tech_Search />
-               <Sidebar_Sponsors />
-            </div>
+            <Sidebar />
          </div>
       </div>
    )

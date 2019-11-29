@@ -23,7 +23,6 @@ class Next_Event extends Component {
 
    render() {
       const {
-         _id,
          title,
          started_on,
          ended_on,
@@ -46,10 +45,16 @@ class Next_Event extends Component {
 
       return (
          <div>
+            {/* <h3 className="mb-1 d-md-none d-sm-none d-xs-none d-lg-block d-xl-block">
+               Next event
+            </h3> */}
             <h3 className="mb-1">Next event</h3>
-            <hr className="mt-0" />
+            <hr className="mt-0 mb-2" />
+            <h4 className="d-md-block d-sm-block d-xs-block d-lg-none d-xl-none">
+               {title} - {friendly_format_date(started_on)}
+            </h4>
             <div className="row">
-               <div className="col-md-6">
+               <div className="col-lg-6 col-md-4">
                   <img
                      src={main_image}
                      className="img-fluid"
@@ -57,8 +62,8 @@ class Next_Event extends Component {
                      title="Las Vegas Developers at our monthly coding meetup"
                   />
                </div>
-               <div className="col-md-6" key={_id}>
-                  <h4>
+               <div className="col-lg-6 col-md-8">
+                  <h4 className="d-md-none d-sm-none d-xs-none d-lg-block d-xl-block">
                      {title} - {friendly_format_date(started_on)}
                   </h4>
                   <div className="row">
