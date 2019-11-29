@@ -3,6 +3,7 @@ import Sidebar_Mailing_List from '../sections/Sidebar_Mailing_List'
 import Sidebar_Tech_Search from '../sections/Sidebar_Tech_Search'
 import Next_Event from '../sections/Next_Event'
 import Past_Event_List from '../sections/Past_Event_List'
+import Sidebar_Sponsors from '../sections/Sidebar_Sponsors'
 
 function Home() {
    return (
@@ -20,6 +21,7 @@ function Home() {
             <div className="col-md-3">
                <Sidebar_Mailing_List />
                <Sidebar_Tech_Search />
+               <Sidebar_Sponsors />
             </div>
          </div>
       </div>

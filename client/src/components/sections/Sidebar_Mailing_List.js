@@ -16,6 +16,7 @@ import Mailing_List_Success from '../overlays/Mailing_List_Success'
 const Sidebar = styled.div`
    background-color: ${color.gray_100};
    padding: ${spacer[4]};
+   padding-bottom: 0;
    input {
       margin-bottom: ${spacer[2]};
    }
