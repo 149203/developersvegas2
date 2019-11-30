@@ -1,7 +1,7 @@
 import React from 'react'
 import Next_Event from '../sections/Next_Event'
 import Past_Event_List from '../sections/Past_Event_List'
-import Sidebar from '../layouts/Sidebar'
+import Sidebar from '../sections/Sidebar'
 import Callout from '../sections/Callout'
 
 function Home() {
@@ -9,7 +9,7 @@ function Home() {
       <div className="container">
          <div className="row">
             <div className="col-12 mt-3">
-               <h1 className="mb-4">Las Vegas Developers</h1>
+               <h1 className="headline">Las Vegas Developers</h1>
             </div>
          </div>
          <div className="row">

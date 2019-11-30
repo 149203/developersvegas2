@@ -45,9 +45,9 @@ class Next_Event extends Component {
             </h3> */}
             <h3 className="mb-1">Next event</h3>
             <hr className="mt-0" />
-            <h4 className="d-md-block d-sm-block d-xs-block d-lg-none d-xl-none">
+            {/* <h4 className="d-md-block d-sm-block d-xs-block d-lg-none d-xl-none">
                {title} - {friendly_format_date(started_on)}
-            </h4>
+            </h4> */}
             <div className="row">
                <div className="col-lg-6 col-md-4">
                   <img
@@ -58,10 +58,11 @@ class Next_Event extends Component {
                   />
                </div>
                <div className="col-lg-6 col-md-8">
-                  <h4 className="d-md-none d-sm-none d-xs-none d-lg-block d-xl-block">
+                  <h4 className="d-none d-md-block d-lg-block d-xl-block">
                      {title} - {friendly_format_date(started_on)}
                   </h4>
-                  <div className="row">
+
+                  <div className="row d-md-none d-lg-flex">
                      <div className="col-2">
                         <p>Time:</p>
                      </div>
@@ -74,8 +75,6 @@ class Next_Event extends Component {
                            {friendly_format_time(trim_time(ended_on))}
                         </p>
                      </div>
-                  </div>
-                  <div className="row">
                      <div className="col-2">
                         <p>Place:</p>
                      </div>
@@ -101,16 +100,12 @@ class Next_Event extends Component {
                            {location_city}, {location_state} {location_zip}
                         </p>
                      </div>
-                  </div>
-                  <div className="row">
                      <div className="col-2">
                         <p>Cost:</p>
                      </div>
                      <div className="col-10">
                         <p>{cost}</p>
                      </div>
-                  </div>
-                  <div className="row">
                      <div className="col-2">
                         <p>Details:</p>
                      </div>
@@ -118,9 +113,42 @@ class Next_Event extends Component {
                         <p className="">{description}</p>
                      </div>
                   </div>
+
+                  {/* end row */}
+
+                  <div className="row d-none d-md-block d-lg-none">
+                     <div className="col">
+                        <p className="">{description}</p>
+                        <p>
+                           We'll meet at&nbsp;
+                           <a
+                              href={location_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              title={location_url}
+                           >
+                              {location_name}
+                           </a>{' '}
+                           at {location_street_1},&nbsp;
+                           {location_street_2 && (
+                              <span>{location_street_2},&nbsp;</span>
+                           )}
+                           {location_city}, {location_state} {location_zip}
+                           .&nbsp;
+                           <span className="text-capitalize">
+                              {friendly_format_time(trim_time(started_on))}
+                           </span>
+                           &nbsp;to&nbsp;
+                           {friendly_format_time(trim_time(ended_on))}.&nbsp;
+                           {cost}
+                        </p>
+                     </div>
+                  </div>
+
+                  {/* end row */}
                </div>
             </div>
-            <br className="d-xl-none d-lg-block" />
+            <br className="d-xl-none d-lg-block d-md-none" />
             <div className="clearfix"></div>
          </div>
       )

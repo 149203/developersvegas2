@@ -35,3 +35,27 @@ blockquote a:hover {
    border-left: 1px solid $input-border-color;
    margin-left: -1px;
 }
+
+.sponsor_logo_size {
+   @include media-breakpoint-down(md) {
+      height: 32px;
+   }
+   @include media-breakpoint-up(lg) {
+      height: 40px;
+   }
+}
+
+.past_event_description {
+   @include media-breakpoint-up(lg) {
+      text-align: justify;
+   }
+   margin-bottom: 0;
+}
+
+.headline {
+   margin-bottom: map-get($map: $spacers, $key: 4);
+   @include media-breakpoint-down(md) {
+      font-size: 48px;
+      margin-bottom: map-get($map: $spacers, $key: 3);
+   }
+}
