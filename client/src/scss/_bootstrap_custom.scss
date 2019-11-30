@@ -481,9 +481,6 @@ $blockquote-small-color:      $gray-600;
 $blockquote-small-font-size:  $small-font-size;
 $blockquote-font-size:        $font-size-base * 1.375;
 
-$hr-border-color:             rgba($black, .1);
-$hr-border-width:             $border-width;
-
 $mark-padding:                .2em;
 
 $dt-font-weight:              $font-weight-bold;
@@ -841,6 +838,10 @@ $zindex-modal:                      1050;
 $zindex-popover:                    1060;
 $zindex-tooltip:                    1070;
 
+// hr
+
+$hr-border-color:             $input-border-color;
+$hr-border-width:             $border-width;
 
 // Navs
 

@@ -30,3 +30,8 @@ blockquote a {
 blockquote a:hover {
    color: $blue-500;
 }
+
+.vr {
+   border-left: 1px solid $input-border-color;
+   margin-left: -1px;
+}

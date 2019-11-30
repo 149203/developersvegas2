@@ -1,0 +1,91 @@
+import React from 'react'
+import vh_logo from '../../img/las-vegas-developers-coding-meetup-vehicle-history.png'
+import chsi_logo from '../../img/las-vegas-developers-coding-meetup-chsi-technologies.svg'
+import dot_logo from '../../img/las-vegas-developers-coding-meetup-vegas-domain.png'
+
+function Sponsors() {
+   return (
+      <div>
+         <h4 className="mb-3">Sponsored by</h4>
+
+         <div className="row">
+            <div className="col-4 col-xl-12 pr-lg-4 pr-xl-2">
+               <img
+                  src={vh_logo}
+                  className="mb-2"
+                  style={{ height: '40px' }}
+                  alt="Vehicle History logo"
+               />
+
+               <p className="mb-0">
+                  <a
+                     href="https://www.vehiclehistory.com/"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     title="https://www.vehiclehistory.com/"
+                  >
+                     VehicleHistory.com
+                  </a>{' '}
+                  believes everyone deserves access to unbiased, accurate
+                  information about every vehicle—simplifying the research
+                  process.
+               </p>
+               <hr className="d-none d-xl-block" />
+            </div>
+
+            <div className="vr d-xl-none" />
+
+            <div className="col-4 col-xl-12 px-lg-4 px-xl-2">
+               <img
+                  src={chsi_logo}
+                  className="mb-2"
+                  style={{ height: '40px' }}
+                  alt="CHSI Technologies logo"
+               />
+
+               <p className="mb-0">
+                  CHSI Technologies makes{' '}
+                  <a
+                     href="https://chsiconnections.com/"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     title="https://chsiconnections.com/"
+                  >
+                     Connections
+                  </a>
+                  —award-winning insurance and risk management software—with a
+                  team of some of the best developers in Las Vegas.
+               </p>
+               <hr className="d-none d-xl-block" />
+            </div>
+
+            <div className="vr d-xl-none" />
+
+            <div className="col-4 col-xl-12 pl-lg-4 pl-xl-2">
+               <img
+                  src={dot_logo}
+                  className="mb-2"
+                  style={{ height: '40px' }}
+                  alt="Dot Vegas domains logo"
+               />
+               <p className="mb-0">
+                  Enjoy an immediate affiliation to one of the most exciting
+                  brands in the world. Host your web product on a{' '}
+                  <a
+                     href="http://the.vegas/"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     title="http://the.vegas/"
+                  >
+                     .Vegas domain
+                  </a>
+                  .
+               </p>
+            </div>
+         </div>
+         <div className="clearfix"></div>
+      </div>
+   )
+}
+
+export default Sponsors

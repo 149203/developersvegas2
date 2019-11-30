@@ -2,8 +2,7 @@ import React from 'react'
 import Next_Event from '../sections/Next_Event'
 import Past_Event_List from '../sections/Past_Event_List'
 import Sidebar from '../layouts/Sidebar'
-import Column_Mailing_List from '../sections/Column_Mailing_List'
-import Sponsors from '../sections/Sponsors'
+import Callout from '../sections/Callout'
 
 function Home() {
    return (
@@ -16,12 +15,13 @@ function Home() {
          <div className="row">
             <div className="col-xl-9 col-lg-12">
                <Next_Event />
-               <Column_Mailing_List />
+               <Callout contents="Mailing_List" />
                <Past_Event_List />
-               <Sponsors />
+               <Callout contents="Sponsors" />
             </div>
-
-            <Sidebar />
+            <div className="col-xl-3 d-none d-xl-block">
+               <Sidebar />
+            </div>
          </div>
       </div>
    )

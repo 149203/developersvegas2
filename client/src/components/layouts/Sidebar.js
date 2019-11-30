@@ -1,13 +1,12 @@
 import React from 'react'
-import Sidebar_Mailing_List from '../sections/Sidebar_Mailing_List'
-import Sidebar_Tech_Search from '../sections/Sidebar_Tech_Search'
-import Sponsors from '../sections/Sponsors'
+import Mailing_List from '../uis/Mailing_List'
+import Sponsors from '../uis/Sponsors'
 
-function Sidebar() {
+const Sidebar = () => {
    return (
-      <div className="col-xl-3 d-none d-xl-block">
-         <Sidebar_Mailing_List />
-         <Sidebar_Tech_Search />
+      <div className="p-4 pb-0 bg-light">
+         <Mailing_List />
+         <br />
          <Sponsors />
       </div>
    )

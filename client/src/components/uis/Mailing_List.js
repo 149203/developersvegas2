@@ -1,7 +1,4 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
-import color from '../../style/colors'
-import spacer from '../../style/spacers'
 import classnames from 'classnames'
 import Modal from 'react-bootstrap/Modal'
 import axios from 'axios'
@@ -13,15 +10,7 @@ import { store_mailing_list_success } from '../../state/app'
 import { store_current_member } from '../../state/current_member'
 import Mailing_List_Success from '../overlays/Mailing_List_Success'
 
-const Column = styled.div`
-   background-color: ${color.gray_100};
-   padding: ${spacer[4]};
-   padding-bottom: 0;
-   input {
-      margin-bottom: ${spacer[4]};
-   }
-`
-class Column_Mailing_List extends Component {
+class Sidebar_Mailing_List extends Component {
    constructor(props) {
       super(props)
       this.state = {
@@ -71,29 +60,33 @@ class Column_Mailing_List extends Component {
       }
 
       return (
-         <Column className="d-xl-none">
-            <h4 className="d-inline">Stay in the loop&nbsp;&nbsp;&nbsp;</h4>
-            <p className="d-inline">
-               We'll email you about upcoming events, never spam.
-            </p>
+         <div>
+            <div className="d-none d-xl-block">
+               <h4>Stay in the loop</h4>
+               <p>We'll email you about upcoming events, never spam.</p>
+            </div>
+            <div className="d-xl-none mb-4">
+               <h4 className="d-inline">Stay in the loop&nbsp;&nbsp;&nbsp;</h4>
+               <p className="d-inline">
+                  We'll email you about upcoming events, never spam.
+               </p>
+            </div>
             <form
-               noValidate // noValidate turns off HTML5 validation
+               noValidate // turns off HTML5 validation
                onSubmit={e => this.on_submit(e)}
-               className="mt-4"
             >
-               <div className="form-group">
+               <div className="form-group mb-0">
                   <div className="row">
-                     <div className="col-3">
+                     <div className="col-3 col-xl-12">
                         <label htmlFor="first_name">First name</label>
                         <input
                            id="first_name"
                            name="first_name"
-                           className={classnames(
-                              'form-control form-control-sm',
-                              {
+                           className={
+                              classnames('form-control form-control-sm', {
                                  'is-invalid': errors.first_name,
-                              }
-                           )}
+                              }) + ' mb-2'
+                           }
                            type="text"
                            autoComplete="fu-autocomplete"
                            value={this.state.first_name}
@@ -106,17 +99,16 @@ class Column_Mailing_List extends Component {
                         )}
                      </div>
 
-                     <div className="col-3">
+                     <div className="col-3 col-xl-12">
                         <label htmlFor="last_name">Last name</label>
                         <input
                            id="last_name"
                            name="last_name"
-                           className={classnames(
-                              'form-control form-control-sm',
-                              {
+                           className={
+                              classnames('form-control form-control-sm', {
                                  'is-invalid': errors.last_name,
-                              }
-                           )}
+                              }) + ' mb-2'
+                           }
                            type="text"
                            autoComplete="fu-autocomplete"
                            value={this.state.last_name}
@@ -129,17 +121,16 @@ class Column_Mailing_List extends Component {
                         )}
                      </div>
 
-                     <div className="col-3">
+                     <div className="col-3 col-xl-12">
                         <label htmlFor="email">Email</label>
                         <input
                            id="email"
                            name="email"
-                           className={classnames(
-                              'form-control form-control-sm',
-                              {
+                           className={
+                              classnames('form-control form-control-sm', {
                                  'is-invalid': errors.email,
-                              }
-                           )}
+                              }) + ' mb-2'
+                           }
                            type="text"
                            autoComplete="fu-autocomplete"
                            value={this.state.email}
@@ -152,17 +143,19 @@ class Column_Mailing_List extends Component {
                         )}
                      </div>
 
-                     <div className="col-3">
+                     <div className="col-12 d-none d-xl-block">
                         <input
                            type="submit"
                            value="Occasionally email me"
-                           className="btn btn-sm btn-primary btn-block d-none d-lg-block"
-                           style={{ marginTop: '23px' }}
+                           className="btn btn-sm btn-primary float-right mt-2"
                         />
+                     </div>
+
+                     <div className="col-3 d-xl-none">
                         <input
                            type="submit"
                            value="Sign me up"
-                           className="btn btn-sm btn-primary btn-block d-lg-none"
+                           className="btn btn-sm btn-primary btn-block"
                            style={{ marginTop: '23px' }}
                         />
                      </div>
@@ -183,7 +176,7 @@ class Column_Mailing_List extends Component {
                   email={this.props.stored_email}
                />
             </Modal>
-         </Column>
+         </div>
       )
    }
 }
@@ -201,4 +194,4 @@ const map_store_to_props = store => {
 export default connect(
    map_store_to_props, // mapStateToProps
    { store_mailing_list_success, store_current_member } // mapDispatchToProps, here an 'action creator' wrapped in an object
-)(withRouter(Column_Mailing_List))
+)(withRouter(Sidebar_Mailing_List))
