@@ -33,6 +33,7 @@ function Sidebar_Sponsors() {
                href="https://www.vehiclehistory.com/"
                target="_blank"
                rel="noopener noreferrer"
+               title="https://www.vehiclehistory.com/"
             >
                VehicleHistory.com
             </a>{' '}
@@ -56,6 +57,7 @@ function Sidebar_Sponsors() {
                href="https://chsiconnections.com/"
                target="_blank"
                rel="noopener noreferrer"
+               title="https://chsiconnections.com/"
             >
                Connections
             </a>
@@ -80,6 +82,7 @@ function Sidebar_Sponsors() {
                href="http://the.vegas/"
                target="_blank"
                rel="noopener noreferrer"
+               title="http://the.vegas/"
             >
                .Vegas domain
             </a>

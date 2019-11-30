@@ -6,6 +6,7 @@ import { store_next_event } from '../../state/next_event'
 import { format as format_date } from 'date-fns'
 import friendly_format_time from '../../utils/friendly_format_time'
 import friendly_format_date from '../../utils/friendly_format_date'
+import trim_time from '../../utils/trim_time'
 import main_image from '../../img/las-vegas-developers-coding-meetup-main-image.jpg'
 
 class Next_Event extends Component {
@@ -37,19 +38,13 @@ class Next_Event extends Component {
          description,
       } = this.props.stored_next_event
 
-      const trim_time = datetime => {
-         if (datetime) {
-            return String(datetime).slice(-4)
-         }
-      }
-
       return (
          <div>
             {/* <h3 className="mb-1 d-md-none d-sm-none d-xs-none d-lg-block d-xl-block">
                Next event
             </h3> */}
             <h3 className="mb-1">Next event</h3>
-            <hr className="mt-0 mb-2" />
+            <hr className="mt-0" />
             <h4 className="d-md-block d-sm-block d-xs-block d-lg-none d-xl-none">
                {title} - {friendly_format_date(started_on)}
             </h4>
@@ -90,19 +85,20 @@ class Next_Event extends Component {
                               href={location_url}
                               target="_blank"
                               rel="noopener noreferrer"
+                              title={location_url}
                            >
                               {location_name}
-                              <br />
-                              {location_street_1}
-                              {location_street_2 && (
-                                 <span>
-                                    <br />
-                                    {location_street_2}
-                                 </span>
-                              )}
-                              <br />
-                              {location_city}, {location_state} {location_zip}
                            </a>
+                           <br />
+                           {location_street_1}
+                           {location_street_2 && (
+                              <span>
+                                 <br />
+                                 {location_street_2}
+                              </span>
+                           )}
+                           <br />
+                           {location_city}, {location_state} {location_zip}
                         </p>
                      </div>
                   </div>
@@ -119,11 +115,12 @@ class Next_Event extends Component {
                         <p>Details:</p>
                      </div>
                      <div className="col-10">
-                        <p>{description}</p>
+                        <p className="">{description}</p>
                      </div>
                   </div>
                </div>
             </div>
+            <br className="d-xl-none d-lg-block" />
             <div className="clearfix"></div>
          </div>
       )

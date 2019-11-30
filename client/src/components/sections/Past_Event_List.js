@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { format as format_date } from 'date-fns'
 import friendly_format_date from '../../utils/friendly_format_date'
+import friendly_format_time from '../../utils/friendly_format_time'
+import trim_time from '../../utils/trim_time'
 
 class Past_Event_List extends Component {
    constructor() {
@@ -80,21 +82,29 @@ class Past_Event_List extends Component {
                                     href="https://www.meetup.com/Las-Vegas-Developers/"
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    title="Our Meetup page: https://www.meetup.com/Las-Vegas-Developers/"
                                  >
                                     Las Vegas Developers
                                  </a>{' '}
-                                 met on{' '}
-                                 {friendly_format_date(data.event.started_on)}{' '}
+                                 met{' '}
+                                 {friendly_format_time(
+                                    trim_time(data.event.started_on)
+                                 )}
+                                 &nbsp;to&nbsp;
+                                 {friendly_format_time(
+                                    trim_time(data.event.ended_on)
+                                 )}{' '}
                                  at{' '}
                                  <a
                                     href={data.event.location_url}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    title={data.event.location_url}
                                  >
                                     {data.event.location_name}
                                  </a>{' '}
                                  in {data.event.location_city},{' '}
-                                 {data.event.location_state} and saw
+                                 {data.event.location_state}. We saw
                                  presentations from{' '}
                                  {data.past_presentations.map(
                                     (presentation, i, arr) => {
@@ -104,6 +114,7 @@ class Past_Event_List extends Component {
                                                 href={presentation.video_url}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
+                                                title={`A video presentation by ${presentation.member_first_name} ${presentation.member_last_name}`}
                                              >
                                                 {presentation.member_first_name +
                                                    ' ' +
