@@ -1,4 +1,7 @@
 // Custom global SCSS outside of Bootstrap variable overrides goes here
+
+$font-negative-margin: -4px;
+
 h1 {
    font-weight: 300;
 }
@@ -15,7 +18,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-   margin-top: -4px !important; // Lines heading text up with the top
+   margin-top: $font-negative-margin; // Lines heading text up with the top
 }
 
 blockquote {
@@ -48,6 +51,9 @@ blockquote a:hover {
 .past_event_description {
    @include media-breakpoint-up(lg) {
       text-align: justify;
+   }
+   @include media-breakpoint-down(sm) {
+      margin-top: $font-negative-margin;
    }
    margin-bottom: 0;
 }

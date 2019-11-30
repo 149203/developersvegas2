@@ -45,7 +45,14 @@ class Past_Event_List extends Component {
                   {this.state.past_events.map(data => (
                      <div key={data.event._id}>
                         <div className="row">
-                           <div className="col-md-4">
+                           <div className="col-12 d-md-none">
+                              <h4>
+                                 {data.event.title}
+                                 {' - '}
+                                 {friendly_format_date(data.event.started_on)}
+                              </h4>
+                           </div>
+                           <div className="col-md-4 col-sm-6">
                               <div
                                  style={{
                                     padding: '56.25% 0 0 0',
@@ -71,8 +78,8 @@ class Past_Event_List extends Component {
                               </div>
                               {/* <script src="https://player.vimeo.com/api/player.js"></script> */}
                            </div>
-                           <div className="col-md-8">
-                              <h4>
+                           <div className="col-md-8 col-sm-6">
+                              <h4 className="d-none d-md-block">
                                  {data.event.title}
                                  {' - '}
                                  {friendly_format_date(data.event.started_on)}
