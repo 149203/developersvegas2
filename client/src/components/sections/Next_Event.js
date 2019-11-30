@@ -49,7 +49,15 @@ class Next_Event extends Component {
                {title} - {friendly_format_date(started_on)}
             </h4> */}
             <div className="row">
-               <div className="col-lg-6 col-md-4">
+               <div className="col-12 d-md-none">
+                  <h4>
+                     {title}
+                     {' - '}
+                     {friendly_format_date(started_on)}
+                  </h4>
+               </div>
+
+               <div className="col-6 col-md-4 col-lg-6">
                   <img
                      src={main_image}
                      className="img-fluid"
@@ -57,16 +65,16 @@ class Next_Event extends Component {
                      title="Las Vegas Developers at our monthly coding meetup"
                   />
                </div>
-               <div className="col-lg-6 col-md-8">
+               <div className="col-6 col-md-8 col-lg-6">
                   <h4 className="d-none d-md-block d-lg-block d-xl-block">
                      {title} - {friendly_format_date(started_on)}
                   </h4>
 
                   <div className="row d-md-none d-lg-flex">
-                     <div className="col-2">
+                     <div className="col-3 col-md-2">
                         <p>Time:</p>
                      </div>
-                     <div className="col-10">
+                     <div className="col-9 col-md-10">
                         <p>
                            <span className="text-capitalize">
                               {friendly_format_time(trim_time(started_on))}
@@ -75,10 +83,10 @@ class Next_Event extends Component {
                            {friendly_format_time(trim_time(ended_on))}
                         </p>
                      </div>
-                     <div className="col-2">
+                     <div className="col-3 col-md-2">
                         <p>Place:</p>
                      </div>
-                     <div className="col-10">
+                     <div className="col-9 col-md-10">
                         <p>
                            <a
                               href={location_url}
@@ -100,16 +108,16 @@ class Next_Event extends Component {
                            {location_city}, {location_state} {location_zip}
                         </p>
                      </div>
-                     <div className="col-2">
+                     <div className="col-3 col-md-2">
                         <p>Cost:</p>
                      </div>
-                     <div className="col-10">
+                     <div className="col-9 col-md-10">
                         <p>{cost}</p>
                      </div>
-                     <div className="col-2">
+                     <div className="col-3 col-md-2 d-none d-md-block">
                         <p>Details:</p>
                      </div>
-                     <div className="col-10">
+                     <div className="col-9 col-md-10 d-none d-md-block">
                         <p className="">{description}</p>
                      </div>
                   </div>
@@ -147,6 +155,14 @@ class Next_Event extends Component {
 
                   {/* end row */}
                </div>
+
+               {/* <div className="row d-none d-sm-block d-md-none"> */}
+               <div className="col-12 d-none d-sm-block d-md-none">
+                  <p className="mb-0">{description}</p>
+               </div>
+               {/* </div> */}
+
+               {/* end row */}
             </div>
             <br className="d-xl-none d-lg-block d-md-none" />
             <div className="clearfix"></div>
