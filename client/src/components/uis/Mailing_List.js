@@ -143,11 +143,11 @@ class Sidebar_Mailing_List extends Component {
                         )}
                      </div>
 
-                     <div className="col-12 d-none d-xl-block">
+                     <div className="offset-6 col-6 d-none d-xl-block">
                         <input
                            type="submit"
-                           value="Occasionally email me"
-                           className="btn btn-sm btn-primary float-right mt-2"
+                           value="Sign me up"
+                           className="btn btn-sm btn-primary btn-block mt-2"
                         />
                      </div>
 
