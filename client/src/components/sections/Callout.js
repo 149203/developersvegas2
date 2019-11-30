@@ -5,11 +5,8 @@ import Sponsors from '../uis/Sponsors'
 const Callout = props => {
    if (props.contents === 'Mailing_List') {
       return (
-         <div>
-            <div className="pt-4 pb-2 px-4 bg-light d-xl-none">
-               <Mailing_List />
-            </div>
-            <br />
+         <div className="pt-4 pb-2 px-4 bg-light d-xl-none mb-4">
+            <Mailing_List />
          </div>
       )
    }

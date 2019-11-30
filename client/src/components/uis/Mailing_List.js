@@ -65,10 +65,16 @@ class Sidebar_Mailing_List extends Component {
                <h4>Stay in the loop</h4>
                <p>We'll email you about upcoming events, never spam.</p>
             </div>
-            <div className="d-xl-none mb-2">
+            <div className="d-none d-md-block d-xl-none mb-2">
                <h4 className="d-inline">Stay in the loop&nbsp;&nbsp;&nbsp;</h4>
                <p className="d-inline">
                   We'll email you about upcoming events, never spam.
+               </p>
+            </div>
+            <div className="d-none d-sm-block d-md-none mb-2">
+               <h4 className="d-inline">Stay in the loop&nbsp;&nbsp;&nbsp;</h4>
+               <p className="d-inline">
+                  We'll only email you about upcoming events.
                </p>
             </div>
             <form
