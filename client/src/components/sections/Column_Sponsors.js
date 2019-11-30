@@ -14,7 +14,7 @@ const Sidebar = styled.div`
    }
 `
 
-function Sidebar_Sponsors() {
+function Column_Sponsors() {
    return (
       <Sidebar>
          <h4 className="mb-3">Sponsored by</h4>
@@ -94,4 +94,4 @@ function Sidebar_Sponsors() {
    )
 }
 
-export default Sidebar_Sponsors
+export default Column_Sponsors
