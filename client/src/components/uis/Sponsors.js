@@ -6,7 +6,8 @@ import dot_logo from '../../img/las-vegas-developers-coding-meetup-vegas-domain.
 function Sponsors() {
    return (
       <div>
-         <h4 className="mb-3">Sponsored by</h4>
+         <h4 className="mb-3 d-none d-sm-block">Sponsored by</h4>
+         <h3 className="mb-3 d-xs-block d-sm-none">Sponsored by</h3>
 
          <div className="row">
             <div className="col-12 col-md-4 col-xl-12 pr-md-4 pr-lg-4 pr-xl-2">

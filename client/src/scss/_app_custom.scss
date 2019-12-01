@@ -2,7 +2,10 @@
 
 $font-negative-margin: -4px;
 
-h1 {
+h1,
+h2,
+.h1,
+.h2 {
    font-weight: 300;
 }
 
@@ -64,10 +67,37 @@ blockquote a:hover {
    }
 }
 
-.headline {
-   margin-bottom: map-get($map: $spacers, $key: 4);
+// As the screen grows smaller, the headings will step down in size to another heading's size
+
+h1,
+.h1 {
    @include media-breakpoint-down(md) {
-      font-size: 48px;
-      margin-bottom: map-get($map: $spacers, $key: 3);
+      font-size: $h2-font-size;
+      // margin-bottom: map-get($map: $spacers, $key: 3);
+   }
+   @include media-breakpoint-down(xs) {
+      font-size: $h3-font-size;
+      // margin-bottom: map-get($map: $spacers, $key: 3);
+   }
+}
+
+h2,
+.h2 {
+   @include media-breakpoint-down(xs) {
+      font-size: $h3-font-size;
+   }
+}
+
+h3,
+.h3 {
+   @include media-breakpoint-down(xs) {
+      font-size: 21px; // at $h3-font-size (22px) the heading is too bold
+   }
+}
+
+h4,
+.h4 {
+   @include media-breakpoint-down(xs) {
+      font-size: $h5-font-size;
    }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { format as format_date } from 'date-fns'
 import friendly_format_date from '../../utils/friendly_format_date'
+import friendly_format_date_short from '../../utils/friendly_format_date_short'
 import friendly_format_time from '../../utils/friendly_format_time'
 import trim_time from '../../utils/trim_time'
 
@@ -46,11 +47,18 @@ class Past_Event_List extends Component {
                      <div key={data.event._id}>
                         <div className="row">
                            <div className="col-12 d-md-none">
-                              <h4>
+                              <h4 className="d-none d-sm-block">
                                  {data.event.title}
                                  {' - '}
                                  {friendly_format_date(data.event.started_on)}
                               </h4>
+                              <h5 className="d-sm-none mb-3">
+                                 {data.event.title}
+                                 {' - '}
+                                 {friendly_format_date_short(
+                                    data.event.started_on
+                                 )}
+                              </h5>
                            </div>
                            <div className="col-md-4 col-sm-6">
                               <div
