@@ -48,7 +48,7 @@ blockquote a:hover {
    }
 }
 
-.past_event_description {
+.past_event_details {
    @include media-breakpoint-up(lg) {
       text-align: justify;
    }
@@ -56,6 +56,12 @@ blockquote a:hover {
       margin-top: $font-negative-margin;
    }
    margin-bottom: 0;
+}
+
+.next_event_details p {
+   @include media-breakpoint-down(sm) {
+      margin-top: $font-negative-margin;
+   }
 }
 
 .headline {

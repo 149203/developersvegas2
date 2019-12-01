@@ -70,7 +70,7 @@ class Next_Event extends Component {
                      {title} - {friendly_format_date(started_on)}
                   </h4>
 
-                  <div className="row d-md-none d-lg-flex">
+                  <div className="row d-md-none d-lg-flex next_event_details">
                      <div className="col-3 col-md-2">
                         <p>Time:</p>
                      </div>
@@ -158,7 +158,7 @@ class Next_Event extends Component {
 
                {/* <div className="row d-none d-sm-block d-md-none"> */}
                <div className="col-12 d-none d-sm-block d-md-none">
-                  <p className="mb-0">{description}</p>
+                  <p className="mb-0 mt-1">{description}</p>
                </div>
                {/* </div> */}
 

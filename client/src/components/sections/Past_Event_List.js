@@ -84,7 +84,7 @@ class Past_Event_List extends Component {
                                  {' - '}
                                  {friendly_format_date(data.event.started_on)}
                               </h4>
-                              <p className="past_event_description">
+                              <p className="past_event_details">
                                  <a
                                     href="https://www.meetup.com/Las-Vegas-Developers/"
                                     target="_blank"
