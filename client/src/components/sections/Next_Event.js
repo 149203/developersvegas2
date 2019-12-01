@@ -71,10 +71,10 @@ class Next_Event extends Component {
                   </h4>
 
                   <div className="row d-md-none d-lg-flex next_event_details">
-                     <div className="col-3 col-md-2">
+                     <div className="d-none d-md-block col-md-2">
                         <p>Time:</p>
                      </div>
-                     <div className="col-9 col-md-10">
+                     <div className="col-12 col-md-10">
                         <p>
                            <span className="text-capitalize">
                               {friendly_format_time(trim_time(started_on))}
@@ -83,10 +83,10 @@ class Next_Event extends Component {
                            {friendly_format_time(trim_time(ended_on))}
                         </p>
                      </div>
-                     <div className="col-3 col-md-2">
+                     <div className="d-none d-md-block col-md-2">
                         <p>Place:</p>
                      </div>
-                     <div className="col-9 col-md-10">
+                     <div className="col-12 col-md-10">
                         <p>
                            <a
                               href={location_url}
@@ -108,10 +108,10 @@ class Next_Event extends Component {
                            {location_city}, {location_state} {location_zip}
                         </p>
                      </div>
-                     <div className="col-3 col-md-2">
+                     <div className="d-none d-md-block col-md-2">
                         <p>Cost:</p>
                      </div>
-                     <div className="col-9 col-md-10">
+                     <div className="col-12 col-md-10">
                         <p>{cost}</p>
                      </div>
                      <div className="col-3 col-md-2 d-none d-md-block">
@@ -156,13 +156,9 @@ class Next_Event extends Component {
                   {/* end row */}
                </div>
 
-               {/* <div className="row d-none d-sm-block d-md-none"> */}
                <div className="col-12 d-none d-sm-block d-md-none">
-                  <p className="mb-0 mt-1">{description}</p>
+                  <p className="mb-0 mt-2">{description}</p>
                </div>
-               {/* </div> */}
-
-               {/* end row */}
             </div>
             <br className="d-xl-none d-lg-block d-md-none" />
             <div className="clearfix"></div>

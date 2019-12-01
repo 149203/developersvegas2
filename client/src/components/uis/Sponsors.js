@@ -9,7 +9,7 @@ function Sponsors() {
          <h4 className="mb-3">Sponsored by</h4>
 
          <div className="row">
-            <div className="col-4 col-xl-12 pr-md-4 pr-lg-4 pr-xl-2">
+            <div className="col-12 col-md-4 col-xl-12 pr-md-4 pr-lg-4 pr-xl-2">
                <img
                   src={vh_logo}
                   className="mb-2 sponsor_logo_size"
@@ -29,12 +29,12 @@ function Sponsors() {
                   information about every vehicle—simplifying the research
                   process.
                </p>
-               <hr className="d-none d-xl-block" />
+               <hr className="d-block d-md-none d-xl-block" />
             </div>
 
-            <div className="vr d-xl-none" />
+            <div className="vr d-none d-md-block d-xl-none" />
 
-            <div className="col-4 col-xl-12 px-md-4 px-lg-4 px-xl-2">
+            <div className="col-12 col-md-4 col-xl-12 px-md-4 px-lg-4 px-xl-2">
                <img
                   src={chsi_logo}
                   className="mb-2 sponsor_logo_size"
@@ -54,12 +54,12 @@ function Sponsors() {
                   —award-winning insurance and risk management software—with a
                   team of some of the best developers in Las Vegas.
                </p>
-               <hr className="d-none d-xl-block" />
+               <hr className="d-block d-md-none d-xl-block" />
             </div>
 
-            <div className="vr d-xl-none" />
+            <div className="vr d-none d-md-block d-xl-none" />
 
-            <div className="col-4 col-xl-12 pl-md-4 pl-lg-4 pl-xl-2">
+            <div className="col-12 col-md-4 col-xl-12 pl-md-4 pl-lg-4 pl-xl-2">
                <img
                   src={dot_logo}
                   className="mb-2 sponsor_logo_size"
