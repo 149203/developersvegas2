@@ -58,6 +58,9 @@ blockquote a:hover {
    @include media-breakpoint-down(sm) {
       margin-top: $font-negative-margin;
    }
+   @include media-breakpoint-down(xs) {
+      margin-top: map-get($map: $spacers, $key: 3);
+   }
    margin-bottom: 0;
 }
 

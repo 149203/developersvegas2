@@ -58,7 +58,7 @@ class Next_Event extends Component {
                   </h4>
                </div>
 
-               <div className="col-6 col-md-4 col-lg-6">
+               <div className="col-12 col-sm-6 col-md-4 col-lg-6">
                   <img
                      src={main_image}
                      className="img-fluid"
@@ -66,7 +66,7 @@ class Next_Event extends Component {
                      title="Las Vegas Developers at our monthly coding meetup"
                   />
                </div>
-               <div className="col-6 col-md-8 col-lg-6">
+               <div className="col-12 col-sm-6 col-md-8 col-lg-6">
                   <h4 className="d-none d-md-block d-lg-block d-xl-block">
                      {title} - {friendly_format_date(started_on)}
                   </h4>
@@ -75,7 +75,7 @@ class Next_Event extends Component {
                      <div className="d-none d-md-block col-md-2">
                         <p>Time:</p>
                      </div>
-                     <div className="col-12 col-md-10">
+                     <div className="col-12 col-md-10 d-none d-sm-block">
                         <p>
                            <span className="text-capitalize">
                               {friendly_format_time(trim_time(started_on))}
@@ -87,7 +87,7 @@ class Next_Event extends Component {
                      <div className="d-none d-md-block col-md-2">
                         <p>Place:</p>
                      </div>
-                     <div className="col-12 col-md-10">
+                     <div className="col-12 col-md-10 d-none d-sm-block">
                         <p>
                            <a
                               href={location_url}
@@ -112,7 +112,7 @@ class Next_Event extends Component {
                      <div className="d-none d-md-block col-md-2">
                         <p>Cost:</p>
                      </div>
-                     <div className="col-12 col-md-10">
+                     <div className="col-12 col-md-10 d-none d-sm-block">
                         <p>{cost}</p>
                      </div>
                      <div className="col-3 col-md-2 d-none d-md-block">
@@ -126,7 +126,7 @@ class Next_Event extends Component {
                   {/* end row */}
 
                   <div className="row d-none d-md-block d-lg-none">
-                     <div className="col">
+                     <div className="col-12">
                         <p className="">{description}</p>
                         <p>
                            We'll meet at&nbsp;
@@ -144,6 +144,41 @@ class Next_Event extends Component {
                            )}
                            {location_city}, {location_state} {location_zip}
                            .&nbsp;
+                           <span className="text-capitalize">
+                              {friendly_format_time(trim_time(started_on))}
+                           </span>
+                           &nbsp;to&nbsp;
+                           {friendly_format_time(trim_time(ended_on))}.&nbsp;
+                           {cost}
+                        </p>
+                     </div>
+                  </div>
+
+                  {/* end row */}
+
+                  <div className="row d-sm-none mt-4">
+                     <div className="col-12">
+                        <p className="">{description}</p>
+                        <p>
+                           We'll meet at&nbsp;
+                           <a
+                              href={location_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              title={location_url}
+                           >
+                              {location_name}
+                           </a>
+                           :
+                        </p>
+                        <p>
+                           {location_street_1},&nbsp;
+                           {location_street_2 && (
+                              <span>{location_street_2},&nbsp;</span>
+                           )}
+                           {location_city}, {location_state} {location_zip}
+                        </p>
+                        <p className="mb-0">
                            <span className="text-capitalize">
                               {friendly_format_time(trim_time(started_on))}
                            </span>

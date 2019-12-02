@@ -74,8 +74,12 @@ class Sidebar_Mailing_List extends Component {
             <div className="d-none d-sm-block d-md-none mb-2">
                <h4 className="d-inline">Stay in the loop&nbsp;&nbsp;&nbsp;</h4>
                <p className="d-inline">
-                  We'll only email you about upcoming events.
+                  We'll email you only about upcoming events.
                </p>
+            </div>
+            <div className="d-sm-none">
+               <h3>Stay in the loop</h3>
+               <p>We'll email you only about upcoming events.</p>
             </div>
             <form
                noValidate // turns off HTML5 validation
@@ -83,7 +87,7 @@ class Sidebar_Mailing_List extends Component {
             >
                <div className="form-group mb-0">
                   <div className="row">
-                     <div className="col-3 col-xl-12">
+                     <div className="col-12 col-sm-3 col-xl-12">
                         <label htmlFor="first_name">First name</label>
                         <input
                            id="first_name"
@@ -105,7 +109,7 @@ class Sidebar_Mailing_List extends Component {
                         )}
                      </div>
 
-                     <div className="col-3 col-xl-12">
+                     <div className="col-12 col-sm-3 col-xl-12">
                         <label htmlFor="last_name">Last name</label>
                         <input
                            id="last_name"
@@ -127,7 +131,7 @@ class Sidebar_Mailing_List extends Component {
                         )}
                      </div>
 
-                     <div className="col-3 col-xl-12">
+                     <div className="col-12 col-sm-3 col-xl-12">
                         <label htmlFor="email">Email</label>
                         <input
                            id="email"
@@ -149,7 +153,7 @@ class Sidebar_Mailing_List extends Component {
                         )}
                      </div>
 
-                     <div className="offset-6 col-6 d-none d-xl-block">
+                     <div className="offset-6 col-6 d-sm-none d-xl-block">
                         <input
                            type="submit"
                            value="Sign me up"
@@ -157,7 +161,7 @@ class Sidebar_Mailing_List extends Component {
                         />
                      </div>
 
-                     <div className="col-3 d-xl-none">
+                     <div className="d-none d-sm-block col-3 d-xl-none">
                         <input
                            type="submit"
                            value="Sign me up"
