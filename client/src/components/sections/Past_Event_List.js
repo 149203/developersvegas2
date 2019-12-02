@@ -104,8 +104,8 @@ class Past_Event_List extends Component {
                                  met{' '}
                                  {friendly_format_time(
                                     trim_time(data.event.started_on)
-                                 )}
-                                 &nbsp;to&nbsp;
+                                 )}{' '}
+                                 to{' '}
                                  {friendly_format_time(
                                     trim_time(data.event.ended_on)
                                  )}{' '}
