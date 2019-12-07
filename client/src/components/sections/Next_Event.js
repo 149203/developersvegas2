@@ -44,7 +44,7 @@ class Next_Event extends Component {
             <h3 className="mb-1">Next event</h3>
             <hr className="mt-0" />
 
-            <div className="row">
+            <div className="row mb-xl-4">
                <div className="col-12 d-md-none">
                   <h4 className="d-none d-sm-block">
                      {title}
