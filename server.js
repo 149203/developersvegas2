@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const body_parser = require('body-parser')
+const path = require('path')
 const cors = require('cors') // Connor Leech's comment here: https://stackoverflow.com/a/11057628
 
 const app = express()
@@ -27,7 +28,18 @@ app.use('/api/v1/technologies', require('./routes/api/v1/technologies'))
 app.use('/api/v1/attendees', require('./routes/api/v1/attendees'))
 app.use('/api/v1/demo-day', require('./routes/api/v1/demo-day'))
 app.use('/api/v1/test', require('./routes/api/v1/test'))
-app.get('/', (req, res) => res.send('Hello world.'))
+// app.get('/', (req, res) => res.send('Hello world.'))
+
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+   // this is set in package.json
+   console.log('In production!')
+   app.use(express.static('client/build'))
+   app.get('*', (req, res) => {
+      // for any route except for the APIs above
+      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+   })
+}
 
 const port = process.env.PORT || 3333
 
