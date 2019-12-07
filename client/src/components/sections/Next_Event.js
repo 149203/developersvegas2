@@ -63,7 +63,6 @@ class Next_Event extends Component {
                      src={main_image}
                      className="img-fluid"
                      alt="Las Vegas Developers at our monthly coding meetup"
-                     title="Las Vegas Developers at our monthly coding meetup"
                   />
                </div>
                <div className="col-12 col-sm-6 col-md-8 col-lg-6">

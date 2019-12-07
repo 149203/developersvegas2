@@ -446,12 +446,12 @@ $font-weight-bolder:          bolder;
 $font-weight-base:            $font-weight-normal;
 $line-height-base:            1.2;
 
-$h1-font-size:                $font-size-base * 3.375;
-$h2-font-size:                $font-size-base * 3;
-$h3-font-size:                $font-size-base * 1.875;
-$h4-font-size:                $font-size-base * 1.375;
-$h5-font-size:                $font-size-base * 1.125;
-$h6-font-size:                $font-size-base * 1;
+$h1-font-size:                $font-size-base * 3.375;  // 54px
+$h2-font-size:                $font-size-base * 3;      // 48px
+$h3-font-size:                $font-size-base * 1.875;  // 30px
+$h4-font-size:                $font-size-base * 1.375;  // 22px
+$h5-font-size:                $font-size-base * 1.125;  // 18px
+$h6-font-size:                $font-size-base * 1;      // 16px
 
 $headings-margin-bottom:      $spacer / 2; // SPCECO
 $headings-font-family:        null;

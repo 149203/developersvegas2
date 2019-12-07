@@ -81,7 +81,9 @@ class Past_Event_List extends Component {
                                     frameBorder="0"
                                     allow="autoplay; fullscreen"
                                     allowFullScreen
-                                    title={featured_video_title(data)}
+                                    title={`A video iframe: ${featured_video_title(
+                                       data
+                                    )}`}
                                  ></iframe>
                               </div>
                               {/* <script src="https://player.vimeo.com/api/player.js"></script> */}
@@ -97,7 +99,7 @@ class Past_Event_List extends Component {
                                     href="https://www.meetup.com/Las-Vegas-Developers/"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    title="Our Meetup page: https://www.meetup.com/Las-Vegas-Developers/"
+                                    title="https://www.meetup.com/Las-Vegas-Developers/"
                                  >
                                     Las Vegas Developers
                                  </a>{' '}
@@ -129,7 +131,7 @@ class Past_Event_List extends Component {
                                                 href={presentation.video_url}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                title={`A video presentation by ${presentation.member_first_name} ${presentation.member_last_name}`}
+                                                title={presentation.video_url}
                                              >
                                                 {presentation.member_first_name +
                                                    ' ' +
