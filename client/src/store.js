@@ -1,5 +1,4 @@
 import { createStore, applyMiddleware, compose } from 'redux'
-// import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
 import thunk from 'redux-thunk'
 import rootReducer from './state/root_reducer'
 
@@ -15,7 +14,7 @@ const store = createStore(
       applyMiddleware(...middleware),
       (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
          window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()) ||
-         compose
+         compose // https://github.com/zalmoxisus/redux-devtools-extension/issues/320#issuecomment-447914219
    )
 )
 
