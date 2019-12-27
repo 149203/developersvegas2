@@ -24,7 +24,6 @@ const event_schema = new schema({
    },
    location_street_2: {
       type: String,
-      required: true,
    },
    location_city: {
       type: String,
