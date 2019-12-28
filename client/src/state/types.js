@@ -6,3 +6,6 @@ export const UPDATE_CURRENT_MEMBER = 'UPDATE_CURRENT_MEMBER'
 
 // next_event
 export const UPDATE_NEXT_EVENT = 'UPDATE_NEXT_EVENT'
+
+// sign_in_stage
+export const UPDATE_SIGN_IN_STAGE = 'UPDATE_SIGN_IN_STAGE'
