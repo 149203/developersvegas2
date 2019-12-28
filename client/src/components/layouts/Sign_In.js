@@ -5,7 +5,9 @@ import { connect } from 'react-redux' // allows connecting redux to this react c
 import { store_next_event } from '../../state/next_event'
 import { store_sign_in_stage } from '../../state/sign_in_stage'
 import { format as format_date } from 'date-fns'
-import { app } from '../../state/app'
+import Sign_In_Search from '../sections/Sign_In_Search'
+import Sign_In_Last_Name from '../sections/Sign_In_Last_Name'
+import Sign_In_Presentation from '../sections/Sign_In_Presentation'
 
 class Sign_In extends Component {
    constructor(props) {
@@ -14,7 +16,6 @@ class Sign_In extends Component {
       this.props.store_sign_in_stage('Sign_In_Search')
 
       const todays_datetime = format_date(new Date(), 'yyyyMMddkkmm')
-
       axios
          .get(`/api/v1/events?occurs=after&date=${todays_datetime}`) // recall we put a PROXY value in our client package.json
          .then(res => {
@@ -24,6 +25,16 @@ class Sign_In extends Component {
    }
 
    render() {
+      const sign_in_stage = this.props.stored_sign_in_stage
+      function update_sign_in_stage() {
+         if (sign_in_stage === 'Sign_In_Search') {
+            return <Sign_In_Search />
+         }
+         if (sign_in_stage === 'Sign_In_Last_Name') {
+            return <Sign_In_Last_Name />
+         }
+      }
+
       return (
          <div className="container">
             <div className="row">
@@ -31,6 +42,7 @@ class Sign_In extends Component {
                   <h1 className="font-weight-light mb-3 mb-lg-4">
                      Sign in to Demo Day
                   </h1>
+                  {update_sign_in_stage()}
                </div>
             </div>
          </div>
