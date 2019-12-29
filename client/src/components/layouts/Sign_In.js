@@ -58,7 +58,6 @@ const map_store_to_props = store => {
    // so I can use stored values as props
    // https://stackoverflow.com/a/38678454
    return {
-      stored_next_event: store.next_event,
       stored_sign_in_stage: store.sign_in_stage,
    }
 }
