@@ -7,6 +7,8 @@ import { store_sign_in_stage } from '../../state/sign_in_stage'
 import { format as format_date } from 'date-fns'
 import Sign_In_Search from '../sections/Sign_In_Search'
 import Sign_In_Last_Name from '../sections/Sign_In_Last_Name'
+import Sign_In_First_Name from '../sections/Sign_In_First_Name'
+import Sign_In_Email from '../sections/Sign_In_Email'
 import Sign_In_Presentation from '../sections/Sign_In_Presentation'
 
 class Sign_In extends Component {
@@ -24,27 +26,29 @@ class Sign_In extends Component {
          .catch(err => console.log({ errors: err.response.data }))
    }
 
-   render() {
-      const sign_in_stage = this.props.stored_sign_in_stage
-      function update_sign_in_stage() {
-         if (sign_in_stage === 'Sign_In_Search') {
-            return <Sign_In_Search />
-         }
-         if (sign_in_stage === 'Sign_In_Last_Name') {
-            return <Sign_In_Last_Name />
-         }
+   update_stage() {
+      const stage = this.props.stored_sign_in_stage
+      if (stage === 'Sign_In_Search') {
+         return <Sign_In_Search />
       }
+      if (stage === 'Sign_In_Last_Name') {
+         return <Sign_In_Last_Name />
+      }
+      if (stage === 'Sign_In_First_Name') {
+         return <Sign_In_First_Name />
+      }
+      if (stage === 'Sign_In_Email') {
+         return <Sign_In_Email />
+      }
+      if (stage === 'Sign_In_Presentation') {
+         return <Sign_In_Presentation />
+      }
+   }
 
+   render() {
       return (
-         <div className="container">
-            <div className="row">
-               <div className="col-12 mt-3">
-                  <h1 className="font-weight-light mb-3 mb-lg-4">
-                     Sign in to Demo Day
-                  </h1>
-                  {update_sign_in_stage()}
-               </div>
-            </div>
+         <div style={{ overflowY: 'scroll', height: '100vh' }}>
+            <div className="container">{this.update_stage()}</div>
          </div>
       )
    }

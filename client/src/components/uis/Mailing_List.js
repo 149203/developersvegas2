@@ -44,6 +44,7 @@ class Sidebar_Mailing_List extends Component {
             // Store member in current_member redux store
             this.props.store_current_member(res.data)
             this.setState({
+               // resets the input fields
                first_name: '',
                last_name: '',
                email: '',
