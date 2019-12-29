@@ -5,6 +5,7 @@ import axios from 'axios'
 import escape_regex from 'lodash/escapeRegExp'
 import sort_by from 'lodash/sortBy'
 import { store_sign_in_stage } from '../../state/sign_in_stage'
+import { store_current_member } from '../../state/current_member'
 
 class Sign_In_Search extends Component {
    constructor() {
@@ -39,7 +40,10 @@ class Sign_In_Search extends Component {
       this.setState({ filtered_members })
    }
 
-   sign_me_in() {
+   sign_me_in(member_id) {
+      console.log(member_id)
+      this.props.store_current_member(member_id)
+      // TODO: only go to Sign_In_Presentation if presenters <= 18
       this.props.store_sign_in_stage('Sign_In_Presentation')
    }
 
@@ -76,7 +80,7 @@ class Sign_In_Search extends Component {
                               <div className="col-5 col-xl-4">
                                  <button
                                     className="btn btn-primary btn-sm btn-block"
-                                    onClick={() => this.sign_me_in()}
+                                    onClick={() => this.sign_me_in(member._id)}
                                  >
                                     Sign me in
                                  </button>
@@ -120,9 +124,10 @@ const map_store_to_props = store => {
    // https://stackoverflow.com/a/38678454
    return {
       stored_sign_in_stage: store.sign_in_stage,
+      stored_current_member: store.current_member,
    }
 }
 export default connect(
    map_store_to_props, // mapStateToProps
-   { store_sign_in_stage } // mapDispatchToProps, here an 'action creator' wrapped in an object
+   { store_sign_in_stage, store_current_member } // mapDispatchToProps, here an 'action creator' wrapped in an object
 )(withRouter(Sign_In_Search))
