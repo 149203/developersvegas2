@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux' // allows connecting redux to this react component
 import axios from 'axios'
 import escape_regex from 'lodash/escapeRegExp'
-import sort_by from 'lodash/sortBy'
 import { store_sign_in_stage } from '../../state/sign_in_stage'
 import { store_current_member } from '../../state/current_member'
 
@@ -17,7 +16,7 @@ class Sign_In_Search extends Component {
       axios
          .get(`/api/v1/members`) // recall we put a PROXY value in our client package.json
          .then(res => {
-            const members = sort_by(res.data, ['last_name', 'first_name'])
+            const members = res.data
             this.state.members = members
             this.state.filtered_members = members
             document.getElementById('search_input').focus()

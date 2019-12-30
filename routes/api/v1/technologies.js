@@ -13,6 +13,7 @@ const append_slug_suffix = require('../../../utils/append_slug_suffix')
 router.get('/', (req, res) => {
    technology_model
       .find()
+      .sort({ popularity: 'desc', name: 'asc' })
       .then(technologies => {
          res.json(technologies)
       })

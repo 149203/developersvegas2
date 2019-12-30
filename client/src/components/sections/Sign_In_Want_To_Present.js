@@ -6,10 +6,12 @@ import { store_sign_in_stage } from '../../state/sign_in_stage'
 class Sign_In_Want_To_Present extends Component {
    i_want_to_present() {
       console.log('I want to present')
+      this.props.store_sign_in_stage('Sign_In_Presentation')
    }
 
    im_just_lurking() {
       console.log("I'm just lurking")
+      // TODO: Go to Finish
    }
 
    render() {

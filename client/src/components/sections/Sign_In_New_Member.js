@@ -42,6 +42,10 @@ class Sign_In_New_Member extends Component {
          .catch(err => this.setState({ errors: err.response.data }))
    }
 
+   componentDidMount() {
+      document.getElementById('first_name').focus()
+   }
+
    render() {
       const { errors } = this.state
 

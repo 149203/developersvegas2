@@ -14,6 +14,7 @@ const slug_format = require('../../../utils/slug_format')
 router.get('/', (req, res) => {
    member_model
       .find()
+      .sort({ last_name: 'asc', first_name: 'asc' })
       .then(members => {
          const formatted_members = _map(members, member => {
             member.email = mask_email(member.email)
