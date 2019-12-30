@@ -37,13 +37,7 @@ class Sign_In_New_Member extends Component {
             // Store member in current_member redux store
             const { _id, first_name, last_name } = res.data
             this.props.store_current_member({ _id, first_name, last_name })
-            this.setState({
-               // resets the input fields
-               first_name: '',
-               last_name: '',
-               email: '',
-               errors: {},
-            })
+            this.props.store_sign_in_stage('Sign_In_Presentation')
          })
          .catch(err => this.setState({ errors: err.response.data }))
    }
