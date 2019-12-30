@@ -6,9 +6,7 @@ import { store_next_event } from '../../state/next_event'
 import { store_sign_in_stage } from '../../state/sign_in_stage'
 import { format as format_date } from 'date-fns'
 import Sign_In_Search from '../sections/Sign_In_Search'
-import Sign_In_Last_Name from '../sections/Sign_In_Last_Name'
-import Sign_In_First_Name from '../sections/Sign_In_First_Name'
-import Sign_In_Email from '../sections/Sign_In_Email'
+import Sign_In_New_Member from '../sections/Sign_In_New_Member'
 import Sign_In_Presentation from '../sections/Sign_In_Presentation'
 
 class Sign_In extends Component {
@@ -31,14 +29,8 @@ class Sign_In extends Component {
       if (stage === 'Sign_In_Search') {
          return <Sign_In_Search />
       }
-      if (stage === 'Sign_In_Last_Name') {
-         return <Sign_In_Last_Name />
-      }
-      if (stage === 'Sign_In_First_Name') {
-         return <Sign_In_First_Name />
-      }
-      if (stage === 'Sign_In_Email') {
-         return <Sign_In_Email />
+      if (stage === 'Sign_In_New_Member') {
+         return <Sign_In_New_Member />
       }
       if (stage === 'Sign_In_Presentation') {
          return <Sign_In_Presentation />

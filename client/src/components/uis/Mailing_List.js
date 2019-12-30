@@ -42,7 +42,8 @@ class Sidebar_Mailing_List extends Component {
             // Store success modal variable in redux store
             this.props.store_mailing_list_success(true)
             // Store member in current_member redux store
-            this.props.store_current_member(res.data)
+            const { _id, first_name, last_name } = res.data
+            this.props.store_current_member({ _id, first_name, last_name })
             this.setState({
                // resets the input fields
                first_name: '',

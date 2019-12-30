@@ -40,21 +40,20 @@ class Sign_In_Search extends Component {
       this.setState({ filtered_members })
    }
 
-   sign_me_in(member_id) {
-      console.log(member_id)
-      this.props.store_current_member(member_id)
+   sign_me_in(member) {
+      this.props.store_current_member(member)
       // TODO: only go to Sign_In_Presentation if presenters <= 18
       this.props.store_sign_in_stage('Sign_In_Presentation')
    }
 
    im_new_here() {
-      this.props.store_sign_in_stage('Sign_In_Last_Name')
+      this.props.store_sign_in_stage('Sign_In_New_Member')
    }
 
    render() {
       return (
          <div className="row">
-            <div className="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 mt-3">
+            <div className="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 mt-3">
                <h1 className="mb-4">Sign in to Demo Day</h1>
                <label htmlFor="search_input">
                   Type your <strong>LAST NAME</strong>
@@ -80,7 +79,13 @@ class Sign_In_Search extends Component {
                               <div className="col-5 col-xl-4">
                                  <button
                                     className="btn btn-primary btn-sm btn-block"
-                                    onClick={() => this.sign_me_in(member._id)}
+                                    onClick={() =>
+                                       this.sign_me_in({
+                                          _id: member._id,
+                                          first_name: member.first_name,
+                                          last_name: member.last_name,
+                                       })
+                                    }
                                  >
                                     Sign me in
                                  </button>
