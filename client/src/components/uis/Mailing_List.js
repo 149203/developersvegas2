@@ -94,11 +94,12 @@ class Sidebar_Mailing_List extends Component {
                         <input
                            id="first_name"
                            name="first_name"
-                           className={
-                              classnames('form-control form-control-sm', {
+                           className={classnames(
+                              'form-control form-control-sm mb-2',
+                              {
                                  'is-invalid': errors.first_name,
-                              }) + ' mb-2'
-                           }
+                              }
+                           )}
                            type="text"
                            autoComplete="fu-autocomplete"
                            value={this.state.first_name}
@@ -116,11 +117,12 @@ class Sidebar_Mailing_List extends Component {
                         <input
                            id="last_name"
                            name="last_name"
-                           className={
-                              classnames('form-control form-control-sm', {
+                           className={classnames(
+                              'form-control form-control-sm mb-2',
+                              {
                                  'is-invalid': errors.last_name,
-                              }) + ' mb-2'
-                           }
+                              }
+                           )}
                            type="text"
                            autoComplete="fu-autocomplete"
                            value={this.state.last_name}
@@ -138,11 +140,12 @@ class Sidebar_Mailing_List extends Component {
                         <input
                            id="email"
                            name="email"
-                           className={
-                              classnames('form-control form-control-sm', {
+                           className={classnames(
+                              'form-control form-control-sm mb-2',
+                              {
                                  'is-invalid': errors.email,
-                              }) + ' mb-2'
-                           }
+                              }
+                           )}
                            type="text"
                            autoComplete="fu-autocomplete"
                            value={this.state.email}

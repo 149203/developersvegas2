@@ -42,8 +42,8 @@ class Sign_In_Search extends Component {
 
    sign_me_in(member) {
       this.props.store_current_member(member)
-      // TODO: only go to Sign_In_Presentation if presenters <= 18
-      this.props.store_sign_in_stage('Sign_In_Presentation')
+      // TODO: only go to Sign_In_Want_To_Present if presenters <= 18
+      this.props.store_sign_in_stage('Sign_In_Want_To_Present')
    }
 
    im_new_here() {
@@ -78,7 +78,7 @@ class Sign_In_Search extends Component {
                               </div>
                               <div className="col-5 col-xl-4">
                                  <button
-                                    className="btn btn-primary btn-sm btn-block"
+                                    className="btn btn-primary btn-block"
                                     onClick={() =>
                                        this.sign_me_in({
                                           _id: member._id,
@@ -111,7 +111,7 @@ class Sign_In_Search extends Component {
                <div className="row mt-2">
                   <div className="col-5 offset-7 col-xl-4 offset-xl-8">
                      <button
-                        className="btn btn-success btn-sm btn-block"
+                        className="btn btn-success btn-block"
                         onClick={() => this.im_new_here()}
                      >
                         I'm new here
@@ -127,7 +127,7 @@ class Sign_In_Search extends Component {
 const map_store_to_props = store => {
    // so I can use stored values as props
    // https://stackoverflow.com/a/38678454
-   return
+   return {} // must always return an object
 }
 export default connect(
    map_store_to_props, // mapStateToProps

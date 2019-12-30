@@ -7,6 +7,7 @@ import { store_sign_in_stage } from '../../state/sign_in_stage'
 import { format as format_date } from 'date-fns'
 import Sign_In_Search from '../sections/Sign_In_Search'
 import Sign_In_New_Member from '../sections/Sign_In_New_Member'
+import Sign_In_Want_To_Present from '../sections/Sign_In_Want_To_Present'
 import Sign_In_Presentation from '../sections/Sign_In_Presentation'
 
 class Sign_In extends Component {
@@ -31,6 +32,9 @@ class Sign_In extends Component {
       }
       if (stage === 'Sign_In_New_Member') {
          return <Sign_In_New_Member />
+      }
+      if (stage === 'Sign_In_Want_To_Present') {
+         return <Sign_In_Want_To_Present />
       }
       if (stage === 'Sign_In_Presentation') {
          return <Sign_In_Presentation />

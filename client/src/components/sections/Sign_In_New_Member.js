@@ -37,7 +37,7 @@ class Sign_In_New_Member extends Component {
             // Store member in current_member redux store
             const { _id, first_name, last_name } = res.data
             this.props.store_current_member({ _id, first_name, last_name })
-            this.props.store_sign_in_stage('Sign_In_Presentation')
+            this.props.store_sign_in_stage('Sign_In_Want_To_Present')
          })
          .catch(err => this.setState({ errors: err.response.data }))
    }
@@ -67,11 +67,9 @@ class Sign_In_New_Member extends Component {
                               <input
                                  id="first_name"
                                  name="first_name"
-                                 className={
-                                    classnames('form-control form-control-sm', {
-                                       'is-invalid': errors.first_name,
-                                    }) + ' mb-2'
-                                 }
+                                 className={classnames('form-control mb-2', {
+                                    'is-invalid': errors.first_name,
+                                 })}
                                  type="text"
                                  autoComplete="fu-autocomplete"
                                  value={this.state.first_name}
@@ -89,11 +87,9 @@ class Sign_In_New_Member extends Component {
                               <input
                                  id="last_name"
                                  name="last_name"
-                                 className={
-                                    classnames('form-control form-control-sm', {
-                                       'is-invalid': errors.last_name,
-                                    }) + ' mb-2'
-                                 }
+                                 className={classnames('form-control mb-2', {
+                                    'is-invalid': errors.last_name,
+                                 })}
                                  type="text"
                                  autoComplete="fu-autocomplete"
                                  value={this.state.last_name}
@@ -111,11 +107,9 @@ class Sign_In_New_Member extends Component {
                               <input
                                  id="email"
                                  name="email"
-                                 className={
-                                    classnames('form-control form-control-sm', {
-                                       'is-invalid': errors.email,
-                                    }) + ' mb-2'
-                                 }
+                                 className={classnames('form-control mb-2', {
+                                    'is-invalid': errors.email,
+                                 })}
                                  type="text"
                                  autoComplete="fu-autocomplete"
                                  value={this.state.email}
@@ -132,7 +126,7 @@ class Sign_In_New_Member extends Component {
                               <input
                                  type="submit"
                                  value="Sign me up"
-                                 className="btn btn-sm btn-primary btn-block mt-2"
+                                 className="btn btn-primary btn-block mt-2"
                               />
                            </div>
                         </div>
