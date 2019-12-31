@@ -31,7 +31,6 @@ const presentation_schema = new mongoose.Schema({
    },
    order: {
       type: Number,
-      required: true,
    },
    is_featured: {
       type: Boolean,

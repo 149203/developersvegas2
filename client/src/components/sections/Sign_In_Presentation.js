@@ -12,11 +12,11 @@ class Sign_In_Presentation extends Component {
       super(props)
       this.state = {
          presentation_title: '',
-         presentation_technologies: [],
          tags: [],
          suggestions: [],
          errors: {},
          data_is_loaded: false,
+         has_accepted_agreement: false,
       }
 
       axios
@@ -34,12 +34,21 @@ class Sign_In_Presentation extends Component {
       this.setState(new_state)
    }
 
+   toggle_check(e) {
+      const id = e.target.id
+      if (this.state[id] === false) {
+         this.setState({ [id]: true })
+      } else this.setState({ [id]: false })
+   }
+
    on_submit(e) {
       e.preventDefault() // because this is a form
-      const { presentation_title, presentation_technologies } = this.state
+      const { presentation_title, tags } = this.state
       const presentation = {
          title: presentation_title,
-         technologies: presentation_technologies,
+         technologies: tags,
+         event_id: this.props.stored_next_event._id,
+         member_id: this.props.stored_current_member._id,
       }
       console.log(presentation)
       // Call API
@@ -129,6 +138,24 @@ class Sign_In_Presentation extends Component {
                                        placeholderText={''}
                                        onValidate={tag => this.onValidate(tag)}
                                     />
+                                    <div className="custom-control custom-checkbox mt-4">
+                                       <input
+                                          type="checkbox"
+                                          className="custom-control-input"
+                                          id="has_accepted_agreement"
+                                          onChange={e => this.toggle_check(e)}
+                                          checked={
+                                             this.state.has_accepted_agreement
+                                          }
+                                       />
+                                       <label
+                                          className="custom-control-label"
+                                          htmlFor="has_accepted_agreement"
+                                       >
+                                          I agree to be filmed and hosted on
+                                          Vimeo and Developers.Vegas.
+                                       </label>
+                                    </div>
                                     {/* <input
                                  id="presentation_technologies"
                                  name="presentation_technologies"
@@ -173,6 +200,8 @@ const map_store_to_props = store => {
    // https://stackoverflow.com/a/38678454
    return {
       stored_sign_in_stage: store.sign_in_stage,
+      stored_current_member: store.current_member,
+      stored_next_event: store.next_event,
    }
 }
 export default connect(
