@@ -12,13 +12,13 @@ class Sign_In_Search extends Component {
       this.state = {
          members: [],
          filtered_members: [],
+         data_is_loaded: false,
       }
       axios
          .get(`/api/v1/members`) // recall we put a PROXY value in our client package.json
          .then(res => {
             const members = res.data
-            this.state.members = members
-            this.state.filtered_members = members
+            this.setState({ members, data_is_loaded: true })
             document.getElementById('search_input').focus()
             // TODO: don't load the elements on the page until this data is returned from the API
          })
@@ -51,73 +51,77 @@ class Sign_In_Search extends Component {
 
    render() {
       return (
-         <div className="row">
-            <div className="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 mt-3">
-               <h1 className="mb-4">Sign in to Demo Day</h1>
-               <label htmlFor="search_input">
-                  Type your <strong>LAST NAME</strong>
-               </label>
-               <input
-                  className="form-control mb-4"
-                  type="text"
-                  id="search_input"
-                  autoComplete="off"
-                  onInput={e => {
-                     this.search(e)
-                  }}
-               ></input>
+         <div>
+            {this.state.data_is_loaded ? ( // wait for data to load before rendering page
+               <div className="row">
+                  <div className="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 mt-3">
+                     <h1 className="mb-4">Sign in to Demo Day</h1>
+                     <label htmlFor="search_input">
+                        Type your <strong>LAST NAME</strong>
+                     </label>
+                     <input
+                        className="form-control mb-4"
+                        type="text"
+                        id="search_input"
+                        autoComplete="off"
+                        onInput={e => {
+                           this.search(e)
+                        }}
+                     ></input>
 
-               {this.state.filtered_members &&
-                  this.state.filtered_members.map(member => {
-                     return (
-                        <div key={member._id}>
-                           <div className="row">
-                              <div className="col-7 col-xl-8">
-                                 <h3 className="d-inline mr-4">{`${member.first_name} ${member.last_name}`}</h3>
-                              </div>
-                              <div className="col-5 col-xl-4">
-                                 <button
-                                    className="btn btn-primary btn-block"
-                                    onClick={() =>
-                                       this.sign_me_in({
-                                          _id: member._id,
-                                          first_name: member.first_name,
-                                          last_name: member.last_name,
-                                       })
-                                    }
-                                 >
-                                    Sign me in
-                                 </button>
-                              </div>
-                           </div>
-                           <div className="row">
-                              <div className="col-12">
-                                 <p className="mb-0 mt-1 mt-sm-0 text-break">
-                                    {member.email}
-                                 </p>
-                              </div>
-                           </div>
+                     {this.state.filtered_members &&
+                        this.state.filtered_members.map(member => {
+                           return (
+                              <div key={member._id}>
+                                 <div className="row">
+                                    <div className="col-7 col-xl-8">
+                                       <h3 className="d-inline mr-4">{`${member.first_name} ${member.last_name}`}</h3>
+                                    </div>
+                                    <div className="col-5 col-xl-4">
+                                       <button
+                                          className="btn btn-primary btn-block"
+                                          onClick={() =>
+                                             this.sign_me_in({
+                                                _id: member._id,
+                                                first_name: member.first_name,
+                                                last_name: member.last_name,
+                                             })
+                                          }
+                                       >
+                                          Sign me in
+                                       </button>
+                                    </div>
+                                 </div>
+                                 <div className="row">
+                                    <div className="col-12">
+                                       <p className="mb-0 mt-1 mt-sm-0 text-break">
+                                          {member.email}
+                                       </p>
+                                    </div>
+                                 </div>
 
-                           <div className="row">
-                              <div className="col-12">
-                                 <hr className="my-4" />
+                                 <div className="row">
+                                    <div className="col-12">
+                                       <hr className="my-4" />
+                                    </div>
+                                 </div>
                               </div>
-                           </div>
+                           )
+                        })}
+
+                     <div className="row mt-2">
+                        <div className="col-5 offset-7 col-xl-4 offset-xl-8">
+                           <button
+                              className="btn btn-success btn-block"
+                              onClick={() => this.im_new_here()}
+                           >
+                              I'm new here
+                           </button>
                         </div>
-                     )
-                  })}
-
-               <div className="row mt-2">
-                  <div className="col-5 offset-7 col-xl-4 offset-xl-8">
-                     <button
-                        className="btn btn-success btn-block"
-                        onClick={() => this.im_new_here()}
-                     >
-                        I'm new here
-                     </button>
+                     </div>
                   </div>
                </div>
-            </div>
+            ) : null}
          </div>
       )
    }

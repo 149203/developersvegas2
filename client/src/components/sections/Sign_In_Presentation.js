@@ -5,6 +5,7 @@ import { store_sign_in_stage } from '../../state/sign_in_stage'
 import classnames from 'classnames'
 import axios from 'axios'
 import ReactTags from 'react-tag-autocomplete'
+// import is_empty from '../../utils/is_empty'
 
 class Sign_In_Presentation extends Component {
    constructor(props) {
@@ -15,16 +16,17 @@ class Sign_In_Presentation extends Component {
          tags: [],
          suggestions: [],
          errors: {},
+         data_is_loaded: false,
       }
 
       axios
          .get(`/api/v1/technologies`) // recall we put a PROXY value in our client package.json
          .then(res => {
-            this.state.suggestions = res.data
+            this.setState({ suggestions: res.data, data_is_loaded: true })
             document.getElementById('presentation_title').focus()
-            // TODO: don't load the elements on the page until this data is returned from the API
          })
-         .catch(err => console.log({ errors: err.response.data }))
+         // .catch(err => console.log({ errors: err.response.data })) // TODO: put this back and sort it out!
+         .catch(err => console.log({ errors: err }))
    }
 
    on_change(e) {
@@ -52,72 +54,76 @@ class Sign_In_Presentation extends Component {
       //    .catch(err => this.setState({ errors: err.response.data }))
    }
 
-   handleDelete(i) {
+   onDelete(i) {
       const tags = this.state.tags.slice(0)
       tags.splice(i, 1)
       this.setState({ tags })
    }
 
-   handleAddition(tag) {
+   onAddition(tag) {
       const tags = [].concat(this.state.tags, tag)
       this.setState({ tags })
    }
-   handleValidate(tag) {
-      // what happens on validate
+   onValidate(tag) {
       return this.state.tags.length < 5
    }
 
    render() {
       const { errors } = this.state
-
       return (
-         <div className="row">
-            <div className="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 mt-3">
-               <h1 className="mb-4">Your presentation today</h1>
-               <div>
-                  <form
-                     noValidate // turns off HTML5 validation
-                     onSubmit={e => this.on_submit(e)}
-                  >
-                     <div className="form-group mb-0">
-                        <div className="row">
-                           <div className="col-12">
-                              <label htmlFor="presentation_title">
-                                 Presentation title
-                              </label>
-                              <input
-                                 id="presentation_title"
-                                 name="presentation_title"
-                                 className={classnames('form-control mb-2', {
-                                    'is-invalid': errors.presentation_title,
-                                 })}
-                                 type="text"
-                                 autoComplete="fu-autocomplete"
-                                 value={this.state.presentation_title}
-                                 onChange={e => this.on_change(e)}
-                              />
-                              {errors.first_name && (
-                                 <div className="invalid-feedback mt-n1 mb-3">
-                                    {errors.presentation_title}
+         <div>
+            {this.state.data_is_loaded ? ( // wait for data to load before rendering page
+               <div className="row">
+                  <div className="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 mt-3">
+                     <h1 className="mb-4">Your presentation today</h1>
+                     <div>
+                        <form
+                           noValidate // turns off HTML5 validation
+                           onSubmit={e => this.on_submit(e)}
+                        >
+                           <div className="form-group mb-0">
+                              <div className="row">
+                                 <div className="col-12">
+                                    <label htmlFor="presentation_title">
+                                       Presentation title
+                                    </label>
+                                    <input
+                                       id="presentation_title"
+                                       name="presentation_title"
+                                       className={classnames(
+                                          'form-control mb-2',
+                                          {
+                                             'is-invalid':
+                                                errors.presentation_title,
+                                          }
+                                       )}
+                                       type="text"
+                                       autoComplete="fu-autocomplete"
+                                       value={this.state.presentation_title}
+                                       onChange={e => this.on_change(e)}
+                                    />
+                                    {errors.first_name && (
+                                       <div className="invalid-feedback mt-n1 mb-3">
+                                          {errors.presentation_title}
+                                       </div>
+                                    )}
                                  </div>
-                              )}
-                           </div>
 
-                           <div className="col-12 mt-2">
-                              <label htmlFor="presentation_technologies">
-                                 What technologies did you use?
-                              </label>
-                              <ReactTags
-                                 tags={this.state.tags}
-                                 suggestions={this.state.suggestions}
-                                 handleDelete={this.handleDelete.bind(this)}
-                                 handleAddition={this.handleAddition.bind(this)}
-                                 delimiters={[9, 13, 188]}
-                                 minQueryLength={1}
-                                 placeholder={'Add a technology'}
-                                 handleValidate={this.handleValidate.bind(this)}
-                              />
-                              {/* <input
+                                 <div className="col-12 mt-2">
+                                    <label htmlFor="presentation_technologies">
+                                       What technologies did you use?
+                                    </label>
+                                    <ReactTags
+                                       tags={this.state.tags}
+                                       suggestions={this.state.suggestions}
+                                       onDelete={this.onDelete.bind(this)}
+                                       onAddition={this.onAddition.bind(this)}
+                                       delimiters={['Tab', 'Enter', ',']}
+                                       minQueryLength={1}
+                                       placeholderText={'Enter a technology'}
+                                       onValidate={this.onValidate.bind(this)}
+                                    />
+                                    {/* <input
                                  id="presentation_technologies"
                                  name="presentation_technologies"
                                  className={classnames('form-control mb-2', {
@@ -129,26 +135,28 @@ class Sign_In_Presentation extends Component {
                                  value={this.state.presentation_technologies}
                                  onChange={e => this.on_change(e)}
                               /> */}
-                              {/* {errors.presentation_technologies && (
+                                    {/* {errors.presentation_technologies && (
                                  <div className="invalid-feedback mt-n1 mb-3">
                                     {errors.presentation_technologies}
                                  </div>
                               )} */}
-                           </div>
+                                 </div>
 
-                           <div className="col-12 mt-2">
-                              <input
-                                 type="submit"
-                                 value="Sign up to present"
-                                 className="btn btn-primary float-right mt-2"
-                              />
+                                 <div className="col-12 mt-2">
+                                    <input
+                                       type="submit"
+                                       value="Sign up to present"
+                                       className="btn btn-primary float-right mt-2"
+                                    />
+                                 </div>
+                              </div>
                            </div>
-                        </div>
+                        </form>
+                        <div className="clearfix"></div>
                      </div>
-                  </form>
-                  <div className="clearfix"></div>
+                  </div>
                </div>
-            </div>
+            ) : null}
          </div>
       )
    }
