@@ -52,7 +52,7 @@ class Sign_In_Search extends Component {
    render() {
       return (
          <div>
-            {this.state.data_is_loaded ? ( // wait for data to load before rendering page
+            {this.state.data_is_loaded ? ( // wait for data to load before rendering page https://stackoverflow.com/a/46825893
                <div className="row">
                   <div className="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 mt-3">
                      <h1 className="mb-4">Sign in to Demo Day</h1>

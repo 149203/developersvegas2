@@ -72,7 +72,7 @@ class Sign_In_Presentation extends Component {
       const { errors } = this.state
       return (
          <div>
-            {this.state.data_is_loaded ? ( // wait for data to load before rendering page
+            {this.state.data_is_loaded ? ( // wait for data to load before rendering page https://stackoverflow.com/a/46825893
                <div className="row">
                   <div className="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 mt-3">
                      <h1 className="mb-4">Your presentation today</h1>
@@ -111,17 +111,23 @@ class Sign_In_Presentation extends Component {
 
                                  <div className="col-12 mt-2">
                                     <label htmlFor="presentation_technologies">
-                                       What technologies did you use?
+                                       What programming technologies did you
+                                       use?
+                                       <br />
+                                       <span className="text-muted mb-2">
+                                          (JavaScript, Amazon Alexa, PostgreSQL,
+                                          etc.)
+                                       </span>
                                     </label>
                                     <ReactTags
                                        tags={this.state.tags}
                                        suggestions={this.state.suggestions}
-                                       onDelete={this.onDelete.bind(this)}
-                                       onAddition={this.onAddition.bind(this)}
+                                       onDelete={i => this.onDelete(i)}
+                                       onAddition={tag => this.onAddition(tag)}
                                        delimiters={['Tab', 'Enter', ',']}
                                        minQueryLength={1}
-                                       placeholderText={'Enter a technology'}
-                                       onValidate={this.onValidate.bind(this)}
+                                       placeholderText={''}
+                                       onValidate={tag => this.onValidate(tag)}
                                     />
                                     {/* <input
                                  id="presentation_technologies"
