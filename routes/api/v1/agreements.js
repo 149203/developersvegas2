@@ -17,6 +17,19 @@ router.get('/', (req, res) => {
       .catch(err => console.log(err))
 })
 
+// @route      GET api/v1/agreements/latest
+// @desc       Gets the latest agreement
+// @access     Public
+router.get('/latest/', (req, res) => {
+   agreement_model
+      .findOne()
+      .sort({ version: 'desc' })
+      .then(agreement => {
+         res.json(agreement)
+      })
+      .catch(err => console.log(err))
+})
+
 // @route      POST api/v1/agreements
 // @desc       Create a new agreement in the agreements resource
 // @access     Public

@@ -17,7 +17,16 @@ class Sign_In_Presentation extends Component {
          errors: {},
          data_is_loaded: false,
          has_accepted_agreement: false,
+         agreement: null,
       }
+
+      axios
+         .get(`/api/v1/agreements/latest`) // recall we put a PROXY value in our client package.json
+         .then(res => {
+            this.setState({ agreement: res.data })
+         })
+         // .catch(err => console.log({ errors: err.response.data })) // TODO: put this back and sort it out!
+         .catch(err => console.log({ errors: err }))
 
       axios
          .get(`/api/v1/technologies`) // recall we put a PROXY value in our client package.json
@@ -49,6 +58,8 @@ class Sign_In_Presentation extends Component {
          technologies: tags,
          event_id: this.props.stored_next_event._id,
          member_id: this.props.stored_current_member._id,
+         agreement_id: this.state.agreement._id,
+         has_accepted_agreement: this.state.has_accepted_agreement,
       }
       console.log(presentation)
       // Call API
@@ -152,8 +163,7 @@ class Sign_In_Presentation extends Component {
                                           className="custom-control-label"
                                           htmlFor="has_accepted_agreement"
                                        >
-                                          I agree to be filmed and hosted on
-                                          Vimeo and Developers.Vegas.
+                                          {this.state.agreement.text}
                                        </label>
                                     </div>
                                     {/* <input
