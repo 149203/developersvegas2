@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const presentation_model = require('../../../models/presentation')
+const xref_presentation_technology_model = require('../../../models/xref_presentation_technology')
 const validate_input_for_presentation = require('../../../validation/presentation')
 const member_model = require('../../../models/member')
 const event_model = require('../../../models/event')
@@ -8,6 +9,7 @@ const cast_to_object_id = require('mongodb').ObjectID
 const date_format = require('date-fns/format')
 const convert_datetime_num_to_str = require('../../../utils/convert_datetime_num_to_str')
 const untitled_presentation_title = require('../../../utils/untitled_presentation_title')
+const has = require('lodash/has')
 
 // @route      GET api/v1/presentations?started_on
 // @desc       Gets all presentations filtered by the event's started_on date, else all presentations
@@ -45,7 +47,7 @@ router.get('/', (req, res) => {
 // @access     Public
 router.post('/', async (req, res) => {
    const presentation = req.body
-   console.log('SERVER REQUEST: ', presentation)
+
    // Assign to payload
    const payload = {}
    if (presentation.title) {
@@ -83,6 +85,7 @@ router.post('/', async (req, res) => {
       return res.status(400).json(errors)
    }
 
+   // Create slug fields
    let slug_fields = [payload.title]
    if (payload.title === untitled_presentation_title) {
       const event_date = date_format(
@@ -92,11 +95,52 @@ router.post('/', async (req, res) => {
       slug_fields = [event_date, payload.title]
    }
 
-   // TODO: validation
-   // TODO: upsert
-   // TODO: technologies
+   const { event_id, member_id } = payload
 
-   return res.json({ payload, slug_fields })
+   // Upsert presentation
+   const upserted_presentation = await upsert({
+      payload,
+      collection: presentation_model,
+      options: {
+         should_create_slug: true,
+         should_create_row_id: false,
+         slug_fields, // an array of strings, in order
+      },
+      filter: { event_id, member_id }, // only one presentation per member per event, therefore if they try to insert another presentation, it will upsert over their previous one
+   })
+
+   const xref_presentation_technology = []
+
+   // Upsert presentation_technology xrefs
+   if (upserted_presentation.has_error) {
+      return res.status(400).json(upserted_presentation)
+   } else if (has(presentation, 'technologies')) {
+      const presentation_id = upserted_presentation._id
+      const technology_ids = presentation.technologies
+
+      for await (const technology_id of technology_ids) {
+         // for await...of
+         // https://medium.com/@ian.mundy/async-map-in-javascript-b19439f0099
+         // https://stackoverflow.com/a/50874507
+         const xref = await upsert({
+            payload: { presentation_id, technology_id },
+            collection: xref_presentation_technology_model,
+            options: {
+               should_create_slug: false,
+               should_create_row_id: false,
+            },
+            filter: { presentation_id, technology_id }, // will update with fields it already has (do nothing)
+         })
+
+         if (xref.has_error) {
+            return res.status(400).json(xref)
+         } else xref_presentation_technology.push(xref)
+      }
+   }
+
+   // Return results
+   const results = { presentation, xref_presentation_technology }
+   return res.json(results)
 })
 
 // @route      POST api/v1/presentations/all-deprecated
