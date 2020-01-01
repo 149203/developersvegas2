@@ -11,7 +11,7 @@ class Sign_In_Want_To_Present extends Component {
 
    im_just_lurking() {
       console.log("I'm just lurking")
-      // TODO: Go to Finish
+      this.props.store_sign_in_stage('Sign_In_Finish')
    }
 
    render() {

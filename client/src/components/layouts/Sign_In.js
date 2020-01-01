@@ -9,6 +9,7 @@ import Sign_In_Search from '../sections/Sign_In_Search'
 import Sign_In_New_Member from '../sections/Sign_In_New_Member'
 import Sign_In_Want_To_Present from '../sections/Sign_In_Want_To_Present'
 import Sign_In_Presentation from '../sections/Sign_In_Presentation'
+import Sign_In_Finish from '../sections/Sign_In_Finish'
 
 class Sign_In extends Component {
    constructor(props) {
@@ -38,6 +39,9 @@ class Sign_In extends Component {
       }
       if (stage === 'Sign_In_Presentation') {
          return <Sign_In_Presentation />
+      }
+      if (stage === 'Sign_In_Finish') {
+         return <Sign_In_Finish />
       }
    }
 

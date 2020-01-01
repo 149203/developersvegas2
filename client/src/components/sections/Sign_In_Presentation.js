@@ -67,7 +67,7 @@ class Sign_In_Presentation extends Component {
          .post('/api/v1/presentations', presentation) // recall we put a PROXY value in our client package.json
          .then(res => {
             console.log(res.data)
-            // this.props.store_sign_in_stage('Sign_In_Want_To_Present')
+            this.props.store_sign_in_stage('Sign_In_Finish')
          })
          .catch(err => this.setState({ errors: err.response.data }))
    }
