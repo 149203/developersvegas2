@@ -76,6 +76,13 @@ router.post('/', async (req, res) => {
    payload.video_url = convert_undefined(presentation.video_url) // string, optional
    payload.video_iframe = convert_undefined(presentation.video_iframe) // string, optional
 
+   // Validate stuff before trying to upsert into db
+   const { errors, is_valid } = validate_input_for_presentation(payload)
+   if (!is_valid) {
+      console.log(errors)
+      return res.status(400).json(errors)
+   }
+
    let slug_fields = [payload.title]
    if (payload.title === untitled_presentation_title) {
       const event_date = date_format(
@@ -86,8 +93,8 @@ router.post('/', async (req, res) => {
    }
 
    // TODO: validation
-   // TODO: technologies
    // TODO: upsert
+   // TODO: technologies
 
    return res.json({ payload, slug_fields })
 })

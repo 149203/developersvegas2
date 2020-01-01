@@ -42,12 +42,9 @@ module.exports = function validate_input_for_presentation(input) {
    if (input.is_featured && !validator.isBoolean(String(input.is_featured))) {
       errors.is_featured = 'is_featured must be a Boolean.'
    }
-   if (
-      input.has_accepted_agreement &&
-      !validator.isBoolean(String(input.has_accepted_agreement))
-   ) {
+   if (input.has_accepted_agreement !== true) {
       errors.has_accepted_agreement =
-         'has_accepted_agreement must be a Boolean.'
+         'Please give us permission to film your presentation today. We automate the video and upload process and need your consent before proceeding.'
    }
    if (input.order && !validator.isNumeric(String(input.order))) {
       errors.order = 'order must be a number.'
@@ -55,7 +52,6 @@ module.exports = function validate_input_for_presentation(input) {
 
    // required fields
    if (is_empty(input.title)) errors.title = 'title is required'
-   if (is_empty(input.order)) errors.order = 'order is required'
    if (is_empty(input.has_accepted_agreement))
       errors.has_accepted_agreement = 'has_accepted_agreement is required'
 

@@ -111,8 +111,7 @@ class Sign_In_Presentation extends Component {
                                        className={classnames(
                                           'form-control mb-2',
                                           {
-                                             'is-invalid':
-                                                errors.presentation_title,
+                                             'is-invalid': errors.title,
                                           }
                                        )}
                                        type="text"
@@ -120,9 +119,9 @@ class Sign_In_Presentation extends Component {
                                        value={this.state.presentation_title}
                                        onChange={e => this.on_change(e)}
                                     />
-                                    {errors.first_name && (
+                                    {errors.title && (
                                        <div className="invalid-feedback mt-n1 mb-3">
-                                          {errors.presentation_title}
+                                          {errors.title}
                                        </div>
                                     )}
                                  </div>
@@ -150,7 +149,13 @@ class Sign_In_Presentation extends Component {
                                     <div className="custom-control custom-checkbox mt-4">
                                        <input
                                           type="checkbox"
-                                          className="custom-control-input"
+                                          className={classnames(
+                                             'custom-control-input',
+                                             {
+                                                'is-invalid':
+                                                   errors.has_accepted_agreement,
+                                             }
+                                          )}
                                           id="has_accepted_agreement"
                                           onChange={e => this.toggle_check(e)}
                                           checked={
@@ -158,29 +163,18 @@ class Sign_In_Presentation extends Component {
                                           }
                                        />
                                        <label
-                                          className="custom-control-label"
+                                          className="custom-control-label text-dark"
                                           htmlFor="has_accepted_agreement"
                                        >
                                           {this.state.agreement.text}
                                        </label>
                                     </div>
-                                    {/* <input
-                                 id="presentation_technologies"
-                                 name="presentation_technologies"
-                                 className={classnames('form-control mb-2', {
-                                    'is-invalid':
-                                       errors.presentation_technologies,
-                                 })}
-                                 type="text"
-                                 autoComplete="fu-autocomplete"
-                                 value={this.state.presentation_technologies}
-                                 onChange={e => this.on_change(e)}
-                              /> */}
-                                    {/* {errors.presentation_technologies && (
-                                 <div className="invalid-feedback mt-n1 mb-3">
-                                    {errors.presentation_technologies}
-                                 </div>
-                              )} */}
+
+                                    {errors.has_accepted_agreement && (
+                                       <p className="mt-1 ml-5 text-danger">
+                                          {errors.has_accepted_agreement}
+                                       </p>
+                                    )}
                                  </div>
 
                                  <div className="col-12 mt-2">
