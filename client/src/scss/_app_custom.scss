@@ -104,3 +104,7 @@ h4,
       font-size: $h5-font-size;
    }
 }
+
+.custom-checkbox .custom-control-label {
+   cursor: pointer;
+}
