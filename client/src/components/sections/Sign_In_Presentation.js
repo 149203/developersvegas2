@@ -57,21 +57,19 @@ class Sign_In_Presentation extends Component {
          title: presentation_title,
          technologies: tags,
          event_id: this.props.stored_next_event._id,
+         event_started_on: this.props.stored_next_event.started_on,
          member_id: this.props.stored_current_member._id,
          agreement_id: this.state.agreement._id,
          has_accepted_agreement: this.state.has_accepted_agreement,
       }
-      console.log(presentation)
-      // Call API
-      // axios
-      //    .post('/api/v1/members', new_member) // recall we put a PROXY value in our client package.json
-      //    .then(res => {
-      //       // Store member in current_member redux store
-      //       const { _id, first_name, last_name } = res.data
-      //       this.props.store_current_member({ _id, first_name, last_name })
-      //       this.props.store_sign_in_stage('Sign_In_Want_To_Present')
-      //    })
-      //    .catch(err => this.setState({ errors: err.response.data }))
+
+      axios
+         .post('/api/v1/presentations', presentation) // recall we put a PROXY value in our client package.json
+         .then(res => {
+            console.log(res.data)
+            // this.props.store_sign_in_stage('Sign_In_Want_To_Present')
+         })
+         .catch(err => this.setState({ errors: err.response.data }))
    }
 
    onDelete(i) {

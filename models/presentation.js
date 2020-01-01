@@ -34,6 +34,7 @@ const presentation_schema = new mongoose.Schema({
    },
    is_featured: {
       type: Boolean,
+      default: false,
    },
    video_id: {
       type: String, // Vimeo uses numbers, but YouTube uses a mix of characters

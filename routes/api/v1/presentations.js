@@ -5,6 +5,9 @@ const validate_input_for_presentation = require('../../../validation/presentatio
 const member_model = require('../../../models/member')
 const event_model = require('../../../models/event')
 const cast_to_object_id = require('mongodb').ObjectID
+const date_format = require('date-fns/format')
+const convert_datetime_num_to_str = require('../../../utils/convert_datetime_num_to_str')
+const untitled_presentation_title = require('../../../utils/untitled_presentation_title')
 
 // @route      GET api/v1/presentations?started_on
 // @desc       Gets all presentations filtered by the event's started_on date, else all presentations
@@ -38,9 +41,61 @@ router.get('/', (req, res) => {
 })
 
 // @route      POST api/v1/presentations
-// @desc       Create a new presentation in the presentations resource
+// @desc       Post a presentation to the presentations resource
 // @access     Public
 router.post('/', async (req, res) => {
+   const presentation = req.body
+   console.log('SERVER REQUEST: ', presentation)
+   // Assign to payload
+   const payload = {}
+   if (presentation.title) {
+      payload.title = presentation.title // string, optional
+   } else {
+      payload.title = untitled_presentation_title
+   }
+   payload.event_id = cast_to_object_id(presentation.event_id) // object_id, required
+   payload.member_id = cast_to_object_id(presentation.member_id) // object_id, required
+   payload.agreement_id = cast_to_object_id(presentation.agreement_id) // object_id, required
+   payload.has_accepted_agreement = presentation.has_accepted_agreement // boolean, required
+   if (presentation.order) {
+      payload.order = presentation.order // number, optional
+   }
+   if (presentation.is_featured) {
+      payload.is_featured = presentation.is_featured // boolean, optional
+   }
+   if (presentation.is_active) {
+      payload.is_active = presentation.is_active // boolean, optional
+   }
+   payload.video_id = convert_undefined(presentation.video_id) // string, optional
+   payload.video_screenshot_url = convert_undefined(
+      presentation.video_screenshot_url
+   ) // string, optional
+   payload.video_screenshot_with_play_url = convert_undefined(
+      presentation.video_screenshot_with_play_url
+   ) // string, optional
+   payload.video_url = convert_undefined(presentation.video_url) // string, optional
+   payload.video_iframe = convert_undefined(presentation.video_iframe) // string, optional
+
+   let slug_fields = [payload.title]
+   if (payload.title === untitled_presentation_title) {
+      const event_date = date_format(
+         convert_datetime_num_to_str(presentation.event_started_on),
+         'MMMM-Do-YYYY'
+      )
+      slug_fields = [event_date, payload.title]
+   }
+
+   // TODO: validation
+   // TODO: technologies
+   // TODO: upsert
+
+   return res.json({ payload, slug_fields })
+})
+
+// @route      POST api/v1/presentations/all-deprecated
+// @desc       Post multiple presentations from a file // DEPRECATED
+// @access     Public
+router.post('/all-deprecated', async (req, res) => {
    console.log('SERVER: ', req.body.demo_day_presentations)
    const demo_days = JSON.parse(req.body.demo_day_presentations)
    const results = []

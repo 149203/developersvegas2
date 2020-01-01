@@ -7,7 +7,9 @@ post_json(JSON.stringify(demo_day_presentations))
 
 function post_json(demo_day_presentations) {
    axios
-      .post(`${server_url}/api/v1/presentations`, { demo_day_presentations })
+      .post(`${server_url}/api/v1/presentations/all-deprecated`, {
+         demo_day_presentations,
+      })
       .then(res => {
          console.log('Back from the API:', res.data)
       })
