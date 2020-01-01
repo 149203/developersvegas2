@@ -15,6 +15,7 @@ const has = require('lodash/has')
 const date_format = require('date-fns/format')
 const to_lower = require('lodash/toLower')
 const trim = require('lodash/trim')
+const untitled_presentation_title = require('../../../utils/untitled_presentation_title')
 
 // @route      POST api/v1/demo-day
 // @desc       Create all data for a demo day
@@ -79,7 +80,10 @@ router.post('/', async (req, res) => {
       }
 
       let slug_fields = [presentation_obj.title]
-      if (to_lower(presentation_obj.title) === 'untitled project') {
+      if (
+         to_lower(presentation_obj.title) ===
+         to_lower(untitled_presentation_title)
+      ) {
          const event_date = await event_model
             .findById(event_id)
             .then(event =>
