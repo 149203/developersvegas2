@@ -75,10 +75,19 @@ router.get('/', async (req, res) => {
             })
             .catch(err => res.status(400).json(err))
       } else if (req.query.occurs === 'after') {
-         event_model
+         await event_model
             .findOne({ ended_on: { $gt: today } })
-            .then(events => {
-               return res.json(events)
+            .lean() // needed because mongoose models do not return JS objects and this converts to JS object
+            .then(async event => {
+               // Return presentations for this next (current) event
+               await presentation_model
+                  .find({ event_id: event._id })
+                  .then(presentations => {
+                     event.presentations = presentations
+                  })
+                  .catch(err => res.status(400).json(err))
+
+               return res.json(event)
             })
             .catch(err => res.status(400).json(err))
       } else
@@ -89,7 +98,7 @@ router.get('/', async (req, res) => {
             )
    } else {
       event_model
-         .find()
+         .find() // get all events
          .then(events => {
             return res.json(events)
          })
