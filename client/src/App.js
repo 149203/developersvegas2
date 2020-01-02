@@ -2,6 +2,7 @@ import React from 'react'
 import './scss/master.scss' // applies global scss styles
 import Home from './components/layouts/Home'
 import Sign_In from './components/layouts/Sign_In'
+import List from './components/layouts/List'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Provider } from 'react-redux' // provides our application with a store, it has to wrap around everything
@@ -14,6 +15,7 @@ function App() {
             <div className="App">
                <Route exact path="/" component={Home} />
                <Route exact path="/hello" component={Sign_In} />
+               <Route exact path="/list" component={List} />
             </div>
          </Router>
       </Provider>
