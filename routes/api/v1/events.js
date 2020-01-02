@@ -82,6 +82,12 @@ router.get('/', async (req, res) => {
                // Return presentations for this next (current) event
                await presentation_model
                   .find({ event_id: event._id })
+                  .populate(
+                     // populate member data for each presentation
+                     'member_id',
+                     ['first_name', 'last_name', 'is_active'],
+                     member
+                  )
                   .then(presentations => {
                      event.presentations = presentations
                   })
