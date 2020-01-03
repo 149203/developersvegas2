@@ -38,6 +38,10 @@ class List extends Component {
          })
          if (index === 0) return
          move_index(presentations, index, index - 1)
+         presentations.map((presentation, i) => {
+            presentation.order = i
+            return presentation
+         })
          const next_event = this.state.next_event
          next_event.presentations = presentations
          this.setState({ next_event })
@@ -53,6 +57,10 @@ class List extends Component {
          })
          if (index + 1 >= presentations.length) return
          move_index(presentations, index, index + 1)
+         presentations.map((presentation, i) => {
+            presentation.order = i
+            return presentation
+         })
          const next_event = this.state.next_event
          next_event.presentations = presentations
          this.setState({ next_event })
@@ -167,7 +175,12 @@ class List extends Component {
                                           htmlFor={presentation._id}
                                        >
                                           <span className="font-weight-bold">
-                                             {`${presentation.member_id.first_name} ${presentation.member_id.last_name}`}
+                                             {`${presentation.order + 1}. ${
+                                                presentation.member_id
+                                                   .first_name
+                                             } ${
+                                                presentation.member_id.last_name
+                                             }`}
                                           </span>
                                           {` - ${presentation.title}`}
                                           <span className="font-weight-bold">
