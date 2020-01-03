@@ -3,6 +3,7 @@ import axios from 'axios'
 import { format as format_date } from 'date-fns'
 import find_index from 'lodash/findIndex'
 import move_index from '../../utils/move_index'
+import classnames from 'classnames'
 
 class List extends Component {
    constructor(props) {
@@ -59,6 +60,11 @@ class List extends Component {
    }
 
    render() {
+      const show_featured = is_featured => {
+         if (is_featured) return ' (FEATURED)'
+         else return ''
+      }
+
       return (
          <div style={{ overflowY: 'scroll', height: '100vh' }}>
             <div className="container">
@@ -152,13 +158,23 @@ class List extends Component {
                                           }
                                        />
                                        <label
-                                          className="custom-control-label h5"
+                                          className={classnames(
+                                             'custom-control-label h5',
+                                             {
+                                                'text-strikethrough': !presentation.is_active,
+                                             }
+                                          )}
                                           htmlFor={presentation._id}
                                        >
                                           <span className="font-weight-bold">
                                              {`${presentation.member_id.first_name} ${presentation.member_id.last_name}`}
                                           </span>
                                           {` - ${presentation.title}`}
+                                          <span className="font-weight-bold">
+                                             {show_featured(
+                                                presentation.is_featured
+                                             )}
+                                          </span>
                                        </label>
                                     </div>
                                  )
