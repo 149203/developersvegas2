@@ -95,6 +95,7 @@ class List extends Component {
                if (presentation.is_active) {
                   presentation.is_active = false
                   presentation.is_featured = false
+                  this.setState({ has_feature: false })
                } else presentation.is_active = true
             }
          })
@@ -115,11 +116,14 @@ class List extends Component {
                if (presentation.is_active) {
                   if (presentation.is_featured) {
                      presentation.is_featured = false
+                     this.setState({ has_feature: false })
                   } else {
                      presentations.map(
+                        // reset all to is_featured: false
                         presentation => (presentation.is_featured = false)
                      )
                      presentation.is_featured = true
+                     this.setState({ has_feature: true })
                   }
                } else return
             } else return
