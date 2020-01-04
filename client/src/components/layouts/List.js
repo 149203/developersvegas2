@@ -4,11 +4,18 @@ import { format as format_date } from 'date-fns'
 import find_index from 'lodash/findIndex'
 import move_index from '../../utils/move_index'
 import classnames from 'classnames'
+import shuffle from 'lodash/shuffle'
 
 class List extends Component {
    constructor(props) {
       super(props)
-      this.state = { next_event: {}, selected_radio_id: '' }
+      this.state = {
+         next_event: {},
+         selected_radio_id: '',
+         has_feature: false,
+         has_changes: false,
+         is_saved: false,
+      }
 
       const todays_datetime = format_date(new Date(), 'yyyyMMddkkmm')
       axios
@@ -38,11 +45,12 @@ class List extends Component {
          })
          if (index === 0) return
          move_index(presentations, index, index - 1)
+         // reorder
          presentations.map((presentation, i) => {
             presentation.order = i
             return presentation
          })
-         const next_event = this.state.next_event
+         const next_event = { ...this.state.next_event }
          next_event.presentations = presentations
          this.setState({ next_event })
       }
@@ -57,15 +65,72 @@ class List extends Component {
          })
          if (index + 1 >= presentations.length) return
          move_index(presentations, index, index + 1)
+         // reorder
          presentations.map((presentation, i) => {
             presentation.order = i
             return presentation
          })
-         const next_event = this.state.next_event
+         const next_event = { ...this.state.next_event }
          next_event.presentations = presentations
          this.setState({ next_event })
       }
    }
+
+   strike() {
+      const id = this.state.selected_radio_id // whichever radio button is selected
+      if (id) {
+         let presentations = [...this.state.next_event.presentations]
+         presentations.forEach(presentation => {
+            if (presentation._id === id) {
+               if (presentation.is_active) {
+                  presentation.is_active = false
+                  presentation.is_featured = false
+               } else presentation.is_active = true
+            }
+         })
+         const next_event = { ...this.state.next_event }
+         next_event.presentations = presentations
+         this.setState({ next_event })
+      }
+   }
+
+   feature() {
+      const id = this.state.selected_radio_id // whichever radio button is selected
+      if (id) {
+         let presentations = [...this.state.next_event.presentations]
+         presentations.forEach(presentation => {
+            if (presentation._id === id) {
+               if (presentation.is_active) {
+                  if (presentation.is_featured) {
+                     presentation.is_featured = false
+                  } else {
+                     presentations.map(
+                        presentation => (presentation.is_featured = false)
+                     )
+                     presentation.is_featured = true
+                  }
+               } else return
+            } else return
+         })
+         const next_event = { ...this.state.next_event }
+         next_event.presentations = presentations
+         this.setState({ next_event })
+      }
+   }
+
+   shuffle() {
+      const presentations = shuffle([...this.state.next_event.presentations])
+      const next_event = { ...this.state.next_event }
+      next_event.presentations = presentations
+      // reorder
+      presentations.map((presentation, i) => {
+         presentation.order = i
+         return presentation
+      })
+      this.setState({ next_event })
+   }
+
+   save() {}
 
    render() {
       const show_featured = is_featured => {
@@ -195,6 +260,23 @@ class List extends Component {
                            )}
                         </div>
                      )}
+
+                     <div className="row">
+                        <div className="col-12">
+                           <button
+                              className="btn btn-primary float-right ml-4 px-9"
+                              onClick={e => this.save()}
+                           >
+                              Save
+                           </button>
+                           <button
+                              className="btn btn-outline-secondary float-right"
+                              onClick={e => this.shuffle()}
+                           >
+                              Shuffle
+                           </button>
+                        </div>
+                     </div>
                   </div>
                </div>
             </div>
