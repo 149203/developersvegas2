@@ -3,13 +3,16 @@ import axios from 'axios'
 import { format as format_date } from 'date-fns'
 import find_index from 'lodash/findIndex'
 import move_index from '../../utils/move_index'
+import deep_copy from '../../utils/deep_copy'
 import classnames from 'classnames'
 import shuffle from 'lodash/shuffle'
+import is_equal from 'lodash/isEqual'
 
 class List extends Component {
    constructor(props) {
       super(props)
       this.state = {
+         initial_next_event: {},
          next_event: {},
          selected_radio_id: '',
          has_feature: false,
@@ -27,7 +30,10 @@ class List extends Component {
                presentation.order = i
                return presentation
             })
-            this.setState({ next_event })
+            this.setState({
+               initial_next_event: deep_copy(next_event),
+               next_event,
+            })
          })
          .catch(err => console.log({ errors: err.response.data }))
    }
@@ -39,8 +45,9 @@ class List extends Component {
    move_up() {
       const id = this.state.selected_radio_id // whichever radio button is selected
       if (id) {
-         let presentations = [...this.state.next_event.presentations]
-         let index = find_index(presentations, presentation => {
+         const next_event = { ...this.state.next_event }
+         const presentations = next_event.presentations
+         const index = find_index(presentations, presentation => {
             return presentation._id === id
          })
          if (index === 0) return
@@ -50,17 +57,19 @@ class List extends Component {
             presentation.order = i
             return presentation
          })
-         const next_event = { ...this.state.next_event }
-         next_event.presentations = presentations
          this.setState({ next_event })
+         is_equal(next_event, this.state.initial_next_event)
+            ? this.setState({ has_changes: false })
+            : this.setState({ has_changes: true })
       }
    }
 
    move_down() {
       const id = this.state.selected_radio_id // whichever radio button is selected
       if (id) {
-         let presentations = [...this.state.next_event.presentations]
-         let index = find_index(presentations, presentation => {
+         const next_event = { ...this.state.next_event }
+         const presentations = next_event.presentations
+         const index = find_index(presentations, presentation => {
             return presentation._id === id
          })
          if (index + 1 >= presentations.length) return
@@ -70,17 +79,18 @@ class List extends Component {
             presentation.order = i
             return presentation
          })
-         const next_event = { ...this.state.next_event }
-         next_event.presentations = presentations
          this.setState({ next_event })
+         is_equal(next_event, this.state.initial_next_event)
+            ? this.setState({ has_changes: false })
+            : this.setState({ has_changes: true })
       }
    }
 
    strike() {
       const id = this.state.selected_radio_id // whichever radio button is selected
       if (id) {
-         let presentations = [...this.state.next_event.presentations]
-         presentations.forEach(presentation => {
+         const next_event = { ...this.state.next_event }
+         next_event.presentations.forEach(presentation => {
             if (presentation._id === id) {
                if (presentation.is_active) {
                   presentation.is_active = false
@@ -88,16 +98,18 @@ class List extends Component {
                } else presentation.is_active = true
             }
          })
-         const next_event = { ...this.state.next_event }
-         next_event.presentations = presentations
          this.setState({ next_event })
+         is_equal(next_event, this.state.initial_next_event)
+            ? this.setState({ has_changes: false })
+            : this.setState({ has_changes: true })
       }
    }
 
    feature() {
       const id = this.state.selected_radio_id // whichever radio button is selected
       if (id) {
-         let presentations = [...this.state.next_event.presentations]
+         const next_event = { ...this.state.next_event }
+         const presentations = next_event.presentations
          presentations.forEach(presentation => {
             if (presentation._id === id) {
                if (presentation.is_active) {
@@ -112,9 +124,11 @@ class List extends Component {
                } else return
             } else return
          })
-         const next_event = { ...this.state.next_event }
-         next_event.presentations = presentations
+         // next_event.presentations = presentations
          this.setState({ next_event })
+         is_equal(next_event, this.state.initial_next_event)
+            ? this.setState({ has_changes: false })
+            : this.setState({ has_changes: true })
       }
    }
 
@@ -128,9 +142,18 @@ class List extends Component {
          return presentation
       })
       this.setState({ next_event })
+      is_equal(next_event, this.state.initial_next_event)
+         ? this.setState({ has_changes: false })
+         : this.setState({ has_changes: true })
    }
 
-   save() {}
+   save() {
+      this.setState({
+         is_saved: true,
+         has_changes: false,
+         initial_next_event: deep_copy(this.state.next_event),
+      })
+   }
 
    render() {
       const show_featured = is_featured => {
