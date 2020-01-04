@@ -26,6 +26,10 @@ class List extends Component {
          .then(res => {
             const next_event = res.data
             next_event.presentations.map((presentation, i) => {
+               // if there is a featured presentation from db data, update state
+               if (presentation.is_featured)
+                  this.setState({ has_feature: true })
+
                // arbitrarily assigning a number to the presentations before shuffle
                presentation.order = i
                return presentation
