@@ -62,10 +62,10 @@ router.post('/', async (req, res) => {
    if (presentation.order) {
       payload.order = presentation.order // number, optional
    }
-   if (presentation.is_featured) {
+   if (presentation.is_featured !== undefined) {
       payload.is_featured = presentation.is_featured // boolean, optional
    }
-   if (presentation.is_active) {
+   if (presentation.is_active !== undefined) {
       payload.is_active = presentation.is_active // boolean, optional
    }
    payload.video_id = convert_undefined(presentation.video_id) // string, optional

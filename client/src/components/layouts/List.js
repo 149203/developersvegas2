@@ -7,6 +7,7 @@ import deep_copy from '../../utils/deep_copy'
 import classnames from 'classnames'
 import shuffle from 'lodash/shuffle'
 import is_equal from 'lodash/isEqual'
+import clone_deep from 'lodash/cloneDeep'
 
 class List extends Component {
    constructor(props) {
@@ -18,6 +19,7 @@ class List extends Component {
          has_feature: false,
          has_changes: false,
          is_saved: false,
+         errors: {},
       }
 
       const todays_datetime = format_date(new Date(), 'yyyyMMddkkmm')
@@ -198,10 +200,21 @@ class List extends Component {
    }
 
    save() {
-      this.setState({
-         is_saved: true,
-         has_changes: false,
-         initial_next_event: deep_copy(this.state.next_event),
+      this.state.next_event.presentations.forEach(presentation => {
+         const payload = deep_copy(presentation)
+         payload.member_id = deep_copy(presentation.member_id._id)
+         // POST to API
+         axios
+            .post('/api/v1/presentations', payload) // recall we put a PROXY value in our client package.json
+            .then(res => {
+               console.log(res.data)
+               this.setState({
+                  is_saved: true,
+                  has_changes: false,
+                  initial_next_event: deep_copy(this.state.next_event),
+               })
+            })
+            .catch(err => this.setState({ errors: err.response.data }))
       })
    }
 

@@ -14,7 +14,7 @@ module.exports = function validate_input_for_technology(input) {
    if (validator.isEmpty(input.name)) {
       errors.name = 'A name for the technology is required.'
    }
-   if (input.is_active && !validator.isBoolean(input.is_active)) {
+   if (input.is_active !== undefined && !validator.isBoolean(input.is_active)) {
       errors.is_active = 'is_active must be a Boolean.'
    }
    if (input.popularity && !validator.isNumeric(input.popularity)) {

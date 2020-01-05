@@ -36,10 +36,16 @@ module.exports = function validate_input_for_presentation(input) {
    ) {
       errors.signed_up_on = 'signed_up_on is not a valid date.'
    }
-   if (input.is_active && !validator.isBoolean(String(input.is_active))) {
+   if (
+      input.is_active !== undefined &&
+      !validator.isBoolean(String(input.is_active))
+   ) {
       errors.is_active = 'is_active must be a Boolean.'
    }
-   if (input.is_featured && !validator.isBoolean(String(input.is_featured))) {
+   if (
+      input.is_featured !== undefined &&
+      !validator.isBoolean(String(input.is_featured))
+   ) {
       errors.is_featured = 'is_featured must be a Boolean.'
    }
    if (input.has_accepted_agreement !== true) {

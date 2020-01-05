@@ -46,7 +46,7 @@ router.post('/', (req, res) => {
       member_obj.profile_photo_url = body.profile_photo_url // String
    if (body.bio) member_obj.bio = body.bio // String
    if (body.joined_on) member_obj.joined_on - body.joined_on // Date, default now
-   if (body.is_active) member_obj.is_active = body.is_active // Boolean, default true
+   if (body.is_active !== undefined) member_obj.is_active = body.is_active // Boolean, default true
 
    member_model
       .findById(body._id)

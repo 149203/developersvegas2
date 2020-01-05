@@ -23,7 +23,7 @@ module.exports = function validate_input_for_event(input) {
    if (validator.isEmpty(input.title)) {
       errors.title = 'A title for the event is required.'
    }
-   if (input.is_active && !validator.isBoolean(input.is_active)) {
+   if (input.is_active !== undefined && !validator.isBoolean(input.is_active)) {
       errors.is_active = 'is_active must be a Boolean.'
    }
    if (validator.isEmpty(input.started_on)) {

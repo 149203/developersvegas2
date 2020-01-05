@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
    if (body.name) technology_obj.name = body.name // String, required
    if (body.popularity) technology_obj.popularity = body.popularity // Number, default 10
    if (body.row_id) technology_obj.row_id = body.row_id // String
-   if (body.is_active) technology_obj.is_active = body.is_active // Boolean, default true
+   if (body.is_active !== undefined) technology_obj.is_active = body.is_active // Boolean, default true
 
    technology_model
       .findById(body._id)
