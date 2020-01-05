@@ -448,8 +448,8 @@ class List extends Component {
                         skill levels, and demographics).
                      </p>
                      <p className="mb-2">
-                        9. The facilitator's presentation can be featured. But
-                        Chad Columbus can never be featured.
+                        9. Yes, the facilitator's presentation can be featured.
+                        But Chad Columbus can never be featured.
                      </p>
                   </div>
                </div>
