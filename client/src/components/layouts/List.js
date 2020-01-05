@@ -216,10 +216,11 @@ class List extends Component {
       return (
          <div style={{ overflowY: 'scroll', height: '100vh' }}>
             <div className="container">
-               <div className="row">
-                  <div className="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 mt-3">
+               <div className="row mt-3">
+                  <div className="col-12 col-md-10 offset-md-1 offset-lg-0 col-lg-8 col-xl-6 offset-xl-1 mr-lg-n6">
                      <h1 className="mb-4 mb-sm-5">List admin</h1>
-
+                  </div>
+                  <div className="col-12 col-md-10 offset-md-1 offset-lg-0 col-lg-8 col-xl-6 offset-xl-1 mr-lg-n6">
                      <div className="row d-none d-sm-flex mb-5">
                         <div className="col-sm-3">
                            <h4
@@ -354,6 +355,62 @@ class List extends Component {
                      </div>
 
                      {show_saved_alert({ is_saved, has_feature, has_changes })}
+                  </div>
+                  <div className="col-12 col-md-10 offset-md-1 offset-lg-0 col-lg-4 col-xl-4 ml-lg-5 pl-lg-6 mt-lg-n2">
+                     <h3 className="d-none d-sm-block">Event procedures</h3>
+                     <h3 className="d-sm-none font-weight-bold">
+                        Event procedures
+                     </h3>
+                     <h4 className="d-none d-sm-block mt-4 mb-3">Schedule</h4>
+                     <h4 className="d-sm-none mt-4 mb-3 font-weight-bold">
+                        Schedule
+                     </h4>
+                     <p className="mb-2">
+                        12:00pm - 12:30pm:&nbsp;&nbsp;Sign in and pizza
+                     </p>
+                     <p className="mb-2">12:30pm - 1:15pm:&nbsp;&nbsp;Demos</p>
+                     <p className="mb-2">
+                        1:15pm - 1:35pm:&nbsp;&nbsp;Mingle time
+                     </p>
+                     <p className="mb-2">1:35pm - 2:20pm:&nbsp;&nbsp;Demos</p>
+                     <p className="mb-2">
+                        2:20pm - 3:00pm:&nbsp;&nbsp;Mingle time
+                     </p>
+                     <h4 className="d-none d-sm-block mt-6 mb-3">
+                        Featured presentation checklist
+                     </h4>
+                     <h4 className="d-sm-none mt-6 mb-3 font-weight-bold">
+                        Featured presentation checklist
+                     </h4>
+                     <p className="mb-2">
+                        1. There are no technical difficulties in the
+                        presentation (on our end or theirs).
+                     </p>
+                     <p className="mb-2">
+                        2. Presenter demos code or a working application.
+                     </p>
+                     <p className="mb-2">
+                        3. There is time and effort put into the presentation.
+                     </p>
+                     <p className="mb-2">
+                        4. The presentation is enlightening or entertaining.
+                     </p>
+                     <p className="mb-2">
+                        5. The presenter has a strong speaking or presenting
+                        presence.
+                     </p>
+                     <p className="mb-2">
+                        6. The presentation isn't offensive or borderline
+                        offensive.
+                     </p>
+                     <p className="mb-2">
+                        7. The presentation appeals to programmers and
+                        non-programmers alike.
+                     </p>
+                     <p className="mb-2">
+                        8. The presentation shows our diversity (of languages,
+                        skill levels, and demographics).
+                     </p>
                   </div>
                </div>
             </div>
