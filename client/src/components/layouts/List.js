@@ -94,15 +94,21 @@ class List extends Component {
       const id = this.state.selected_radio_id // whichever radio button is selected
       if (id) {
          const next_event = { ...this.state.next_event }
-         next_event.presentations.forEach(presentation => {
+         const presentations = next_event.presentations
+         presentations.forEach(presentation => {
             if (presentation._id === id) {
                if (presentation.is_active) {
                   presentation.is_active = false
-                  presentation.is_featured = false
-                  this.setState({ has_feature: false })
+                  presentation.is_featured = false // HERE
                } else presentation.is_active = true
             }
          })
+         const presentations_with_feature = presentations.filter(
+            presentation => presentation.is_featured
+         )
+         if (presentations_with_feature.length === 0) {
+            this.setState({ has_feature: false })
+         }
          this.setState({ next_event })
          is_equal(next_event, this.state.initial_next_event)
             ? this.setState({ has_changes: false })
@@ -168,6 +174,44 @@ class List extends Component {
          if (is_featured) return ' (FEATURED)'
          else return ''
       }
+
+      const show_saved_alert = page_state => {
+         const { is_saved, has_feature, has_changes } = page_state
+         if (is_saved && has_feature && !has_changes) {
+            return (
+               <div className="row">
+                  <div className="col-12">
+                     <div className="alert alert-secondary" role="alert">
+                        <strong>Saved!</strong>
+                     </div>
+                  </div>
+               </div>
+            )
+         } else if (is_saved && !has_feature && !has_changes) {
+            return (
+               <div className="row">
+                  <div className="col-12">
+                     <div className="alert alert-warning" role="alert">
+                        <strong>Saved.</strong> But remember to select a
+                        featured presentation.
+                     </div>
+                  </div>
+               </div>
+            )
+         } else if (has_changes) {
+            return (
+               <div className="row">
+                  <div className="col-12">
+                     <div className="alert alert-danger" role="alert">
+                        Changes made, but <strong>not saved.</strong>
+                     </div>
+                  </div>
+               </div>
+            )
+         }
+      }
+
+      const { is_saved, has_changes, has_feature } = this.state
 
       return (
          <div style={{ overflowY: 'scroll', height: '100vh' }}>
@@ -292,7 +336,7 @@ class List extends Component {
                         </div>
                      )}
 
-                     <div className="row">
+                     <div className="row mb-5 mt-4">
                         <div className="col-12">
                            <button
                               className="btn btn-primary float-right ml-4 px-9"
@@ -308,6 +352,8 @@ class List extends Component {
                            </button>
                         </div>
                      </div>
+
+                     {show_saved_alert({ is_saved, has_feature, has_changes })}
                   </div>
                </div>
             </div>
