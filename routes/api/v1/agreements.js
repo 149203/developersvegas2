@@ -44,7 +44,7 @@ router.post('/', (req, res) => {
    const agreement_obj = {}
    // These are fields that can be updated via the API
    if (body.title) agreement_obj.title = body.title // String, required
-   if (body.version) agreement_obj.version = body.version // Number, required
+   if (body.version !== undefined) agreement_obj.version = body.version // Number, required
    if (body.text) agreement_obj.text = body.text // String, required
    if (body.created_on) agreement_obj.created_on = body.created_on // Date, default Date.now
    if (body.is_active !== undefined) agreement_obj.is_active = body.is_active // Boolean, default true

@@ -52,7 +52,7 @@ module.exports = function validate_input_for_presentation(input) {
       errors.has_accepted_agreement =
          'Please give us permission to film your presentation today. We automate the video and upload process and need your consent before proceeding.'
    }
-   if (input.order && !validator.isNumeric(String(input.order))) {
+   if (input.order !== undefined && !validator.isNumeric(String(input.order))) {
       errors.order = 'order must be a number.'
    }
 

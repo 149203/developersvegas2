@@ -34,7 +34,8 @@ router.post('/', (req, res) => {
    const technology_obj = {}
    // These are fields that can be updated via the API
    if (body.name) technology_obj.name = body.name // String, required
-   if (body.popularity) technology_obj.popularity = body.popularity // Number, default 10
+   if (body.popularity !== undefined)
+      technology_obj.popularity = body.popularity // Number, default 10
    if (body.row_id) technology_obj.row_id = body.row_id // String
    if (body.is_active !== undefined) technology_obj.is_active = body.is_active // Boolean, default true
 

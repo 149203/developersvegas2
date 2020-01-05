@@ -59,7 +59,7 @@ router.post('/', async (req, res) => {
    payload.member_id = cast_to_object_id(presentation.member_id) // object_id, required
    payload.agreement_id = cast_to_object_id(presentation.agreement_id) // object_id, required
    payload.has_accepted_agreement = presentation.has_accepted_agreement // boolean, required
-   if (presentation.order) {
+   if (presentation.order !== undefined) {
       payload.order = presentation.order // number, optional
    }
    if (presentation.is_featured !== undefined) {
