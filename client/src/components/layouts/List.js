@@ -93,22 +93,58 @@ class List extends Component {
    strike() {
       const id = this.state.selected_radio_id // whichever radio button is selected
       if (id) {
+         // Toggle strikethrough
          const next_event = { ...this.state.next_event }
          const presentations = next_event.presentations
-         presentations.forEach(presentation => {
+         let index
+         let was_made_inactive = false
+         presentations.forEach((presentation, i) => {
             if (presentation._id === id) {
+               index = i
                if (presentation.is_active) {
                   presentation.is_active = false
-                  presentation.is_featured = false // HERE
-               } else presentation.is_active = true
+                  presentation.is_featured = false
+                  was_made_inactive = true
+               } else {
+                  presentation.is_active = true
+               }
             }
          })
+
+         // Reorder, moving this id to the bottom
+         if (was_made_inactive) {
+            move_index(presentations, index, presentations.length - 1)
+            presentations.map((presentation, i) => {
+               presentation.order = i
+               return presentation
+            })
+         }
+
+         // if all presentations are inactive & one is made active, push it to the top
+         const active_presentations = presentations.filter(
+            presentation => presentation.is_active
+         )
+         if (active_presentations.length === 1) {
+            move_index(presentations, index, 0)
+            presentations.map((presentation, i) => {
+               presentation.order = i
+               return presentation
+            })
+         }
+
+         // TODO: move all inactive presentations to the bottom
+         // RECREATE THE PROBLEM: Strike all presenters. Then unstrike one from the bottom. Then unstrike another from the top. We don't want a struck (inactive) presenter in the middle. We always want them at the bottom of the list.
+         // Not working on it because this is such a rare thing that doesn't even actually cause a bug. It's just OCD.
+
+         // Check if there's a feature in the list
          const presentations_with_feature = presentations.filter(
             presentation => presentation.is_featured
          )
          if (presentations_with_feature.length === 0) {
             this.setState({ has_feature: false })
          }
+
+         // Set state
          this.setState({ next_event })
          is_equal(next_event, this.state.initial_next_event)
             ? this.setState({ has_changes: false })
@@ -410,6 +446,10 @@ class List extends Component {
                      <p className="mb-2">
                         8. The presentation shows our diversity (of languages,
                         skill levels, and demographics).
+                     </p>
+                     <p className="mb-2">
+                        9. The facilitator's presentation can be featured. But
+                        Chad Columbus can never be featured.
                      </p>
                   </div>
                </div>
