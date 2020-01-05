@@ -16,7 +16,6 @@ const map = require('lodash/map')
 router.get('/', async (req, res) => {
    if (req.query.occurs && req.query.date) {
       const today = req.query.date
-      // console.log(today)
       if (req.query.occurs === 'before') {
          const past_events = []
          await event_model
@@ -82,6 +81,7 @@ router.get('/', async (req, res) => {
                // Return presentations for this next (current) event
                await presentation_model
                   .find({ event_id: event._id })
+                  .sort({ order: 'asc', signed_up_on: 'asc' })
                   .populate(
                      // populate member data for each presentation
                      'member_id',
@@ -218,7 +218,6 @@ router.post('/', (req, res) => {
          } else {
             // Create event
             const datetime = convert_datetime_num_to_str(body.started_on)
-            // console.log(datetime)
             let event_date = date_format(datetime, 'MMMM-Do-YYYY')
             const slug = slug_format(`${event_date}-${body.title}`)
             event_obj.slug = await append_slug_suffix(event_model, slug)

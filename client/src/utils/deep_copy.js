@@ -14,6 +14,9 @@ https://stackoverflow.com/a/10869248
 
 */
 
+// DEPRECATED: USE THE 'clone_deep' LODASH FUNCTION
+// import clone_deep from 'lodash/cloneDeep'
+
 export default json => {
    return JSON.parse(JSON.stringify(json))
 }

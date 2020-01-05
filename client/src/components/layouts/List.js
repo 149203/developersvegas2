@@ -3,7 +3,6 @@ import axios from 'axios'
 import { format as format_date } from 'date-fns'
 import find_index from 'lodash/findIndex'
 import move_index from '../../utils/move_index'
-import deep_copy from '../../utils/deep_copy'
 import classnames from 'classnames'
 import shuffle from 'lodash/shuffle'
 import is_equal from 'lodash/isEqual'
@@ -37,7 +36,7 @@ class List extends Component {
                return presentation
             })
             this.setState({
-               initial_next_event: deep_copy(next_event),
+               initial_next_event: clone_deep(next_event),
                next_event,
             })
          })
@@ -201,8 +200,8 @@ class List extends Component {
 
    save() {
       this.state.next_event.presentations.forEach(presentation => {
-         const payload = deep_copy(presentation)
-         payload.member_id = deep_copy(presentation.member_id._id)
+         const payload = clone_deep(presentation)
+         payload.member_id = clone_deep(presentation.member_id._id)
          // POST to API
          axios
             .post('/api/v1/presentations', payload) // recall we put a PROXY value in our client package.json
@@ -211,7 +210,7 @@ class List extends Component {
                this.setState({
                   is_saved: true,
                   has_changes: false,
-                  initial_next_event: deep_copy(this.state.next_event),
+                  initial_next_event: clone_deep(this.state.next_event),
                })
             })
             .catch(err => this.setState({ errors: err.response.data }))
