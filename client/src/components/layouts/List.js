@@ -7,6 +7,7 @@ import classnames from 'classnames'
 import shuffle from 'lodash/shuffle'
 import is_equal from 'lodash/isEqual'
 import clone_deep from 'lodash/cloneDeep'
+import order_by from 'lodash/orderBy'
 
 class List extends Component {
    constructor(props) {
@@ -133,10 +134,6 @@ class List extends Component {
             })
          }
 
-         // TODO: move all inactive presentations to the bottom
-         // RECREATE THE PROBLEM: Strike all presenters. Then unstrike one from the bottom. Then unstrike another from the top. We don't want a struck (inactive) presenter in the middle. We always want them at the bottom of the list.
-         // Not working on it because this is such a rare thing that doesn't even actually cause a bug. It's just OCD.
-
          // Check if there's a feature in the list
          const presentations_with_feature = presentations.filter(
             presentation => presentation.is_featured
@@ -199,21 +196,38 @@ class List extends Component {
    }
 
    save() {
-      this.state.next_event.presentations.forEach(presentation => {
-         const payload = clone_deep(presentation)
-         payload.member_id = clone_deep(presentation.member_id._id)
-         // POST to API
-         axios
-            .post('/api/v1/presentations', payload) // recall we put a PROXY value in our client package.json
-            .then(res => {
-               console.log(res.data)
-               this.setState({
-                  is_saved: true,
-                  has_changes: false,
-                  initial_next_event: clone_deep(this.state.next_event),
+      const next_event = clone_deep(this.state.next_event)
+
+      // Reorder inactive presentations to the bottom & remap new order
+      next_event.presentations = order_by(
+         next_event.presentations,
+         ['is_active', 'order'],
+         ['desc', 'asc']
+      ).map((presentation, i) => {
+         presentation.order = i
+         return presentation
+      })
+
+      this.setState({ next_event }, () => {
+         // after state is updated:
+         this.state.next_event.presentations.forEach(presentation => {
+            const payload = clone_deep(presentation)
+            // rewrite member_id to a Mongo Object ID instead of an object
+            payload.member_id = clone_deep(presentation.member_id._id)
+
+            // POST to API
+            axios
+               .post('/api/v1/presentations', payload) // recall we put a PROXY value in our client package.json
+               .then(res => {
+                  console.log(res.data)
+                  this.setState({
+                     is_saved: true,
+                     has_changes: false,
+                     initial_next_event: clone_deep(this.state.next_event),
+                  })
                })
-            })
-            .catch(err => this.setState({ errors: err.response.data }))
+               .catch(err => this.setState({ errors: err.response.data }))
+         })
       })
    }
 
