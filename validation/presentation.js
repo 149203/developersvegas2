@@ -42,20 +42,20 @@ module.exports = function validate_input_for_presentation(input) {
    }
 
    video_screenshot_url = convert_to_str(video_screenshot_url)
-   if (!validator.isURL(video_screenshot_url)) {
+   if (video_url !== '' && !validator.isURL(video_screenshot_url)) {
       errors.video_screenshot_url = 'video_screenshot_url is not a valid URL.'
    }
 
    video_screenshot_with_play_url = convert_to_str(
       video_screenshot_with_play_url
    )
-   if (!validator.isURL(video_screenshot_with_play_url)) {
-      errors.video_screenshot_url =
+   if (video_url !== '' && !validator.isURL(video_screenshot_with_play_url)) {
+      errors.video_screenshot_with_play_url =
          'video_screenshot_with_play_url is not a valid URL.'
    }
 
    video_url = convert_to_str(video_url)
-   if (!validator.isURL(video_url)) {
+   if (video_url !== '' && !validator.isURL(video_url)) {
       errors.video_url = 'video_url is not a valid URL.'
    }
 
