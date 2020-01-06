@@ -37,13 +37,13 @@ module.exports = function validate_input_for_presentation(input) {
       errors.signed_up_on = 'signed_up_on is not a valid date.'
    }
    if (
-      input.is_active !== undefined &&
+      String(input.is_active) !== '' &&
       !validator.isBoolean(String(input.is_active))
    ) {
       errors.is_active = 'is_active must be a Boolean.'
    }
    if (
-      input.is_featured !== undefined &&
+      String(input.is_featured) !== '' &&
       !validator.isBoolean(String(input.is_featured))
    ) {
       errors.is_featured = 'is_featured must be a Boolean.'
@@ -52,7 +52,10 @@ module.exports = function validate_input_for_presentation(input) {
       errors.has_accepted_agreement =
          'Please give us permission to film your presentation today. We automate the video and upload process and need your consent before proceeding.'
    }
-   if (input.order !== undefined && !validator.isNumeric(String(input.order))) {
+   if (
+      String(input.order) !== '' &&
+      !validator.isNumeric(String(input.order))
+   ) {
       errors.order = 'order must be a number.'
    }
 

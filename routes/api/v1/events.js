@@ -147,9 +147,9 @@ router.post('/:event_id', (req, res) => {
    const event_obj = {}
    // These are fields that can be updated via the API
    if (body.title) event_obj.title = body.title // String, required
-   if (body.started_on !== undefined) event_obj.started_on = body.started_on // Number, required
-   if (body.ended_on !== undefined) event_obj.ended_on = body.ended_on // Number, required
-   if (body.is_active !== undefined) event_obj.is_active = body.is_active // Boolean, default true
+   if (String(body.started_on) !== '') event_obj.started_on = body.started_on // Number, required
+   if (String(body.ended_on) !== '') event_obj.ended_on = body.ended_on // Number, required
+   if (String(body.is_active) !== '') event_obj.is_active = body.is_active // Boolean, default true
    if (body.location_name) event_obj.location_name = body.location_name // String, required
    if (body.location_street_1)
       event_obj.location_street_1 = body.location_street_1 // String, required
@@ -190,9 +190,9 @@ router.post('/', (req, res) => {
    const event_obj = {}
    // These are fields that can be updated via the API
    if (body.title) event_obj.title = body.title // String, required
-   if (body.started_on !== undefined) event_obj.started_on = body.started_on // Number, required
-   if (body.ended_on !== undefined) event_obj.ended_on = body.ended_on // Number, required
-   if (body.is_active !== undefined) event_obj.is_active = body.is_active // Boolean, default true
+   if (String(body.started_on) !== '') event_obj.started_on = body.started_on // Number, required
+   if (String(body.ended_on) !== '') event_obj.ended_on = body.ended_on // Number, required
+   if (String(body.is_active) !== '') event_obj.is_active = body.is_active // Boolean, default true
    if (body.location_name) event_obj.location_name = body.location_name // String, required
    if (body.location_street_1)
       event_obj.location_street_1 = body.location_street_1 // String, required
