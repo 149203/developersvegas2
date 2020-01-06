@@ -58,13 +58,13 @@ router.post('/', async (req, res) => {
    payload.member_id = cast_to_object_id(presentation.member_id) // object_id, required
    payload.agreement_id = cast_to_object_id(presentation.agreement_id) // object_id, required
    payload.has_accepted_agreement = presentation.has_accepted_agreement // boolean, required
-   if (String(presentation.order) !== '') {
+   if (typeof presentation.order !== 'undefined') {
       payload.order = presentation.order // number, optional
    }
-   if (String(presentation.is_featured) !== '') {
+   if (typeof presentation.is_featured !== 'undefined') {
       payload.is_featured = presentation.is_featured // boolean, optional
    }
-   if (String(presentation.is_active) !== '') {
+   if (typeof presentation.is_active !== 'undefined') {
       payload.is_active = presentation.is_active // boolean, optional
    }
    payload.video_id = convert_undefined(presentation.video_id) // string, optional

@@ -57,7 +57,7 @@ module.exports = function validate_input_for_member(input) {
       errors.joined_on = 'joined_on is not a valid date.'
    }
    if (
-      String(input.is_active) !== '' &&
+      typeof input.is_active !== 'undefined' &&
       !validator.isBoolean(input.is_active)
    ) {
       console.log(input.is_active)

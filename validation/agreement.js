@@ -20,7 +20,7 @@ module.exports = function validate_input_for_agreement(input) {
       errors.text = 'Text for the agreement is required.'
    }
    if (
-      String(input.is_active) !== '' &&
+      typeof input.is_active !== 'undefined' &&
       !validator.isBoolean(input.is_active)
    ) {
       errors.is_active = 'is_active must be a Boolean.'

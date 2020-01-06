@@ -24,7 +24,7 @@ module.exports = function validate_input_for_event(input) {
       errors.title = 'A title for the event is required.'
    }
    if (
-      String(input.is_active) !== '' &&
+      typeof input.is_active !== 'undefined' &&
       !validator.isBoolean(input.is_active)
    ) {
       errors.is_active = 'is_active must be a Boolean.'
