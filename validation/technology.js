@@ -1,30 +1,25 @@
 const validator = require('validator')
 const is_empty = require('../utils/is_empty')
+const convert_empty_to_str = require('../utils/convert_empty_to_str')
+const convert_to_str = require('../utils/convert_to_str')
 
 module.exports = function validate_input_for_technology(input) {
    let errors = {}
+   let { name, popularity, is_active } = input
 
-   // if the user input is empty, replace with an empty string
-   // else use the user's input
-   input.name = is_empty(input.name) ? '' : input.name
-   input.is_active = is_empty(input.is_active) ? '' : input.is_active
-   input.popularity = is_empty(input.popularity) ? '' : input.popularity
-
-   // These have an order! E.g. the isEmpty validation will overwrite the isEmail validation.
+   name = convert_to_str(name)
    if (validator.isEmpty(input.name)) {
       errors.name = 'A name for the technology is required.'
    }
-   if (
-      typeof input.is_active !== 'undefined' &&
-      !validator.isBoolean(input.is_active)
-   ) {
-      errors.is_active = 'is_active must be a Boolean.'
-   }
-   if (
-      typeof input.popularity !== 'undefined' &&
-      !validator.isNumeric(input.popularity)
-   ) {
+
+   popularity = convert_empty_to_str(popularity)
+   if (popularity !== '' && typeof popularity !== 'number') {
       errors.popularity = 'popularity must be a number.'
+   }
+
+   is_active = convert_empty_to_str(is_active)
+   if (is_active !== '' && typeof is_active !== 'boolean') {
+      errors.is_active = 'is_active must be a Boolean.'
    }
 
    console.log({ errors, is_valid: is_empty(errors) })

@@ -1,41 +1,32 @@
 const validator = require('validator')
 const is_empty = require('../utils/is_empty')
+const convert_empty_to_str = require('../utils/convert_empty_to_str')
+const convert_to_str = require('../utils/convert_to_str')
 
 module.exports = function validate_input_for_agreement(input) {
    let errors = {}
+   let { title, text, version, is_active } = input
 
-   // if the user input is empty, replace with an empty string
-   // else use the user's input
-   input.title = is_empty(input.title) ? '' : input.title
-   input.text = is_empty(input.text) ? '' : input.text
-   input.version = is_empty(input.version) ? '' : input.version
-   input.created_on = is_empty(input.created_on) ? '' : input.created_on
-   input.is_active = is_empty(input.is_active) ? '' : input.is_active
-
-   // These have an order! E.g. the isEmpty validation will overwrite the isEmail validation.
-   if (validator.isEmpty(input.title)) {
+   title = convert_to_str(title)
+   if (validator.isEmpty(title)) {
       errors.title = 'A title for the agreement is required.'
    }
-   if (validator.isEmpty(input.text)) {
+
+   text = convert_to_str(text)
+   if (validator.isEmpty(text)) {
       errors.text = 'Text for the agreement is required.'
    }
-   if (
-      typeof input.is_active !== 'undefined' &&
-      !validator.isBoolean(input.is_active)
-   ) {
-      errors.is_active = 'is_active must be a Boolean.'
-   }
-   if (!validator.isNumeric(input.version)) {
+
+   version = convert_empty_to_str(version)
+   if (validator.isEmpty(version)) {
+      errors.version = 'A version for the agreement is required.'
+   } else if (typeof version !== 'number') {
       errors.version = 'Version must be a number.'
    }
-   if (validator.isEmpty(input.version)) {
-      errors.version = 'A version for the agreement is required.'
-   }
-   if (
-      input.created_on &&
-      !validator.isISO8601(input.created_on, { strict: true })
-   ) {
-      errors.created_on = 'created_on is not a valid Date.'
+
+   is_active = convert_empty_to_str(is_active)
+   if (is_active !== '' && typeof is_active !== 'boolean') {
+      errors.is_active = 'is_active must be a Boolean.'
    }
 
    console.log({ errors, is_valid: is_empty(errors) })
