@@ -27,6 +27,7 @@ module.exports = function validate_input_for_presentation(input) {
 
    has_accepted_agreement = convert_empty_to_str(has_accepted_agreement)
    if (has_accepted_agreement !== true) {
+      console.log('HERE:', has_accepted_agreement)
       errors.has_accepted_agreement =
          'Please give us permission to film your presentation today. We automate the video and upload process and need your consent before proceeding.'
    }
