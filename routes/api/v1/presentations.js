@@ -169,6 +169,7 @@ router.post('/all-deprecated', async (req, res) => {
       ) // optional
       presentation_obj.video_url = convert_undefined(demo_day.video_url) // optional
       presentation_obj.video_iframe = convert_undefined(demo_day.video_iframe) // optional
+      presentation_obj.video_id = convert_undefined(demo_day.video_id) // optional
 
       // Validate stuff before trying to upsert into db
       const { errors, is_valid } = validate_input_for_presentation(
