@@ -231,6 +231,19 @@ class List extends Component {
       })
    }
 
+   undo() {
+      const initial_event = clone_deep(this.state.initial_next_event)
+      // if one is featured, has_feature: true
+      initial_event.presentations.forEach(presentation => {
+         if (presentation.is_featured) this.setState({ has_feature: true })
+      })
+
+      this.setState({
+         next_event: initial_event,
+         has_changes: false,
+      })
+   }
+
    render() {
       const show_featured = is_featured => {
          if (is_featured) return ' (FEATURED)'
@@ -265,7 +278,14 @@ class List extends Component {
                <div className="row">
                   <div className="col-12">
                      <div className="alert alert-danger" role="alert">
-                        Changes made, but <strong>not saved.</strong>
+                        Changes made, but not saved.{' '}
+                        <button
+                           type="button"
+                           onClick={() => this.undo()}
+                           className="btn btn-link alert-link p-0"
+                        >
+                           Undo.
+                        </button>
                      </div>
                   </div>
                </div>
