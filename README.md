@@ -26,6 +26,8 @@ Go to `C:\Program Files\MongoDB\Server\4.0\bin`
 
 Enter the `mongorestore_dev` command from your `.env` file with the proper folder name.
 
+**IMPORTANT:** don't delete a database you want to restore. Just delete every collection within it. This will keep the connection, user, and password.
+
 # Conventions
 
 lower_snake_case for everything except urls and filenames of web assets (like images).
