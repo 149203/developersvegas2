@@ -5,3 +5,5 @@ package-lock.json
 scripts/logs
 /data
 data/members.js
+/dist
+/client/dist
