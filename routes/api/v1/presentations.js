@@ -15,7 +15,7 @@ const mask_email = require('../../../utils/mask_email')
 const order_by = require('lodash/orderBy')
 const flatten = require('lodash/flatten')
 const count_by = require('lodash/countBy')
-const merge = require('lodash/merge')
+const uniq_by = require('lodash/uniqBy')
 
 // @route      GET api/v1/presentations?started_on
 // @desc       Gets all presentations filtered by the event's started_on date, else all presentations
@@ -161,29 +161,42 @@ router.get('/:slug', async (req, res) => {
             bio: member.bio,
             joined_on: member.joined_on,
             is_active: member.is_active,
-            technologies: get_technologies_set(ordered_presentations),
+            unique_technologies: get_uniq_technologies(ordered_presentations),
             presentations: ordered_presentations,
          })
 
-         function get_technologies_set(presentations) {
+         function get_uniq_technologies(presentations) {
             const all = flatten(
                presentations.map(presentation => {
                   return presentation.technologies
                })
             )
             const count = count_by(all, '_id')
-            const set = [...new Set(all)]
-            console.log(count_by)
+            const uniqs = uniq_by(all, 'slug')
+
             // turn count into an array of objects with 2 keys: _id, count
             const count_arr = Object.keys(count).map(key => {
                return { _id: key, count: count[key] }
             })
-            // merge with set
-            const merged = merge(set, count_arr) // what are the lengths of set and count_arr?
 
-            // sort the merged set by count, then most popular, then alphabetical
+            // merge matching count objects and uniq objects
+            const merged = uniqs.map(uniq_tech => {
+               let merged_tech
+               count_arr.forEach(count_tech => {
+                  if (String(uniq_tech._id) === String(count_tech._id)) {
+                     uniq_tech.count = count_tech.count
+                     merged_tech = uniq_tech
+                  }
+               })
+               return merged_tech
+            })
 
-            return merged
+            // sort the merged set by highest count, then most popular, then alphabetical
+            return order_by(
+               merged,
+               ['count', 'popularity', 'slug'],
+               ['desc', 'desc', 'asc']
+            )
          }
       })
       .catch(err => res.status(400).json(err))
