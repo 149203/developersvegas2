@@ -5,11 +5,17 @@ const xref_presentation_technology_model = require('../../../models/xref_present
 const validate_input_for_presentation = require('../../../validation/presentation')
 const member_model = require('../../../models/member')
 const event_model = require('../../../models/event')
+const technology_model = require('../../../models/technology')
 const cast_to_object_id = require('mongodb').ObjectID
 const date_format = require('date-fns/format')
 const convert_datetime_num_to_str = require('../../../utils/convert_datetime_num_to_str')
 const untitled_presentation_title = require('../../../utils/untitled_presentation_title')
 const has = require('lodash/has')
+const mask_email = require('../../../utils/mask_email')
+const order_by = require('lodash/orderBy')
+const flatten = require('lodash/flatten')
+const count_by = require('lodash/countBy')
+const merge = require('lodash/merge')
 
 // @route      GET api/v1/presentations?started_on
 // @desc       Gets all presentations filtered by the event's started_on date, else all presentations
@@ -39,6 +45,148 @@ router.get('/', (req, res) => {
          })
          .catch(err => res.status(400).json(err))
    }
+})
+
+// @route      GET api/v1/presentations/:slug
+// @desc       Gets all presentations by the member's slug
+// @access     Public
+router.get('/:slug', async (req, res) => {
+   const slug = req.params.slug
+   await presentation_model
+      .find()
+      .populate(
+         'member_id',
+         [
+            '_id',
+            'first_name',
+            'last_name',
+            'slug',
+            'portfolio_url',
+            'profile_photo_url',
+            'bio',
+            'email',
+            'is_active',
+            'joined_on',
+         ],
+         member_model
+      )
+      .populate(
+         'event_id',
+         [
+            'title',
+            'started_on',
+            'ended_on',
+            'description',
+            'slug',
+            'location_city',
+            'location_state',
+            'location_url',
+            'location_name',
+         ],
+         event_model
+      )
+      .then(async presentations => {
+         const filtered_presentations = presentations.filter(presentation => {
+            return presentation.member_id.slug === slug
+         })
+
+         const organized_presentations = []
+         // don't need an async in the for statement because it is in the function
+         for (let presentation of filtered_presentations) {
+            const technologies = await get_technologies(presentation._id)
+
+            organized_presentations.push({
+               title: presentation.title,
+               _id: presentation._id,
+               slug: presentation.slug,
+               event_title: presentation.event_id.title,
+               event_description: presentation.event_id.description,
+               event_started_on: presentation.event_id.started_on,
+               event_ended_on: presentation.event_id.ended_on,
+               location_name: presentation.event_id.location_name,
+               location_city: presentation.event_id.location_city,
+               location_state: presentation.event_id.location_state,
+               location_url: presentation.event_id.location_url,
+               event_slug: presentation.event_id.slug,
+               video_id: presentation.video_id,
+               video_screenshot_url: presentation.video_screenshot_url,
+               video_screenshot_with_play_url:
+                  presentation.video_screenshot_with_play_url,
+               video_url: presentation.video_url,
+               video_iframe: presentation.video_iframe,
+               is_active: presentation.is_active,
+               technologies,
+            })
+         }
+
+         function get_technologies(presentation_id) {
+            return xref_presentation_technology_model
+               .find({ presentation_id })
+               .populate(
+                  'technology_id',
+                  ['name', '_id', 'popularity', 'slug', 'is_active'],
+                  technology_model
+               )
+               .then(xrefs => {
+                  // console.log(xrefs)
+                  return xrefs.map(xref => {
+                     return {
+                        name: xref.technology_id.name,
+                        popularity: xref.technology_id.popularity,
+                        _id: xref.technology_id._id,
+                        slug: xref.technology_id.slug,
+                        is_active: xref.technology_id.is_active,
+                     }
+                  })
+               })
+               .catch(err => console.log(err))
+         }
+
+         const ordered_presentations = order_by(
+            organized_presentations,
+            p => p.event_started_on,
+            'desc'
+         )
+
+         const member = filtered_presentations[0].member_id
+
+         res.json({
+            first_name: member.first_name,
+            last_name: member.last_name,
+            _id: member._id,
+            slug: member.slug,
+            email: mask_email(member.email),
+            portfolio_url: member.portfolio_url,
+            profile_photo_url: member.profile_photo_url,
+            bio: member.bio,
+            joined_on: member.joined_on,
+            is_active: member.is_active,
+            technologies: get_technologies_set(ordered_presentations),
+            presentations: ordered_presentations,
+         })
+
+         function get_technologies_set(presentations) {
+            const all = flatten(
+               presentations.map(presentation => {
+                  return presentation.technologies
+               })
+            )
+            const count = count_by(all, '_id')
+            const set = [...new Set(all)]
+            console.log(count_by)
+            // turn count into an array of objects with 2 keys: _id, count
+            const count_arr = Object.keys(count).map(key => {
+               return { _id: key, count: count[key] }
+            })
+            // merge with set
+            const merged = merge(set, count_arr) // what are the lengths of set and count_arr?
+
+            // sort the merged set by count, then most popular, then alphabetical
+
+            return merged
+         }
+      })
+      .catch(err => res.status(400).json(err))
 })
 
 // @route      POST api/v1/presentations
