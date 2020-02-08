@@ -1,5 +1,5 @@
 require('dotenv').config()
-const express = require('express')
+import express from 'express'
 const mongoose = require('mongoose')
 const body_parser = require('body-parser')
 const path = require('path')
@@ -15,9 +15,9 @@ app.use(body_parser.json())
 // Database and connection
 const db_server = require('./config/keys').db_uri
 mongoose
-   .connect(db_server)
-   .then(() => console.log('Connected to remote server!'))
-   .catch(err => console.log(err))
+  .connect(db_server)
+  .then(() => console.log('Connected to remote server!'))
+  .catch((err: Error) => console.log(err))
 
 // Routes
 app.use('/api/v1/members', require('./routes/api/v1/members'))
@@ -32,13 +32,13 @@ app.use('/api/v1/test', require('./routes/api/v1/test'))
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
-   // this is set in package.json
-   console.log('In production!')
-   app.use(express.static('client/build'))
-   app.get('*', (req, res) => {
-      // for any route except for the APIs above
-      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-   })
+  // this is set in package.json
+  console.log('In production!')
+  app.use(express.static('client/build'))
+  app.get('*', (req: express.Request, res: express.Response) => {
+    // for any route except for the APIs above
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  })
 }
 
 const port = process.env.PORT || 3333
