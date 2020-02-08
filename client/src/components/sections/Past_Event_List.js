@@ -9,7 +9,7 @@ import trim_time from '../../utils/trim_time'
 class Past_Event_List extends Component {
    constructor() {
       super()
-      const todays_datetime = format_date(new Date(), 'yyyyMMddkkmm')
+      const todays_datetime = format_date(new Date(), 'YYYYMMDDHHmm')
       this.state = { past_events: [] }
 
       axios

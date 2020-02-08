@@ -22,7 +22,7 @@ class List extends Component {
          errors: {},
       }
 
-      const todays_datetime = format_date(new Date(), 'yyyyMMddkkmm')
+      const todays_datetime = format_date(new Date(), 'YYYYMMDDHHmm')
       axios
          .get(`/api/v1/events?occurs=after&date=${todays_datetime}`) // recall we put a PROXY value in our client package.json
          .then(res => {

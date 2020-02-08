@@ -13,7 +13,8 @@ import main_image from '../../img/las-vegas-developers-coding-meetup-main-image.
 class Next_Event extends Component {
    constructor() {
       super()
-      const todays_datetime = format_date(new Date(), 'yyyyMMddkkmm')
+      const todays_datetime = format_date(new Date(), 'YYYYMMDDHHmm')
+      console.log(todays_datetime)
 
       axios
          .get(`/api/v1/events?occurs=after&date=${todays_datetime}`) // recall we put a PROXY value in our client package.json
