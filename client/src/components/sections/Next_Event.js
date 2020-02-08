@@ -13,7 +13,7 @@ import main_image from '../../img/las-vegas-developers-coding-meetup-main-image.
 class Next_Event extends Component {
    constructor() {
       super()
-      const todays_datetime = format_date(new Date(), 'YYYYMMDDHHmm')
+      const todays_datetime = format_date(new Date(), 'yyyyMMddHHmm')
       console.log(todays_datetime)
 
       axios

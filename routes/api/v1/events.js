@@ -222,7 +222,7 @@ router.post('/', (req, res) => {
          } else {
             // Create event
             const datetime = convert_datetime_num_to_str(body.started_on)
-            let event_date = date_format(datetime, 'MMMM-Do-YYYY')
+            let event_date = date_format(datetime, 'MMMM-Do-yyyy')
             const slug = slug_format(`${event_date}-${body.title}`)
             event_obj.slug = await append_slug_suffix(event_model, slug)
 

@@ -250,7 +250,7 @@ router.post('/', async (req, res) => {
    if (payload.title === untitled_presentation_title) {
       const event_date = date_format(
          convert_datetime_num_to_str(presentation.event_started_on),
-         'MMMM-Do-YYYY'
+         'MMMM-Do-yyyy'
       )
       slug_fields = [event_date, payload.title]
    }

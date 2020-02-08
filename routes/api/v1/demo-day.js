@@ -89,7 +89,7 @@ router.post('/', async (req, res) => {
             .then(event =>
                date_format(
                   convert_datetime_num_to_str(event.started_on),
-                  'MMMM-Do-YYYY'
+                  'MMMM-Do-yyyy'
                )
             )
             .catch(err => {

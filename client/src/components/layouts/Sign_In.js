@@ -17,7 +17,7 @@ class Sign_In extends Component {
 
       this.props.store_sign_in_stage('Sign_In_Search')
 
-      const todays_datetime = format_date(new Date(), 'YYYYMMDDHHmm')
+      const todays_datetime = format_date(new Date(), 'yyyyMMddHHmm')
       axios
          .get(`/api/v1/events?occurs=after&date=${todays_datetime}`) // recall we put a PROXY value in our client package.json
          .then(res => {
