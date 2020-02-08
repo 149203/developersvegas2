@@ -1,11 +1,11 @@
 require('dotenv').config()
-const express = require('express')
+import express from 'express'
 const mongoose = require('mongoose')
 const body_parser = require('body-parser')
 const path = require('path')
 const cors = require('cors') // Connor Leech's comment here: https://stackoverflow.com/a/11057628
 
-const app = express()
+const app = express();
 
 // body-parser middleware
 app.use(cors()) // Allow CORS
@@ -17,7 +17,7 @@ const db_server = require('./config/keys').db_uri
 mongoose
    .connect(db_server)
    .then(() => console.log('Connected to remote server!'))
-   .catch(err => console.log(err))
+   .catch((err: Error) => console.log(err))
 
 // Routes
 app.use('/api/v1/members', require('./routes/api/v1/members'))
@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === 'production') {
    // this is set in package.json
    console.log('In production!')
    app.use(express.static('client/build'))
-   app.get('*', (req, res) => {
+   app.get('*', (req: express.Request, res: express.Response) => {
       // for any route except for the APIs above
       res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
    })
