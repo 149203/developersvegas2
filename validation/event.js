@@ -31,19 +31,19 @@ module.exports = function validate_input_for_event(input) {
          'Hey, I know this is weird. But your event title cannot end with a dash followed by a number.'
    }
 
-   started_on = convert_empty_to_str(started_on)
-   if (validator.isEmpty(input.started_on)) {
-      errors.started_on = 'A started_on for the event is required.'
-   } else if (typeof started_on !== 'number') {
-      errors.started_on = 'started_on must be a number'
-   }
+   // started_on = convert_empty_to_str(started_on)
+   // if (validator.isEmpty(input.started_on)) {
+   //    errors.started_on = 'A started_on for the event is required.'
+   // } else if (typeof started_on !== 'number') {
+   //    errors.started_on = 'started_on must be a number'
+   // }
 
-   ended_on = convert_empty_to_str(ended_on)
-   if (validator.isEmpty(input.ended_on)) {
-      errors.ended_on = 'An ended_on for the event is required.'
-   } else if (typeof ended_on !== 'number') {
-      errors.ended_on = 'ended_on must be a number'
-   }
+   // ended_on = convert_empty_to_str(ended_on)
+   // if (validator.isEmpty(input.ended_on)) {
+   //    errors.ended_on = 'An ended_on for the event is required.'
+   // } else if (typeof ended_on !== 'number') {
+   //    errors.ended_on = 'ended_on must be a number'
+   // }
 
    location_name = convert_to_str(location_name)
    if (validator.isEmpty(location_name)) {
