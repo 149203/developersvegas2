@@ -75,10 +75,13 @@ router.get('/', async (req, res) => {
             .catch(err => res.status(400).json(err))
       } else if (req.query.occurs === 'after') {
          await event_model
-            .findOne({ ended_on: { $gt: today } })
+            .find({ ended_on: { $gt: today } })
+            .sort({ ended_on: 'asc' })
+            .limit(1) // find the first one after the date given.
             .lean() // needed because mongoose models do not return JS objects and this converts to JS object
-            .then(async event => {
-               // Return presentations for this next (current) event
+            .then(async events => {
+               // Return presentations for the nextmost event
+               const event = events[0]
                await presentation_model
                   .find({ event_id: event._id })
                   .sort({ order: 'asc', signed_up_on: 'asc' })

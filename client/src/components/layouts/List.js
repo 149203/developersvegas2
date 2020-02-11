@@ -22,7 +22,8 @@ class List extends Component {
          errors: {},
       }
 
-      const todays_datetime = format_date(new Date(), 'yyyyMMddHHmm')
+      let todays_datetime = format_date(new Date(), 'yyyyMMddHHmm')
+      // todays_datetime = 202002081459 // UNCOMMENT TO TEST A DATE
       axios
          .get(`/api/v1/events?occurs=after&date=${todays_datetime}`) // recall we put a PROXY value in our client package.json
          .then(res => {
