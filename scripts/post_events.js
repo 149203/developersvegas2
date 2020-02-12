@@ -15,8 +15,8 @@ let _id = null
 const event = {
    _id,
    title: 'Demo Day',
-   started_on: 202005091200,
-   ended_on: 202005091500,
+   started_on: 202004111200,
+   ended_on: 202004111500,
    cost: 'Free + free food!',
    description:
       "Demo Day is an open-mic-style event for coders to show and tell what they're working on and meet people. Sign up at noon. All ages, programming languages, and skill levels are welcome.",
