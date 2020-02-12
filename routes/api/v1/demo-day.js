@@ -8,7 +8,7 @@ const xref_presentation_technology_model = require('../../../models/xref_present
 const convert_undefined = require('../../../utils/convert_undefined')
 const get_object_id = require('../../../utils/get_object_id')
 const upsert = require('../../../utils/upsert')
-const convert_datetime_num_to_str = require('../../../utils/convert_datetime_num_to_str')
+const convert_datetime_num_to_date = require('../../../utils/convert_datetime_num_to_date')
 const validate_input_for_presentation = require('../../../validation/presentation')
 const cast_to_object_id = require('mongodb').ObjectID
 const has = require('lodash/has')
@@ -88,8 +88,8 @@ router.post('/', async (req, res) => {
             .findById(event_id)
             .then(event =>
                date_format(
-                  convert_datetime_num_to_str(event.started_on),
-                  'MMMM-Do-yyyy'
+                  convert_datetime_num_to_date(event.started_on),
+                  'MMMM-do-yyyy'
                )
             )
             .catch(err => {

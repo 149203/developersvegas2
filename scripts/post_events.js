@@ -3,14 +3,16 @@
 // Imports
 require('dotenv').config({ path: '../.env' })
 const axios = require('axios')
+const convert_datetime_num_to_date = require('../utils/convert_datetime_num_to_date')
 
-const server_url = process.env.server_url_prod
+let server_url = 'http://localhost:3333'
+// server_url = process.env.server_url_prod
 
 // Change the event details
 const event = {
    title: 'Demo Day',
-   started_on: 202003141200,
-   ended_on: 202003141500,
+   started_on: 202004111200,
+   ended_on: 202004111500,
    cost: 'Free + free food!',
    description:
       "Demo Day is an open-mic-style event for coders to show and tell what they're working on and meet people. Sign up at noon. All ages, programming languages, and skill levels are welcome.",
@@ -23,12 +25,13 @@ const event = {
    location_url: 'https://punchcode.org/',
 }
 
-post_event(JSON.stringify(event))
+console.log(convert_datetime_num_to_date(event.started_on))
+post_event(event)
 
 function post_event(event) {
    console.log(event)
    axios
-      .post(`http://localhost:3333/api/v1/events`, { event })
+      .post(`${server_url}/api/v1/events`, event)
       .then(res => {
          console.log('Back from the API:', res.data)
       })

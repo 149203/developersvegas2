@@ -7,7 +7,7 @@ const slug_format = require('../../../utils/slug_format')
 const append_slug_suffix = require('../../../utils/append_slug_suffix')
 const validate_input_for_event = require('../../../validation/event')
 const validator = require('validator')
-const convert_datetime_num_to_str = require('../../../utils/convert_datetime_num_to_str')
+const convert_datetime_num_to_date = require('../../../utils/convert_datetime_num_to_date')
 const map = require('lodash/map')
 
 // @route      GET api/v1/events?occurs&date
@@ -224,8 +224,12 @@ router.post('/', (req, res) => {
                .catch(err => res.status(400).json(err))
          } else {
             // Create event
-            const datetime = convert_datetime_num_to_str(body.started_on)
-            let event_date = date_format(datetime, 'MMMM-Do-yyyy')
+            console.log('Creating event')
+            console.log(body)
+            const datetime = convert_datetime_num_to_date(body.started_on)
+            console.log(datetime)
+            let event_date = date_format(datetime, 'MMMM-do-yyyy')
+            console.log({ event_date })
             const slug = slug_format(`${event_date}-${body.title}`)
             event_obj.slug = await append_slug_suffix(event_model, slug)
 

@@ -1,9 +1,11 @@
-import convert_datetime_num_to_str from './convert_datetime_num_to_str'
+import convert_datetime_num_to_date from './convert_datetime_num_to_date'
 import { format as format_date } from 'date-fns'
 
 export default date_num => {
    if (date_num) {
-      const date_str = convert_datetime_num_to_str(date_num)
-      return format_date(new Date(date_str), 'EEEE, MMM. do, yyyy')
+      return format_date(
+         convert_datetime_num_to_date(date_num),
+         'EEEE, MMM. d, yyyy'
+      )
    }
 }

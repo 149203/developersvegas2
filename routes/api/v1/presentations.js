@@ -8,7 +8,7 @@ const event_model = require('../../../models/event')
 const technology_model = require('../../../models/technology')
 const cast_to_object_id = require('mongodb').ObjectID
 const date_format = require('date-fns/format')
-const convert_datetime_num_to_str = require('../../../utils/convert_datetime_num_to_str')
+const convert_datetime_num_to_date = require('../../../utils/convert_datetime_num_to_date')
 const untitled_presentation_title = require('../../../utils/untitled_presentation_title')
 const has = require('lodash/has')
 const mask_email = require('../../../utils/mask_email')
@@ -249,8 +249,8 @@ router.post('/', async (req, res) => {
    let slug_fields = [payload.title]
    if (payload.title === untitled_presentation_title) {
       const event_date = date_format(
-         convert_datetime_num_to_str(presentation.event_started_on),
-         'MMMM-Do-yyyy'
+         convert_datetime_num_to_date(presentation.event_started_on),
+         'MMMM-do-yyyy'
       )
       slug_fields = [event_date, payload.title]
    }
