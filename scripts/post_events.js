@@ -10,6 +10,7 @@ let server_url = 'http://localhost:3333'
 
 // Change the event details
 const event = {
+   _id: '', // if you include an id, it will update the existing document
    title: 'Demo Day',
    started_on: 202004111200,
    ended_on: 202004111500,
