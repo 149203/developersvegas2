@@ -9,14 +9,14 @@ let server_url = 'http://localhost:3333'
 // server_url = process.env.server_url_prod
 
 let _id = null
-// _id = '5e443ab1151f296ec013fae2' // if you include an id, it will update the existing document
+// _id = '5e44448f3bf60560d8104c97' // if you include an id, it will update the existing document
 
 // Change the event details
 const event = {
    _id,
    title: 'Demo Day',
-   started_on: 202003141200,
-   ended_on: 202003141500,
+   started_on: 202005091200,
+   ended_on: 202005091500,
    cost: 'Free + free food!',
    description:
       "Demo Day is an open-mic-style event for coders to show and tell what they're working on and meet people. Sign up at noon. All ages, programming languages, and skill levels are welcome.",
