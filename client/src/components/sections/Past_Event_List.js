@@ -123,8 +123,11 @@ class Past_Event_List extends Component {
                                  in {data.event.location_city},{' '}
                                  {data.event.location_state}. We saw
                                  presentations from{' '}
-                                 {data.past_presentations.map(
-                                    (presentation, i, arr) => {
+                                 {data.past_presentations
+                                    .filter(
+                                       presentation => presentation.is_active
+                                    )
+                                    .map((presentation, i, arr) => {
                                        return (
                                           <span key={presentation._id}>
                                              <a
@@ -147,8 +150,7 @@ class Past_Event_List extends Component {
                                              {i === arr.length - 1 ? '.' : ''}
                                           </span>
                                        )
-                                    }
-                                 )}
+                                    })}
                               </p>
                            </div>
                         </div>
