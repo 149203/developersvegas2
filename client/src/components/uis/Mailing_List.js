@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import classnames from 'classnames'
 import Modal from 'react-bootstrap/Modal'
 import axios from 'axios'
+import slack_icon from '../../img/las-vegas-developers-coding-meetup-slack-icon.png'
+import facebook_icon from '../../img/las-vegas-developers-coding-meetup-facebook-icon.png'
+import meetup_icon from '../../img/las-vegas-developers-coding-meetup-meetup-icon.png'
 
 // import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
@@ -177,6 +180,43 @@ class Sidebar_Mailing_List extends Component {
                   </div>
                </div>
             </form>
+
+            <div className="mt-3 mt-xl-5 mb-2 mb-xl-0">
+               <h4 className="d-none d-sm-block">Join our community</h4>
+               <h3 className="d-sm-none mt-5 mb-2">Join our community</h3>
+
+               <a
+                  href="https://join.slack.com/t/lasvegasdevelopers/shared_invite/enQtOTQyODg1NzIyNDY0LTVjMjYzNDkwMjYxMmZjMTZhM2UwZjY5ZTZlODE3NDNjZWM3Yjg4MTk0YjNiZDlkMzkyNTRlOWI3OGJjY2U1MTc"
+                  className="d-xl-block mb-3 mb-md-0 mb-xl-3 mr-5 mr-lg-6 d-inline-block"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="https://join.slack.com/t/lasvegasdevelopers/shared_invite/enQtOTQyODg1NzIyNDY0LTVjMjYzNDkwMjYxMmZjMTZhM2UwZjY5ZTZlODE3NDNjZWM3Yjg4MTk0YjNiZDlkMzkyNTRlOWI3OGJjY2U1MTc"
+               >
+                  <img src={slack_icon} alt="Slack icon"></img>
+                  <p className="d-inline mt-4 ml-2">Las Vegas Developers</p>
+               </a>
+               <a
+                  href="https://www.meetup.com/Las-Vegas-Developers/"
+                  className="d-xl-block mb-3 mb-md-0 mb-xl-3 mr-5 mr-lg-6 d-inline-block"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="https://www.meetup.com/Las-Vegas-Developers/"
+               >
+                  <img src={meetup_icon} alt="Meetup icon"></img>
+                  <p className="d-inline mt-4 ml-2">Las Vegas Developers</p>
+               </a>
+               <a
+                  href="https://www.facebook.com/groups/free.code.camp.las.vegas.nv/"
+                  className="d-xl-block mb-0 mb-xl-3 mr-5 mr-lg-6 d-inline-block"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="https://www.facebook.com/groups/free.code.camp.las.vegas.nv/"
+               >
+                  <img src={facebook_icon} alt="Facebook icon"></img>
+                  <p className="d-inline mt-4 ml-2">Free Code Camp Las Vegas</p>
+               </a>
+            </div>
+
             <div className="clearfix"></div>
 
             <Modal

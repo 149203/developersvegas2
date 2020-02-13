@@ -6,7 +6,7 @@ const Sidebar = () => {
    return (
       <div className="p-4 pb-0 bg-light">
          <Mailing_List />
-         <br />
+
          <Sponsors />
       </div>
    )

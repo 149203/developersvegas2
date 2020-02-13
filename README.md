@@ -79,6 +79,18 @@ Data returned from an API should be an array of "flat" objects, one level deep:
 }]
 ```
 
+# Images
+
+Prefix all images with las-vegas-developers-coding-meetup-
+
+Use `alt` for every image. The `alt` value is a description of the image.
+
+# Titles
+
+Use `title` for every link. The title value is the same value as the `href`.
+Use `title` for every iframe. The title value is a description of the iframe.
+Never use `title` or `alt` otherwise.
+
 # Commits
 
 ## VS Code

@@ -1,11 +1,10 @@
 import React from 'react'
 import vh_logo from '../../img/las-vegas-developers-coding-meetup-vehicle-history.png'
-import chsi_logo from '../../img/las-vegas-developers-coding-meetup-chsi-technologies.svg'
 import dot_logo from '../../img/las-vegas-developers-coding-meetup-vegas-domain.png'
 
 function Sponsors() {
    return (
-      <div>
+      <div className="mt-xl-5">
          <h4 className="mb-3 d-none d-sm-block">Sponsored by</h4>
          <h3 className="mb-3 d-xs-block d-sm-none">Sponsored by</h3>
 
@@ -29,31 +28,6 @@ function Sponsors() {
                   believes everyone deserves access to unbiased, accurate
                   information about every vehicle—simplifying the research
                   process.
-               </p>
-               <hr className="d-block d-md-none d-xl-block" />
-            </div>
-
-            <div className="vr d-none d-md-block d-xl-none" />
-
-            <div className="col-12 col-md-4 col-xl-12 px-md-4 px-lg-4 px-xl-2">
-               <img
-                  src={chsi_logo}
-                  className="mb-2 sponsor_logo_size"
-                  alt="CHSI Technologies logo"
-               />
-
-               <p className="mb-0">
-                  CHSI Technologies makes{' '}
-                  <a
-                     href="https://chsiconnections.com/"
-                     target="_blank"
-                     rel="noopener noreferrer"
-                     title="https://chsiconnections.com/"
-                  >
-                     Connections
-                  </a>
-                  —award-winning insurance and risk management software—with a
-                  team of some of the best developers in Las Vegas.
                </p>
                <hr className="d-block d-md-none d-xl-block" />
             </div>
