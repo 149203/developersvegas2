@@ -161,6 +161,7 @@ class Past_Event_List extends Component {
                </div>
             )}
 
+            {/* TESTIMONIAL */}
             {/* <div className="row">
                <div className="col-md-12">
                   <blockquote className="blockquote mx-8 my-2">
