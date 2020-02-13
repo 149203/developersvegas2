@@ -8,8 +8,12 @@ const convert_datetime_num_to_date = require('../utils/convert_datetime_num_to_d
 let server_url = 'http://localhost:3333'
 // server_url = process.env.server_url_prod
 
+let _id = null
+// _id = '5e44448f3bf60560d8104c97' // if you include an id, it will update the existing document
+
 // Change the event details
 const event = {
+   _id,
    title: 'Demo Day',
    started_on: 202004111200,
    ended_on: 202004111500,
@@ -26,6 +30,7 @@ const event = {
 }
 
 console.log(convert_datetime_num_to_date(event.started_on))
+
 post_event(event)
 
 function post_event(event) {
@@ -37,32 +42,3 @@ function post_event(event) {
       })
       .catch(err => console.log('ERROR:', err.response))
 }
-
-// const upserted_event = async () => {
-//    await upsert({
-//       payload,
-//       collection: presentation_model,
-//       options: {
-//          should_create_slug: true,
-//          should_create_row_id: false,
-//          slug_fields, // an array of strings, in order
-//       },
-//       filter: { event_id, member_id }, // only one presentation per member per event, therefore if they try to insert another presentation, it will upsert over their previous one
-//    })
-// }
-
-// mongoose
-//    .connect(db)
-//    .then(async () => {
-//       await collection
-//          .find()
-//          .then(docs => {
-//             console.log(docs)
-//             mongoose.disconnect()
-//          })
-//          .catch(err => {
-//             console.log(err)
-//             mongoose.disconnect()
-//          })
-//    })
-//    .catch(err => console.log(err))

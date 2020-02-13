@@ -6,13 +6,6 @@ export default num => {
    const day = Number(str.slice(6, 8))
    const hour = Number(str.slice(8, 10))
    const minute = Number(str.slice(10, 13))
-   console.log({
-      year,
-      month,
-      day,
-      hour,
-      minute,
-   })
    if (minute) return new Date(year, month, day, hour, minute)
    if (hour) return new Date(year, month, day, hour)
    if (day) return new Date(year, month, day)

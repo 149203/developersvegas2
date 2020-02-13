@@ -8,6 +8,7 @@ import friendly_format_time from '../../utils/friendly_format_time'
 import friendly_format_date from '../../utils/friendly_format_date'
 import friendly_format_date_short from '../../utils/friendly_format_date_short'
 import trim_time from '../../utils/trim_time'
+import is_empty from '../../utils/is_empty'
 import main_image from '../../img/las-vegas-developers-coding-meetup-main-image.jpg'
 
 class Next_Event extends Component {
@@ -42,162 +43,177 @@ class Next_Event extends Component {
 
       return (
          <div>
-            <h3 className="mb-1">Next event</h3>
-            <hr className="mt-0" />
+            {!is_empty(this.props.stored_next_event) && (
+               <div>
+                  <h3 className="mb-1">Next event</h3>
+                  <hr className="mt-0" />
 
-            <div className="row mb-xl-4">
-               <div className="col-12 d-md-none">
-                  <h4 className="d-none d-sm-block">
-                     {title}
-                     {' - '}
-                     {friendly_format_date(started_on)}
-                  </h4>
-                  <h4 className="d-sm-none mb-3">
-                     {title}
-                     {' - '}
-                     {friendly_format_date_short(started_on)}
-                  </h4>
-               </div>
+                  <div className="row mb-xl-4">
+                     <div className="col-12 d-md-none">
+                        <h4 className="d-none d-sm-block">
+                           {title}
+                           {' - '}
+                           {friendly_format_date(started_on)}
+                        </h4>
+                        <h4 className="d-sm-none mb-3">
+                           {title}
+                           {' - '}
+                           {friendly_format_date_short(started_on)}
+                        </h4>
+                     </div>
 
-               <div className="col-12 col-sm-6 col-md-4 col-lg-6">
-                  <img
-                     src={main_image}
-                     className="img-fluid"
-                     alt="Las Vegas Developers at our monthly coding meetup"
-                  />
-               </div>
-               <div className="col-12 col-sm-6 col-md-8 col-lg-6">
-                  <h4 className="d-none d-md-block d-lg-block d-xl-block">
-                     {title} - {friendly_format_date(started_on)}
-                  </h4>
+                     <div className="col-12 col-sm-6 col-md-4 col-lg-6">
+                        <img
+                           src={main_image}
+                           className="img-fluid"
+                           alt="Las Vegas Developers at our monthly coding meetup"
+                        />
+                     </div>
+                     <div className="col-12 col-sm-6 col-md-8 col-lg-6">
+                        <h4 className="d-none d-md-block d-lg-block d-xl-block">
+                           {title} - {friendly_format_date(started_on)}
+                        </h4>
 
-                  <div className="row d-md-none d-lg-flex next_event_details">
-                     <div className="d-none d-md-block col-md-2">
-                        <p>Time:</p>
-                     </div>
-                     <div className="col-12 col-md-10 d-none d-sm-block">
-                        <p>
-                           <span className="text-capitalize">
-                              {friendly_format_time(trim_time(started_on))}
-                           </span>
-                           &nbsp;to&nbsp;
-                           {friendly_format_time(trim_time(ended_on))}
-                        </p>
-                     </div>
-                     <div className="d-none d-md-block col-md-2">
-                        <p>Place:</p>
-                     </div>
-                     <div className="col-12 col-md-10 d-none d-sm-block">
-                        <p>
-                           <a
-                              href={location_url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              title={location_url}
-                           >
-                              {location_name}
-                           </a>
-                           <br />
-                           {location_street_1}
-                           {location_street_2 && (
-                              <span>
+                        <div className="row d-md-none d-lg-flex next_event_details">
+                           <div className="d-none d-md-block col-md-2">
+                              <p>Time:</p>
+                           </div>
+                           <div className="col-12 col-md-10 d-none d-sm-block">
+                              <p>
+                                 <span className="text-capitalize">
+                                    {friendly_format_time(
+                                       trim_time(started_on)
+                                    )}
+                                 </span>
+                                 &nbsp;to&nbsp;
+                                 {friendly_format_time(trim_time(ended_on))}
+                              </p>
+                           </div>
+                           <div className="d-none d-md-block col-md-2">
+                              <p>Place:</p>
+                           </div>
+                           <div className="col-12 col-md-10 d-none d-sm-block">
+                              <p>
+                                 <a
+                                    href={location_url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    title={location_url}
+                                 >
+                                    {location_name}
+                                 </a>
                                  <br />
-                                 {location_street_2}
-                              </span>
-                           )}
-                           <br />
-                           {location_city}, {location_state} {location_zip}
-                        </p>
+                                 {location_street_1}
+                                 {location_street_2 && (
+                                    <span>
+                                       <br />
+                                       {location_street_2}
+                                    </span>
+                                 )}
+                                 <br />
+                                 {location_city}, {location_state}{' '}
+                                 {location_zip}
+                              </p>
+                           </div>
+                           <div className="d-none d-md-block col-md-2">
+                              <p>Cost:</p>
+                           </div>
+                           <div className="col-12 col-md-10 d-none d-sm-block">
+                              <p>{cost}</p>
+                           </div>
+                           <div className="col-3 col-md-2 d-none d-md-block">
+                              <p>Details:</p>
+                           </div>
+                           <div className="col-9 col-md-10 d-none d-md-block">
+                              <p className="">{description}</p>
+                           </div>
+                        </div>
+
+                        {/* end row */}
+
+                        <div className="row d-none d-md-block d-lg-none">
+                           <div className="col-12">
+                              <p className="">{description}</p>
+                              <p>
+                                 We'll meet at&nbsp;
+                                 <a
+                                    href={location_url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    title={location_url}
+                                 >
+                                    {location_name}
+                                 </a>{' '}
+                                 at {location_street_1},&nbsp;
+                                 {location_street_2 && (
+                                    <span>{location_street_2},&nbsp;</span>
+                                 )}
+                                 {location_city}, {location_state}{' '}
+                                 {location_zip}
+                                 .&nbsp;
+                                 <span className="text-capitalize">
+                                    {friendly_format_time(
+                                       trim_time(started_on)
+                                    )}
+                                 </span>
+                                 &nbsp;to&nbsp;
+                                 {friendly_format_time(trim_time(ended_on))}
+                                 .&nbsp;
+                                 {cost}
+                              </p>
+                           </div>
+                        </div>
+
+                        {/* end row */}
+
+                        <div className="row d-sm-none mt-4">
+                           <div className="col-12">
+                              <p className="">{description}</p>
+                              <p>
+                                 We'll meet at&nbsp;
+                                 <a
+                                    href={location_url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    title={location_url}
+                                 >
+                                    {location_name}
+                                 </a>
+                                 :
+                              </p>
+                              <p>
+                                 {location_street_1},&nbsp;
+                                 {location_street_2 && (
+                                    <span>{location_street_2},&nbsp;</span>
+                                 )}
+                                 {location_city}, {location_state}{' '}
+                                 {location_zip}
+                              </p>
+                              <p className="mb-0">
+                                 <span className="text-capitalize">
+                                    {friendly_format_time(
+                                       trim_time(started_on)
+                                    )}
+                                 </span>
+                                 &nbsp;to&nbsp;
+                                 {friendly_format_time(trim_time(ended_on))}
+                                 .&nbsp;
+                                 {cost}
+                              </p>
+                           </div>
+                        </div>
+
+                        {/* end row */}
                      </div>
-                     <div className="d-none d-md-block col-md-2">
-                        <p>Cost:</p>
-                     </div>
-                     <div className="col-12 col-md-10 d-none d-sm-block">
-                        <p>{cost}</p>
-                     </div>
-                     <div className="col-3 col-md-2 d-none d-md-block">
-                        <p>Details:</p>
-                     </div>
-                     <div className="col-9 col-md-10 d-none d-md-block">
-                        <p className="">{description}</p>
+
+                     <div className="col-12 d-none d-sm-block d-md-none">
+                        <p className="mb-0 mt-2">{description}</p>
                      </div>
                   </div>
-
-                  {/* end row */}
-
-                  <div className="row d-none d-md-block d-lg-none">
-                     <div className="col-12">
-                        <p className="">{description}</p>
-                        <p>
-                           We'll meet at&nbsp;
-                           <a
-                              href={location_url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              title={location_url}
-                           >
-                              {location_name}
-                           </a>{' '}
-                           at {location_street_1},&nbsp;
-                           {location_street_2 && (
-                              <span>{location_street_2},&nbsp;</span>
-                           )}
-                           {location_city}, {location_state} {location_zip}
-                           .&nbsp;
-                           <span className="text-capitalize">
-                              {friendly_format_time(trim_time(started_on))}
-                           </span>
-                           &nbsp;to&nbsp;
-                           {friendly_format_time(trim_time(ended_on))}.&nbsp;
-                           {cost}
-                        </p>
-                     </div>
-                  </div>
-
-                  {/* end row */}
-
-                  <div className="row d-sm-none mt-4">
-                     <div className="col-12">
-                        <p className="">{description}</p>
-                        <p>
-                           We'll meet at&nbsp;
-                           <a
-                              href={location_url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              title={location_url}
-                           >
-                              {location_name}
-                           </a>
-                           :
-                        </p>
-                        <p>
-                           {location_street_1},&nbsp;
-                           {location_street_2 && (
-                              <span>{location_street_2},&nbsp;</span>
-                           )}
-                           {location_city}, {location_state} {location_zip}
-                        </p>
-                        <p className="mb-0">
-                           <span className="text-capitalize">
-                              {friendly_format_time(trim_time(started_on))}
-                           </span>
-                           &nbsp;to&nbsp;
-                           {friendly_format_time(trim_time(ended_on))}.&nbsp;
-                           {cost}
-                        </p>
-                     </div>
-                  </div>
-
-                  {/* end row */}
+                  <br className="d-xl-none d-lg-block d-md-none" />
+                  <div className="clearfix"></div>
                </div>
-
-               <div className="col-12 d-none d-sm-block d-md-none">
-                  <p className="mb-0 mt-2">{description}</p>
-               </div>
-            </div>
-            <br className="d-xl-none d-lg-block d-md-none" />
-            <div className="clearfix"></div>
+            )}
          </div>
       )
    }
