@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Header from '../sections/Header'
+import Developer_Bio from '../sections/Developer_Bio'
+import is_empty from '../../utils/is_empty'
 
 class Developer extends Component {
    constructor() {
@@ -19,17 +22,34 @@ class Developer extends Component {
    }
 
    render() {
+      const {
+         first_name,
+         last_name,
+         _id,
+         bio,
+         unique_technologies,
+      } = this.state.developer
+
       return (
-         <div className="container">
-            <div className="row">
-               <div className="col-12 mt-3">
-                  <h1 className="font-weight-light mb-3 mb-lg-4">
-                     DEVELOPER NAME
-                  </h1>
+         <div>
+            <Header />
+            <div className="container">
+               <div className="row">
+                  {!is_empty(this.state.developer) && (
+                     <div>
+                        <Developer_Bio
+                           _id={_id}
+                           first_name={first_name}
+                           last_name={last_name}
+                           bio={bio}
+                           unique_technologies={unique_technologies}
+                        />
+                     </div>
+                  )}
                </div>
-            </div>
-            <div className="row">
-               <div className="col-12"></div>
+               <div className="row">
+                  <div className="col-12"></div>
+               </div>
             </div>
          </div>
       )

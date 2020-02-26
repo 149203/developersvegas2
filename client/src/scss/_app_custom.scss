@@ -113,3 +113,18 @@ h4,
 .text-strikethrough {
    text-decoration: line-through;
 }
+
+.header {
+   background-color: $gray-900;
+   color: $white;
+   padding: map-get($map: $spacers, $key: 2);
+}
+
+.header a {
+   color: white;
+   text-decoration: none;
+}
+
+.header a:hover {
+   text-decoration: underline;
+}
