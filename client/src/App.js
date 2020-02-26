@@ -9,26 +9,12 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux' // provides our application with a store, it has to wrap around everything
 import store from './store'
 
-// function App() {
-//    return (
-//       <Provider store={store}>
-//          <Router>
-//             <div className="App">
-//                <Route exact path="/" component={Home} />
-//                <Route exact path="/hello" component={Sign_In} />
-//                <Route exact path="/list" component={List} />
-//             </div>
-//          </Router>
-//       </Provider>
-//    )
-// }
-
-function App() {
+export default function App() {
    const api_regex = /^\/api\/.*/
+   // if using "/api/" in the pathname, don't use react router
    if (api_regex.test(window.location.pathname)) {
       return <div />
    } else {
-      // if not using the /api/ routes, use react router
       return (
          <Provider store={store}>
             <Router>
@@ -45,5 +31,3 @@ function App() {
       )
    }
 }
-
-export default App
