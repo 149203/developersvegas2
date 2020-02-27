@@ -18,7 +18,7 @@ class Developer extends Component {
          })
          .catch(err => {
             console.log({ errors: err })
-            // window.location.replace('/404')
+            window.location.replace('/404')
          }) // if there is an error here, redirect to the 404 page
    }
 
