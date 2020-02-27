@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Video from '../uis/Video'
 import { format as format_date } from 'date-fns'
 import friendly_format_date from '../../utils/friendly_format_date'
 import friendly_format_date_short from '../../utils/friendly_format_date_short'
@@ -61,32 +62,10 @@ class Past_Event_List extends Component {
                               </h5>
                            </div>
                            <div className="col-md-4 col-sm-6">
-                              <div
-                                 style={{
-                                    padding: '56.25% 0 0 0',
-                                    position: 'relative',
-                                 }}
-                              >
-                                 <iframe
-                                    src={`https://player.vimeo.com/video/${featured_video_id(
-                                       data
-                                    )}?color=ffffff&title=0&byline=0&portrait=0`}
-                                    style={{
-                                       position: 'absolute',
-                                       top: 0,
-                                       left: 0,
-                                       width: '100%',
-                                       height: '100%',
-                                    }}
-                                    frameBorder="0"
-                                    allow="autoplay; fullscreen"
-                                    allowFullScreen
-                                    title={`A video iframe: ${featured_video_title(
-                                       data
-                                    )}`}
-                                 ></iframe>
-                              </div>
-                              {/* <script src="https://player.vimeo.com/api/player.js"></script> */}
+                              <Video
+                                 video_id={featured_video_id(data)}
+                                 title={featured_video_title(data)}
+                              />
                            </div>
                            <div className="col-md-8 col-sm-6">
                               <h4 className="d-none d-md-block">
