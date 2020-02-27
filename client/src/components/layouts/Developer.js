@@ -26,7 +26,6 @@ class Developer extends Component {
       const {
          first_name,
          last_name,
-         _id,
          bio,
          unique_technologies,
          presentations,
@@ -40,7 +39,6 @@ class Developer extends Component {
                   <div>
                      <div className="row">
                         <Developer_Bio
-                           _id={_id}
                            first_name={first_name}
                            last_name={last_name}
                            bio={bio}
