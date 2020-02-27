@@ -74,12 +74,15 @@ blockquote a:hover {
 
 h1,
 .h1 {
+   font-weight: $font-weight-light;
    @include media-breakpoint-down(md) {
       font-size: $h2-font-size;
+      font-weight: $font-weight-light;
       // margin-bottom: map-get($map: $spacers, $key: 3);
    }
    @include media-breakpoint-down(xs) {
       font-size: $h3-font-size;
+      font-weight: $font-weight-normal;
       // margin-bottom: map-get($map: $spacers, $key: 3);
    }
 }

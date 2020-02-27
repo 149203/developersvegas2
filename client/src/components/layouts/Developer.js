@@ -36,44 +36,33 @@ class Developer extends Component {
          <div>
             <Header />
             <div className="container">
-               <div className="row">
-                  {!is_empty(this.state.developer) && (
-                     <div>
-                        <div className="row">
-                           <Developer_Bio
-                              _id={_id}
-                              first_name={first_name}
-                              last_name={last_name}
-                              bio={bio}
-                              unique_technologies={unique_technologies}
-                           />
-                        </div>
-                        <div className="row">
-                           {presentations
-                              .filter(presentation => presentation.is_active)
-                              .map(presentation => (
-                                 <Video_Card
-                                    _id={presentation._id}
-                                    slug={presentation.slug}
-                                    title={presentation.title}
-                                    started_on={presentation.event_started_on}
-                                    video_id={presentation.video_id}
-                                    video_screenshot_url={
-                                       presentation.video_screenshot_url
-                                    }
-                                    video_screenshot_with_play_url={
-                                       presentation.video_screenshot_with_play_url
-                                    }
-                                    video_url={presentation.video_url}
-                                    video_iframe={presentation.video_iframe}
-                                    technologies={presentation.technologies}
-                                    key={presentation._id}
-                                 />
-                              ))}
-                        </div>
+               {!is_empty(this.state.developer) && (
+                  <div>
+                     <div className="row">
+                        <Developer_Bio
+                           _id={_id}
+                           first_name={first_name}
+                           last_name={last_name}
+                           bio={bio}
+                           unique_technologies={unique_technologies}
+                        />
                      </div>
-                  )}
-               </div>
+                     <div className="row">
+                        {presentations
+                           .filter(presentation => presentation.is_active)
+                           .map(presentation => (
+                              <Video_Card
+                                 title={presentation.title}
+                                 started_on={presentation.event_started_on}
+                                 video_id={presentation.video_id}
+                                 technologies={presentation.technologies}
+                                 key={presentation._id}
+                              />
+                           ))}
+                     </div>
+                  </div>
+               )}
+
                <div className="row">
                   <div className="col-12"></div>
                </div>

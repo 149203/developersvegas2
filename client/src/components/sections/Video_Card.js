@@ -2,22 +2,15 @@ import React from 'react'
 import friendly_format_date_without_day from '../../utils/friendly_format_date_without_day'
 
 export default function Video_Card(props) {
-   const {
-      _id,
-      slug,
-      title,
-      started_on,
-      video_id,
-      video_screenshot_url,
-      video_screenshot_with_play_url,
-      video_url,
-      video_iframe,
-      technologies,
-   } = props
+   const { title, started_on, video_id, technologies } = props
    return (
-      <div className="col-12 col-lg-6 mb-4 mb-md-6 mb-xl-8">
+      <div className="col-12 col-lg-6 mb-6 mb-xl-8">
          <div className="row">
-            <div className="col-6">
+            <div className="col-12 d-sm-none mb-2">
+               <h3 className="font-weight-normal">{title}</h3>
+            </div>
+
+            <div className="col-12 col-sm-6 mb-2 mb-sm-0">
                <div
                   style={{
                      padding: '56.25% 0 0 0',
@@ -41,8 +34,8 @@ export default function Video_Card(props) {
                </div>
             </div>
 
-            <div className="col-6">
-               <h4>{title}</h4>
+            <div className="col-12 col-sm-6">
+               <h4 className="d-none d-sm-block">{title}</h4>
                <p className="text-muted">
                   {friendly_format_date_without_day(started_on)}
                </p>
