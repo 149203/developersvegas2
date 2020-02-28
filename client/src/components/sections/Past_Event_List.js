@@ -110,10 +110,8 @@ class Past_Event_List extends Component {
                                        return (
                                           <span key={presentation._id}>
                                              <a
-                                                href={presentation.video_url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                title={presentation.video_url}
+                                                href={`/${presentation.member_slug}`}
+                                                title={`https://developers.vegas/${presentation.member_slug}`}
                                              >
                                                 {presentation.member_first_name +
                                                    ' ' +
