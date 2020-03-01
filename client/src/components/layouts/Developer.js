@@ -5,7 +5,6 @@ import Developer_Bio from '../sections/Developer_Bio'
 import Video_Card from '../sections/Video_Card'
 import is_empty from '../../utils/is_empty'
 import Four_Oh_Four from '../layouts/Four_Oh_Four'
-import Helmet from 'react-helmet'
 
 class Developer extends Component {
    constructor() {
@@ -39,9 +38,6 @@ class Developer extends Component {
             <div>
                {!is_empty(this.state.developer) && (
                   <div>
-                     <Helmet>
-                        <title>{`${first_name} ${last_name}`}</title>
-                     </Helmet>
                      <Header />
                      <div className="container">
                         <div>
