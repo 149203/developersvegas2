@@ -11,7 +11,8 @@ export default function Developer_Bio(props) {
                return (
                   <span key={technology._id}>
                      {technology.name}
-                     {i === arr.length - 2 ? ', and ' : ''}
+                     {i === arr.length - 2 && arr.length > 2 ? ', and ' : ''}
+                     {i === arr.length - 2 && arr.length < 3 ? ' and ' : ''}
                      {i < arr.length - 2 ? ', ' : ''}
                      {i === arr.length - 1 ? '. ' : ''}
                   </span>
