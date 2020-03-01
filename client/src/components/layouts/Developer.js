@@ -20,8 +20,7 @@ class Developer extends Component {
          .catch(err => {
             console.log({ errors: err })
             this.setState({ has_errors: true })
-            //window.location.replace('/404')
-         }) // if there is an error here, redirect to the 404 page
+         })
    }
 
    render() {
