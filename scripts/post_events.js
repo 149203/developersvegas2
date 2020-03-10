@@ -6,7 +6,7 @@ const axios = require('axios')
 const convert_datetime_num_to_date = require('../utils/convert_datetime_num_to_date')
 
 let server_url = 'http://localhost:3333'
-// server_url = process.env.server_url_prod
+server_url = process.env.server_url_prod
 
 let _id = null
 // _id = '5e44448f3bf60560d8104c97' // if you include an id, it will update the existing document
@@ -15,17 +15,17 @@ let _id = null
 const event = {
    _id,
    title: 'Demo Day',
-   started_on: 202004111200,
-   ended_on: 202004111500,
+   started_on: 202007111200,
+   ended_on: 202007111500,
    cost: 'Free + free food!',
    description:
       "Demo Day is an open-mic-style event for coders to show and tell what they're working on and meet people. Sign up at noon. All ages, programming languages, and skill levels are welcome.",
    location_name: 'PunchCode',
-   location_street_1: '1112 S Casino Center Blvd',
-   location_street_2: '',
+   location_street_1: 'Historic 5th Street School',
+   location_street_2: '401 S 4th St',
    location_city: 'Las Vegas',
    location_state: 'NV',
-   location_zip: '89104',
+   location_zip: '89101',
    location_url: 'https://punchcode.org/',
 }
 
