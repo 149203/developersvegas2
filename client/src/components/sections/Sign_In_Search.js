@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux' // allows connecting redux to this react component
 import axios from 'axios'
 import escape_regex from 'lodash/escapeRegExp'
+import { actions } from '../../state/types'
 import { store_sign_in_stage } from '../../state/sign_in_stage'
 import { store_current_member } from '../../state/current_member'
 
@@ -16,13 +17,13 @@ class Sign_In_Search extends Component {
       }
       axios
          .get(`/api/v1/members`) // recall we put a PROXY value in our client package.json
-         .then(res => {
+         .then((res) => {
             const members = res.data
             this.setState({ members, data_is_loaded: true })
             document.getElementById('search_input').focus()
             // TODO: don't load the elements on the page until this data is returned from the API
          })
-         .catch(err => console.log({ errors: err.response.data }))
+         .catch((err) => console.log({ errors: err.response.data }))
    }
 
    search(e) {
@@ -32,7 +33,7 @@ class Sign_In_Search extends Component {
       const members = [...this.state.members]
       if (input && members) {
          let input_regex = new RegExp('^' + escape_regex(input), 'i')
-         filtered_members = members.filter(member => {
+         filtered_members = members.filter((member) => {
             return input_regex.test(member.last_name)
          })
       } else filtered_members = ''
@@ -40,9 +41,20 @@ class Sign_In_Search extends Component {
    }
 
    sign_me_in(member) {
-      this.props.store_current_member(member)
+      this.props.dispatch({
+         type: actions.UPDATE_CURRENT_MEMBER,
+         payload: member,
+      })
       // TODO: only go to Sign_In_Want_To_Present if presenters <= 18
-      this.props.store_sign_in_stage('Sign_In_Want_To_Present')
+      this.props.dispatch({
+         type: actions.UPDATE_SIGN_IN_STAGE,
+         payload: 'Sign_In_Want_To_Present',
+      })
+
+      this.props.dispatch({
+         type: actions.UPDATE_CURRENT_MEMBER_AGE,
+         payload: 18,
+      })
    }
 
    im_new_here() {
@@ -64,13 +76,13 @@ class Sign_In_Search extends Component {
                         type="text"
                         id="search_input"
                         autoComplete="off"
-                        onInput={e => {
+                        onInput={(e) => {
                            this.search(e)
                         }}
                      ></input>
 
                      {this.state.filtered_members &&
-                        this.state.filtered_members.map(member => {
+                        this.state.filtered_members.map((member) => {
                            return (
                               <div key={member._id}>
                                  <div className="row">
@@ -127,12 +139,11 @@ class Sign_In_Search extends Component {
    }
 }
 
-const map_store_to_props = store => {
+const map_store_to_props = (store) => {
    // so I can use stored values as props
    // https://stackoverflow.com/a/38678454
    return {} // must always return an object
 }
 export default connect(
-   map_store_to_props, // mapStateToProps
-   { store_sign_in_stage, store_current_member } // mapDispatchToProps, here an 'action creator' wrapped in an object
+   map_store_to_props // mapStateToProps
 )(withRouter(Sign_In_Search))

@@ -20,10 +20,10 @@ class Sign_In extends Component {
       const todays_datetime = format_date(new Date(), 'yyyyMMddHHmm')
       axios
          .get(`/api/v1/events?occurs=after&date=${todays_datetime}`) // recall we put a PROXY value in our client package.json
-         .then(res => {
+         .then((res) => {
             this.props.store_next_event(res.data)
          })
-         .catch(err => console.log({ errors: err.response.data }))
+         .catch((err) => console.log({ errors: err.response.data }))
    }
 
    update_stage() {
@@ -54,7 +54,7 @@ class Sign_In extends Component {
    }
 }
 
-const map_store_to_props = store => {
+const map_store_to_props = (store) => {
    // so I can use stored values as props
    // https://stackoverflow.com/a/38678454
    return {
