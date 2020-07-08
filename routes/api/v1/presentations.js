@@ -28,22 +28,22 @@ router.get('/', (req, res) => {
          .populate('member_id', ['first_name', 'last_name'], member_model)
          .populate('event_id', ['title', 'started_on'], event_model)
          .sort({ order: 'asc' })
-         .then(presentations => {
+         .then((presentations) => {
             const filtered_presentations = presentations.filter(
-               presentation => {
+               (presentation) => {
                   return presentation.event_id.started_on === started_on
                }
             )
             res.json(filtered_presentations)
          })
-         .catch(err => res.status(400).json(err))
+         .catch((err) => res.status(400).json(err))
    } else {
       presentation_model
          .find()
-         .then(presentations => {
+         .then((presentations) => {
             res.json(presentations)
          })
-         .catch(err => res.status(400).json(err))
+         .catch((err) => res.status(400).json(err))
    }
 })
 
@@ -85,8 +85,8 @@ router.get('/:slug', async (req, res) => {
          ],
          event_model
       )
-      .then(async presentations => {
-         const filtered_presentations = presentations.filter(presentation => {
+      .then(async (presentations) => {
+         const filtered_presentations = presentations.filter((presentation) => {
             return presentation.member_id.slug === slug
          })
 
@@ -127,9 +127,9 @@ router.get('/:slug', async (req, res) => {
                   ['name', '_id', 'popularity', 'slug', 'is_active'],
                   technology_model
                )
-               .then(xrefs => {
+               .then((xrefs) => {
                   // console.log(xrefs)
-                  return xrefs.map(xref => {
+                  return xrefs.map((xref) => {
                      return {
                         name: xref.technology_id.name,
                         popularity: xref.technology_id.popularity,
@@ -139,12 +139,12 @@ router.get('/:slug', async (req, res) => {
                      }
                   })
                })
-               .catch(err => console.log(err))
+               .catch((err) => console.log(err))
          }
 
          const ordered_presentations = order_by(
             organized_presentations,
-            p => p.event_started_on,
+            (p) => p.event_started_on,
             'desc'
          )
 
@@ -167,22 +167,24 @@ router.get('/:slug', async (req, res) => {
 
          function get_uniq_technologies(presentations) {
             const all = flatten(
-               presentations.map(presentation => {
+               presentations.map((presentation) => {
                   return presentation.technologies
                })
             )
-            const count = count_by(all, '_id')
-            const uniqs = uniq_by(all, 'slug')
+            const count = count_by(all, '_id') // { 1: 6, 50: 2 }
+            const uniqs = uniq_by(all, 'slug')[
+               { _id: 1, name: 'JavaScript', count: 6 }
+            ]
 
             // turn count into an array of objects with 2 keys: _id, count
-            const count_arr = Object.keys(count).map(key => {
-               return { _id: key, count: count[key] }
+            const count_arr = Object.keys(count).map((key) => {
+               return { _id: key, count: count[key] } // { _id: 1, count: 6 }
             })
 
             // merge matching count objects and uniq objects
-            const merged = uniqs.map(uniq_tech => {
+            const merged = uniqs.map((uniq_tech) => {
                let merged_tech
-               count_arr.forEach(count_tech => {
+               count_arr.forEach((count_tech) => {
                   if (String(uniq_tech._id) === String(count_tech._id)) {
                      uniq_tech.count = count_tech.count
                      merged_tech = uniq_tech
@@ -199,7 +201,7 @@ router.get('/:slug', async (req, res) => {
             )
          }
       })
-      .catch(err => res.status(400).json(err))
+      .catch((err) => res.status(400).json(err))
 })
 
 // @route      POST api/v1/presentations
